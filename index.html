@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdul Basith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #F7F5F2;
+      --ink: #111111;
+      --ink-muted: #888880;
+      --rule: #D8D5D0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 2rem 1.5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .stage {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: arrive 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      .name {
+        opacity: 0;
+        animation: arrive 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+      }
+
+      .rule {
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: rule-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+      }
+
+      .body-text {
+        opacity: 0;
+        animation: arrive 1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
+      }
+
+      .footer-line {
+        opacity: 0;
+        animation: arrive 1s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards;
+      }
+    }
+
+    @keyframes arrive {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes rule-in {
+      to {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+
+    .stage {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .name {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(1.6rem, 5vw, 2.1rem);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      line-height: 1;
+    }
+
+    .name em {
+      font-style: italic;
+      color: var(--ink-muted);
+    }
+
+    .rule {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin: 1.75rem 0;
+    }
+
+    .body-text {
+      font-size: clamp(0.875rem, 2.8vw, 1rem);
+      line-height: 1.75;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+    }
+
+    .footer-line {
+      margin-top: 2.5rem;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 2.6vw, 0.95rem);
+      color: var(--ink-muted);
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+  <main class="stage" role="main">
+    <h1 class="name">Abdul <em>Basith</em></h1>
+    <span class="rule" role="separator" aria-hidden="true"></span>
+    <p class="body-text">A small corner of the internet for stories, photographs, experiments and other things worth paying attention to.</p>
+    <p class="footer-line">Coming soon.</p>
+  </main>
+</body>
+</html>

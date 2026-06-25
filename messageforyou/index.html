@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For You</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0d0d0d;
+    color: #f0ede8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+  }
+  #lock-screen, #message-screen { width: 100%; max-width: 480px; }
+  .year-tag { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #ff5c2b; margin-bottom: 2.5rem; font-weight: 600; }
+  .headline { font-size: 38px; font-weight: 600; color: #f0ede8; line-height: 1.2; margin-bottom: 1rem; font-family: Georgia, 'Times New Roman', serif; }
+  .headline span { color: #ff5c2b; }
+  .sub { font-size: 14px; color: #888; line-height: 1.75; margin-bottom: 3rem; max-width: 340px; }
+  .input-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 10px; }
+  #code-input { flex: 1; font-size: 15px; padding: 14px 18px; border: 1px solid #2a2a2a; border-radius: 6px; background: #1a1a1a; color: #f0ede8; outline: none; font-family: inherit; letter-spacing: 0.04em; transition: border-color 0.15s; }
+  #code-input::placeholder { color: #444; }
+  #code-input:focus { border-color: #ff5c2b; }
+  #unlock-btn { padding: 14px 24px; font-size: 13px; font-weight: 600; background: #ff5c2b; color: #0d0d0d; border: none; border-radius: 6px; cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase; font-family: inherit; transition: background 0.15s; white-space: nowrap; }
+  #unlock-btn:hover { background: #ff7a4d; }
+  #error-msg { font-size: 12px; color: #ff5c2b; height: 16px; letter-spacing: 0.02em; }
+  .footer-note { margin-top: 3.5rem; font-size: 12px; color: #444; line-height: 1.7; border-left: 2px solid #ff5c2b; padding-left: 14px; }
+  .footer-note em { color: #666; font-style: normal; }
+  #message-screen { display: none; }
+  .msg-from { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #ff5c2b; margin-bottom: 2rem; font-weight: 600; }
+  .rule { width: 100%; height: 1px; background: #1e1e1e; margin-bottom: 2.5rem; }
+  .msg-text { font-size: 18px; line-height: 1.85; color: #f0ede8; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; margin-bottom: 3rem; white-space: pre-line; }
+  .sign-off { font-size: 14px; color: #ff5c2b; font-style: italic; font-family: Georgia, 'Times New Roman', serif; font-weight: 600; }
+  .reset-btn { margin-top: 3rem; display: inline-block; font-size: 11px; color: #444; background: none; border: none; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase; font-family: inherit; padding: 0; transition: color 0.15s; }
+  .reset-btn:hover { color: #888; }
+</style>
+</head>
+<body>
+
+<div id="lock-screen">
+  <p class="year-tag">2013 — 2026</p>
+  <h1 class="headline">Basith left something<br>here <span>for you.</span></h1>
+  <p class="sub">You have a code. It was meant for you. Enter it below and it'll find you.</p>
+  <div class="input-row">
+    <input id="code-input" type="text" placeholder="enter your code" autocomplete="off" spellcheck="false" />
+    <button id="unlock-btn">Open</button>
+  </div>
+  <p id="error-msg"></p>
+  <p class="footer-note">Each code opens one message. Only yours. Only for you.<br><em>Didn't get a code? Don't worry — he's aging. Just ask him.</em></p>
+</div>
+
+<div id="message-screen">
+  <p class="msg-from">a note, before I go</p>
+  <div class="rule"></div>
+  <p class="msg-text" id="msg-content"></p>
+  <p class="sign-off">— Basith</p>
+  <button class="reset-btn" id="reset-btn">← back</button>
+</div>
+
+<script>
+  const messages = {
+    "SindhuBoss": "Sindhu,\nThank you for being you. You have managed to keep me sane here at IA, and I will always be thankful for the same. Wishing you everything beautiful.",
+    "AparnaBoss01": "Aparna,\nThank you for everything you did for me. From bearing with my annoying POVs to giving me a platform when needed. Wishing you everything successful always.",
+    "Khyati001": "Khyati,\nYou've played such a big role in my career at IA, and for that I will always be grateful. You were, are, and always will be the ying to my yang. You have helped me stay grounded and cheered for me all these years, and I will never forget the memories that are etched inside my head. Thank you so much, for everything.",
+    "AjaySan333": "Thank you for being an integral part of my career here at IA, Ajay. I could rely on you for everything. You helped me believe in the right to ask difficult questions, and constantly reminded me what mattered.",
+    "Simrat007": "Simrat,\nThank you for being someone I could always rely on. Your commitment to work made a bigger difference than you probably will realize. Keep doing what you believe in, and keep loving it too. Wishing you all the success and happiness you deserve.",
+    "Barsha101": "Barshana,\nThank you for being such a dependable part of the team. Xiaomi really relied on you during difficult days. Thank you again for holding the fort. Through every challenge, you always showed up with accountability and commitment. Wishing you many more successes in the years ahead.",
+    "EzhilRaj444": "Keerthana,\nThank you for all the support you provided during my time. I will always wish you the best life has to offer you.",
+    "KapilSir": "Kapil,\nThank you for all the memories and the tackles at IA. Been an amazing ride along with you. Goodluck for your future endeavours.",
+    "AishAish": "Aishwarya,\nWishing you everything beautiful and pretty. Thank you for everything you did for me and the team!",
+    "DeviLearns22": "Devi,\nThank you for being such an important part of the team during your time at IA. Watching you take the next step towards higher studies made me incredibly happy. Wishing you success in everything you choose to pursue.",
+    "Tushita456": "Tushita,\nThank you for all the memories you powered at IA during your time in my team. Appreciate everything you did. Wishing you all the love and success.",
+    "BennyMan": "Tom,\nThank you for everything you did during your time at IA. For all the discussions, and push to drive me ahead and also up the wall. Wishing you all the best life has to offer.",
+    "NikNikNik": "Nikitha,\nStill can't spell your name right but I would like to thank you for everything you did for me and the team during your time at IA. Wishing you everything great.",
+    "AditiCalm22": "Aditi,\nThank you for being such a steady and dependable presence through the few years that we shared the work table. It has always been a pleasure working alongside someone so calm and grounded. Wishing you all the very best.",
+    "PearlGunner41": "Pearl,\nThanks for all the support you brought to work everyday (maybe not all days). You have a good future, and I wish you all the very best. Please stay committed. That's what matters no matter where you go. I will keep being your mentor, when you need!",
+    "NewbieNeha111": "Neharika,\nWishing you all the very best here. This place can bring out the best out of people, and you should gear up for the same. Kill it.",
+    "Sanchaybaba44": "Starboy,\nThank you for having me be a part of your work life, and beyond. It was a screamer, and I am sure you will do well wherever you go, and whatever you do. Thank you for all the fun times you have powered for me.",
+    "ShivBoy101": "Shiv,\nThank you for being a part of my team and making it an amazing one while at that. I always wish we work together again someday. You are destined to do bigger things, brother. Proper big things await you. Wishing you success, always.",
+    "AswaBoss77": "Aswathy,\nThank you for all the energy and fun you brought to the team. You always found a way to make work feel a little lighter, while still showing up when it mattered. Wishing you all the success and happiness.",
+    "MeenaMachi09": "Meena,\nThank you for being such a dependable part of the team. Beyond all the work, I will remember the laughs and good times we shared along the way. Wishing you nothing but success and happiness wherever life takes you.",
+    "DivyaFly22": "Divya,\nThank you for everything you brought to the team over the years. You were someone I could count on, and someone who always added a little fun to the everyday chaos. Wishing you the very best always.",
+    "ArjunBaba11": "Arjun,\nThank you for always showing the hunger to learn and get better. While we may not have agreed on everything all the time, I always admired your willingness to push yourself. Good to see you having toned your anger issues now lol. Wishing you great success ahead.",
+    "BhavyaBee19": "Bhavya,\nThank you for being such an infectious colleague. Watching your Instagram updates made me, and continues to want to travel a mile or 10 thousands. Wishing you continued success and happiness with everything you do.",
+    "NikkiWorks88": "Nikitha,\nThank you for all your hard work and commitment over the years. You were always someone the team could count on, and I will always appreciate that. Wishing you every success and happiness ahead.",
+    "SaumyaStar31": "Saumya,\nThank you for everything you contributed to the team. Your accountability and commitment helped make the journey a smoother one for all of us. Thank you for helping me learn and unlearn so much, along with you. Wishing you many wonderful things ahead.",
+    "PrahaLad77": "Prahalad,\nThank you for all the enthusiasm and effort you brought, right from your intern days. It was wonderful watching you learn, grow, and find your feet. Wishing you everything fantastic always.",
+    "ShanTheMan55": "Shantanu,\nThank you for bringing your enthusiasm and positive energy to the team, when you did. It has been great seeing you take on new challenges. Wishing you success in everything that comes your way.",
+    "AdiFun09": "Advaith,\nThank you for all the fun moments and energy you brought during your time with us. You made the days brighter and the team better just by being yourself. I believe you are one-of-a-kind; you just need to keep chasing what you love. Wishing you all the best for what lies ahead.",
+    "CricAakash77": "Aakash,\nThank you for all your support and contribution over the years. You were always someone who could be counted on when it mattered. Wishing you nothing but the best for the future. EVERY TIME CUP NAMMDE.",
+    "Deeps001": "Deepika,\nThank you for being such a committed and dependable part of the journey. It has been wonderful having to share my chapter with you. Wishing you success, happiness, and many exciting opportunities ahead.",
+    "ShrutiWrites07": "Shruti,\nThank you for everything you brought to the table over the years; even the poems you penned. Your commitment and consistency made working together easy and enjoyable. Wishing you every success ahead.",
+    "DeshnaD99": "Deshna,\nThank you for all the effort and commitment you brought to the team. It has been a pleasure working alongside you and sharing this journey together. Wishing you all the very best.",
+    "RoniLondon24": "Ronita,\nThank you for being such a wonderful colleague during your time here. Watching you take the leap towards studying in London was exciting and inspiring. Wishing you success, adventure, and lots of happiness in your chapter.",
+    "PushpaChef404": "Pushpanjali,\nThank you for being one of the most fun people to work with over the years. Between all the chaos, laughter, and your consistently unsuccessful attempts at becoming a chef, you somehow still managed to be an important part of the team. Wishing you success, happiness, and hopefully a few recipes that finally work.",
+    "MukeshBhai": "Mukesh & Team,\nGoodluck to you and your team for everything you lot indulge in hereon. Thank you for everything you did, for me and the team. Wishing you good things always.",
+    "Raghusan666": "Raghu San.\nNot even sure where to begin from, but thank you for being the mentor I needed when I looked for; for being the rock in my life when I seeked; for being my critic, when I deserved one. I really don't know what else to write about you here as a message, but I am very sure if I write more - YOU WILL CRY. Wishing you everything beautiful, Raghu. This isn't the end.",
+    "WinnyBoy11": "Winston,\nThank you for being a part of this journey and for everything you brought to the table along the way. Wishing you continued success and many exciting things ahead. Power ahead, sir!",
+    "QasimMachi07": "Qasim,\nThank you for all the fun conversations, laughs, and good vibes over the little time we spent together. Work is always easier when good people are around, and you were definitely one of them. Wishing you the very best ahead.",
+    "HarshMode01": "Harsh,\nThank you for all your support and commitment you bring to work. I hope you always continue finding your footing here, and do some good work. Wishing you all the success and happiness ahead.",
+    "PCStar21": "PC,\nThank you for all your support and kindness over the years. It has been a pleasure sharing this journey with you. Wishing you success, happiness, and everything wonderful ahead. Crush It always, like the Sun.",
+    "BikerShiv46": "Shiv,\nThank you for being such a reliable part of this journey. May your roads be smooth, your rides be long, and your adventures be many. Wishing you the very best always.",
+    "BainabNew22": "Bainab,\nThough our time working together was shorter than most, it was enough to see your sincerity and commitment. Wishing you a wonderful journey ahead and many successes along the way.",
+    "Vaish22": "Vaishali,\nThank you for bringing your enthusiasm and sincerity to the team. It has been lovely watching you begin your journey and find your place here. Wishing you all the success ahead.",
+    "AkhilUnited": "Akhil,\nGlory to you and to United. We didn't get a chance to work a lot, but I am glad our paths crossed. Always around if you ever need my support. COME ON YOU GUNNERS!!!",
+    "SekharBoss22": "Sekhar,\nThank you for all your support over the years. It has been wonderful sharing this journey with someone so committed (even on the carrom board). Wishing you nothing but success and happiness ahead.",
+    "RaviGupteeeee": "Ravi,\nThank you for all the encouraging words you came and spilled on my desk randomly. Now I am not sure if the clients actually felt I did a good job, or you were pushing me to get better haha. Take care, and wishing you all the best.",
+    "LeenaB": "Leena,\nWishing you everything great. The little time we did work together, I hope I did add value.",
+    "Netra101": "Netra,\nI hope you will always find joy whatever you do. Thank you for bearing with my random probing questions during your briefing.",
+    "DhayaM": "Dhaya,\nI wish there were more random briefs that we worked together on. Or wait, I wished there were more random creator-in-a-room-awkwardness we could share haha. Goodluck and thank you for everything.",
+    "KBClicks88": "KB,\nThank you for being such a dependable part of the journey. We may have worked in different worlds, but your commitment and support were always visible. Wishing you continued success in everything you do.",
+    "InaamBhai": "Inaam Bhai,\nI wish you everything amazing in the future. Thank you for all the support you provided during my tenure here. Bhai toh Bhai hi rahega.",
+    "AnilFixIt99": "Anil,\nThank you for always being the person who somehow had a solution when nobody else did. Whether it was a system issue or a moment of panic, you were always there to help. Wishing you all the very best ahead.",
+    "Ratnakar101": "Ratnakar,\nAlways admired the intelligence you brought to the table. Always was in awe during our conversation. Thank you for all your support. It has been wonderful sharing this chapter with you. Wishing you success and happiness in everything ahead.",
+    "SagarJokes404": "Sagar,\nThank you for all the support, all the laughs, and unfortunately, also for them terrible jokes. The quality of the jokes may be debatable, but the memories certainly aren't. Wishing you nothing but the best ahead.",
+    "Samreen07": "Samreen,\nThank you for all your effort and positivity. It has been wonderful seeing you grow into your role and become a part of the team. Wishing you many great things ahead.",
+    "HRBoss999": "Tasnim,\nThank you for always looking out for all of us, whether we realized it or not. Wishing you all the happiness and success ahead.",
+    "HarshiSmile77": "Harshitha,\nThank you for always bringing warmth, positivity, and kindness to office everyday. The workplace is always better when people like you are around. Wishing you nothing but wonderful things ahead.",
+    "DhanrajHR22": "Dhanraj,\nThank you for all your support and for being a part of this journey. It has been wonderful working alongside you. Wishing you nothing but the best ahead.",
+    "HemantDance": "Hemant,\nKeep rocking the dance floor man. Same energy, full time. Wishing you all the very best.",
+    "SilentNags07": "Nagaraj,\nThank you for proving that you don't need to say much to make an impact. Your quiet nature and steady work ethic have always been something to learn from. Wishing you every success ahead.",
+    "Sathya007": "Sathya,\nThank you for being such a steady presence through the years. Whether it was ideating, dancing or simply standing besides each other and looking into empty future. So excited for you now, and always. Wishing you all the very best for the future. GO CANNES",
+    "OGSuresha01": "Suresha,\nThank you for all the laughs, stories, and memories over the years. Watching IA through the eyes of one of its longest-serving people has always been special. Wishing you happiness, good health, and many more years of making people smile.",
+    "DayaNumbers88": "Daya,\nThank you for being someone we could always rely on. While many of us were busy creating chaos, you were usually busy making sense of it. Wishing you all the success and happiness ahead.",
+    "NaveenHeart11": "Naveena,\nThank you for being one of the genuinely good-hearted people I've had the privilege of working with. Your kindness has always spoken louder than words. Wishing you happiness, success, and everything beautiful ahead.",
+    "NageshFin": "Nagesh,\nWishing you everything wonderful. Thank you for all the support and looking forward to you doing what you love always.",
+    "GauravCalm27": "GT,\nThank you for being such a calm presence through the years in my time. In a place where everything moved fast and often felt chaotic, you always managed to bring a sense of balance. Wishing you success, happiness, and all the good things ahead.",
+    "CowCow": "Kow,\nMan I have so many memories with you at IA. From playing Table Tennis to attending meetings. It feels like we have spent so much time here together that it is difficult now to point out which was fun than the other. Thank you for everything, Kaushik. Goodluck for your future.",
+    "SreeSreeSir": "Sreekanth,\nThank you for letting me get to know you in the limited time we did bump into each other. I wish you all the luck and happiness in the future. Keep giggling thinking of my jokes during client meetings, when I am not here.",
+    "PrasWorks11": "Prasanth,\nThank you for being someone the content team could always count on. So much of what we imagined only became possible because of the effort and commitment you brought to it. Wishing you continued success and many great things ahead.",
+    "PritiLead01": "Priti,\nThank you for all the support during pitches, and pitches. It has been wonderful working alongside you. Wishing you nothing but the best ahead.",
+    "LoveenaBuzz88": "Loveena,\nThank you for all the energy, smiles, and fun you brought into the workplace. Everyday. The days were always a little brighter when you were around. Wishing you happiness, success, and lots of reasons to keep smiling.",
+    "PristyOG07": "Pristy,\nThank you for all the memories, laughs, and work we shared during your time here. Even though you've moved on, you'll always be a part of some wonderful chapters from this journey. Wishing you success wherever life takes you.",
+    "LokiWorks22": "Lokesh,\nThank you for all the fun moments and good times we shared while working together. You made long days feel shorter and stressful days feel easier. Wishing you nothing but success and happiness ahead.",
+    "TJEnergy99": "TJ,\nThank you for bringing so much energy and enthusiasm into everything you did. It has been impossible not to notice the passion you bring to both work and life. Wishing you many exciting adventures ahead.",
+    "DramaQueen77": "Thoolik,\nThank you for keeping life interesting, dramatic, and never boring. You brought your own unique flavour to every room you walked into, and work was always more entertaining because of it. Wishing you all the success and happiness ahead.",
+    "SketchMan11": "Manoj,\nThank you for all the quiet brilliance you brought to the team. While you may not always have been the loudest person in the room, your talent always spoke for itself. Wishing you success and many opportunities to keep creating amazing things.",
+    "SharathCuts07": "Sharath,\nThank you for being more than just a teammate over the years. Between the edits, the conversations, and the friendship, you've been a memorable part of this journey. Wishing you success, happiness, and many great stories ahead.",
+    "KishanTurbo21": "Kishan,\nThank you for bringing so much enthusiasm and energy into the team. It has been wonderful watching you settle in and make your mark. Wishing you a long journey filled with learning, growth, and success.",
+    "DeepaliCreates08": "Deepali,\nThank you for all the dedication and talent you brought to the team. Your work often spoke louder than words, and it was always appreciated. Wishing you success and happiness in everything ahead.",
+    "Anvesha09": "Anvesha,\nThank you for all your commitment and hard work you bring to work. Your quiet determination has always stood out. Wishing you many wonderful opportunities and successes ahead.",
+    "MasthanWorks55": "Masthan,\nThank you for being such a dependable part of the team. Your commitment and consistency helped make many things possible over the years. Wishing you all the very best for the future.",
+    "RanjiniStar12": "Ranjini,\nThank you for all your support, commitment, and contribution over the years. It has been a pleasure sharing this journey with you. Wishing you happiness, success, and everything wonderful ahead. Don't miss breakfast hahah",
+    "SreeMan234": "Sreejith,\nThank you for being an important part of my tenure here. Wish we could have worked on projects together more than what we have right now. But maybe someday. Good luck and all the best.",
+    "SaikatStopSinging": "Saikat,\nMy friend! There are so many memories I have with you, and I hope you have good ones with me too. I just wanted to drop by and thank you for being an amazing friend. So glad I bumped into you, and defeated you in that TT game which was all sorts of EPIC. Love seeing you flourishing in a field that is your passion. Always wishing you the best man.",
+    "Debo000": "Debashree,\nThank you for being a part of my IA journey. I wish you everything beautiful this life has to offer and will always look forward to seeing you do great things for yourself.",
+    "Nikita111": "Nikita,\nThank you for all the support and enthusiasm you brought to work and projects we were a part of. Wishing you nothing but the best!",
+    "Abhi222": "Abhishek,\nGoodluck and wishing you all the very best in everything you do.",
+    "Shikha222": "Shikha,\nWishing you everything beautiful in all the things you will be blessed with. Goodluck!",
+    "ChristyBoy": "Christy,\nMy man! I want to thank you for all the things you powered from your days of copy writing till the strategies you put together. Thank you for making my time here at IA memorable. Wishing you great things always.",
+    "Riyaz6969": "Riyaz,\nThank you for all the fun times at IA. I will miss your utter madness every time you entered a conference room unannounced. Goodluck always.",
+    "Sainath101": "Srinath,\nIt was a fun ride while it lasted. Sometimes, it lasted more than needed, but I am glad we spent a lot of time in the table tennis room more than conference rooms in the fag end of your time at IA. Wishing you all the very best always."
+  };
+
+  const input = document.getElementById('code-input');
+  const btn = document.getElementById('unlock-btn');
+  const errMsg = document.getElementById('error-msg');
+  const lockScreen = document.getElementById('lock-screen');
+  const messageScreen = document.getElementById('message-screen');
+  const msgContent = document.getElementById('msg-content');
+  const resetBtn = document.getElementById('reset-btn');
+
+  function unlock() {
+    const code = input.value.trim();
+    if (messages[code]) {
+      errMsg.textContent = '';
+      lockScreen.style.display = 'none';
+      messageScreen.style.display = 'block';
+      msgContent.textContent = messages[code];
+    } else {
+      errMsg.textContent = "That code doesn't match. Try again.";
+      input.style.borderColor = '#ff5c2b';
+      setTimeout(() => { input.style.borderColor = ''; }, 1500);
+    }
+  }
+
+  btn.addEventListener('click', unlock);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+  resetBtn.addEventListener('click', () => {
+    messageScreen.style.display = 'none';
+    lockScreen.style.display = 'block';
+    input.value = '';
+    errMsg.textContent = '';
+  });
+</script>
+
+</body>
+</html>
