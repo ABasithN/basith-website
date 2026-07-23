@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>humans</title>
+<meta name="color-scheme" content="light only">
 <meta name="description" content="Traces of ordinary lives, from around the world.">
 
 <!-- Link-preview thumbnail for WhatsApp, Twitter/X, iMessage, etc.
@@ -16,33 +17,17 @@
 <meta name="twitter:image" content="humans-og-image.png">
 
 <style>
+  :root { color-scheme: light only; }
   * { box-sizing: border-box; }
   html, body {
     margin: 0; padding: 0; width: 100%; height: 100%;
-    background: #050506; overflow: hidden;
+    background: #ffffff; overflow: hidden;
     font-family: Georgia, 'Times New Roman', serif;
     touch-action: none;
-    color: #efe8dc;
+    color: #201c1a;
   }
   #stars {
     position: fixed; inset: 0; z-index: 0;
-    transition: filter 1.1s ease, opacity 1.1s ease;
-  }
-  #stars.soft { filter: blur(3px); opacity: 0.55; }
-
-  #glow {
-    position: fixed; left: 50%; top: 50%;
-    width: 640px; height: 640px;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(216,166,116,0.10) 0%, rgba(216,166,116,0.04) 35%, rgba(0,0,0,0) 70%);
-    z-index: 1; opacity: 0; pointer-events: none;
-    transition: opacity 1.3s ease;
-  }
-  #glow.on { opacity: 1; }
-
-  #vignette {
-    position: fixed; inset: 0; pointer-events: none; z-index: 2;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 30%, rgba(0,0,0,0.82) 100%);
   }
 
   #stage {
@@ -53,25 +38,39 @@
   #titlecard {
     position: fixed; inset: 0; z-index: 6;
     display: flex; align-items: center; justify-content: center;
-    background: #050506;
+    background: #ffffff;
   }
   #titlecard .letter {
     font-size: 2rem; letter-spacing: 0.05em;
-    color: rgba(239,232,220,0); display: inline-block;
+    color: rgba(32,28,26,0); display: inline-block;
     transition: color 1.4s ease;
   }
-  #titlecard.in .letter { color: rgba(239,232,220,0.88); }
-  #titlecard .letter.u { color: rgba(207,224,255,0.95) !important; }
-  #titlecard.fading { background: rgba(5,5,6,0); transition: background 1s ease; }
+  #titlecard.in .letter { color: rgba(32,28,26,0.85); }
+  #titlecard .letter.u { color: rgba(20,110,120,0.95) !important; }
+  #titlecard.fading { background: rgba(255,255,255,0); transition: background 1s ease; }
 
   #uMark {
-    position: fixed; top: 22px; left: 26px; z-index: 9;
-    font-size: 2rem; color: rgba(207,224,255,0);
+    position: fixed; top: 16px; left: 22px; z-index: 9;
+    font-size: 2rem; color: rgba(20,110,120,0);
     cursor: pointer; transition: color 1.2s ease;
     font-style: italic;
+    perspective: 320px;
+    padding: 10px 14px; margin: -10px -14px; /* generous tap target, invisible */
   }
-  #uMark.show { color: rgba(207,224,255,0.5); }
-  #uMark:hover { color: rgba(207,224,255,0.9); }
+  #uMark.show { color: rgba(20,110,120,0.85); }
+  #uMark:hover { color: rgba(20,110,120,1); }
+  #uSpin {
+    display: inline-block;
+    transform-style: preserve-3d;
+    animation: uFloat 5.6s ease-in-out infinite;
+  }
+  @keyframes uFloat {
+    0%   { transform: translateY(0)    rotateY(0deg); }
+    25%  { transform: translateY(-7px) rotateY(90deg); }
+    50%  { transform: translateY(0)    rotateY(180deg); }
+    75%  { transform: translateY(-7px) rotateY(270deg); }
+    100% { transform: translateY(0)    rotateY(360deg); }
+  }
 
   .fragment {
     position: absolute;
@@ -82,11 +81,11 @@
   .fragment.active { opacity: 1; transform: translateY(0); }
   .fragment.leaving { opacity: 0; transform: translateY(-14px); }
   .fragment-text {
-    font-size: 2.4rem; line-height: 1.55; font-weight: 400; letter-spacing: 0.01em;
+    font-size: 1.5rem; line-height: 1.55; font-weight: 400; letter-spacing: 0.01em;
   }
   .fragment-loc {
-    display: block; margin-top: 14px; font-size: 1rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: rgba(216,166,116,0.85);
+    display: block; margin-top: 14px; font-size: 0.68rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(20,110,120,0.85);
   }
 
   #dots {
@@ -97,7 +96,7 @@
   #dots.show { opacity: 1; }
   #dots span {
     width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(239,232,220,0.5);
+    background: rgba(32,28,26,0.4);
     animation: dotPulse 1.1s ease-in-out infinite;
   }
   #dots span:nth-child(2) { animation-delay: 0.15s; }
@@ -109,26 +108,26 @@
 
   #shareBtn {
     position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%);
-    z-index: 8; padding: 4px 8px; cursor: pointer;
+    z-index: 8; padding: 6px 12px; cursor: pointer;
     border: none;
-    font-size: 0.9rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: rgba(239,232,220,0.35); opacity: 0; transition: opacity 0.8s ease, color 0.3s ease;
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(32,28,26,0.75); opacity: 0; transition: opacity 0.8s ease, color 0.3s ease;
   }
   #shareBtn.show { opacity: 1; }
-  #shareBtn:hover { color: rgba(239,232,220,0.75); }
+  #shareBtn:hover { color: rgba(20,110,120,0.95); }
 
   #hint {
     position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
-    z-index: 8; color: rgba(255,255,255,0.3); font-size: 0.65rem;
+    z-index: 8; color: rgba(32,28,26,0.32); font-size: 0.65rem;
     letter-spacing: 0.2em; text-transform: uppercase; opacity: 0;
     transition: opacity 2s ease;
   }
 
   #toast {
     position: fixed; bottom: 140px; left: 50%; transform: translateX(-50%);
-    z-index: 12; background: rgba(20,18,16,0.9); padding: 10px 18px;
+    z-index: 12; background: rgba(32,28,26,0.92); padding: 10px 18px;
     border-radius: 4px; font-size: 0.72rem; letter-spacing: 0.05em;
-    color: rgba(239,232,220,0.9); opacity: 0; pointer-events: none;
+    color: rgba(255,255,255,0.95); opacity: 0; pointer-events: none;
     transition: opacity 0.4s ease;
   }
   #toast.show { opacity: 1; }
@@ -137,12 +136,10 @@
 <body>
 
 <canvas id="stars"></canvas>
-<div id="glow"></div>
-<div id="vignette"></div>
 <div id="stage"></div>
 <div id="dots"><span></span><span></span><span></span></div>
 <div id="titlecard"></div>
-<div id="uMark" title="back to the start">u</div>
+<div id="uMark" title="back to the start"><span id="uSpin">u</span></div>
 
 <div id="shareBtn">share this</div>
 <div id="hint">tap anywhere for the next one</div>
@@ -311,7 +308,7 @@ window.addEventListener('resize', sizeCanvas);
 function drawStars() {
   const t = performance.now();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#f5ecdd';
+  ctx.fillStyle = '#000000';
   stars.forEach((s) => {
     const tw = s.base + Math.sin(t * s.speed + s.phase) * 0.18;
     ctx.globalAlpha = Math.max(0, tw);
@@ -372,7 +369,6 @@ uMark.addEventListener('click', () => location.reload());
 // ---- fragment stage ----
 const stage = document.getElementById('stage');
 const dots = document.getElementById('dots');
-const glow = document.getElementById('glow');
 const shareBtn = document.getElementById('shareBtn');
 let index = 0;
 let currentEl = null;
@@ -391,16 +387,11 @@ async function renderFragment(i) {
     setTimeout(() => leaving.remove(), 1150);
     currentEl = null;
   }
-  canvas.classList.remove('soft');
-  glow.classList.remove('on');
 
   dots.classList.add('show');
   await new Promise((r) => setTimeout(r, 550));
   if (myToken !== renderToken) return; // a newer call took over — don't create a stale fragment
   dots.classList.remove('show');
-
-  canvas.classList.add('soft');
-  glow.classList.add('on');
 
   const el = document.createElement('div');
   el.className = 'fragment';
@@ -469,41 +460,34 @@ async function buildShareImage(fragment) {
   c.width = size; c.height = size;
   const cx = c.getContext('2d');
 
-  cx.fillStyle = '#050506';
+  cx.fillStyle = '#ffffff';
   cx.fillRect(0, 0, size, size);
 
-  // faint static stars
+  // faint static dots — ink-on-paper, matching the live starfield
   let seed = 42;
   function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
-  cx.fillStyle = '#f5ecdd';
+  cx.fillStyle = '#000000';
   for (let i = 0; i < 140; i++) {
-    cx.globalAlpha = 0.15 + rnd() * 0.3;
+    cx.globalAlpha = 0.10 + rnd() * 0.22;
     cx.beginPath();
     cx.arc(rnd() * size, rnd() * size, rnd() * 1.2 + 0.3, 0, Math.PI * 2);
     cx.fill();
   }
   cx.globalAlpha = 1;
 
-  // soft glow behind the text
-  const grad = cx.createRadialGradient(size/2, size/2, 40, size/2, size/2, 420);
-  grad.addColorStop(0, 'rgba(216,166,116,0.14)');
-  grad.addColorStop(1, 'rgba(0,0,0,0)');
-  cx.fillStyle = grad;
-  cx.fillRect(0, 0, size, size);
-
   cx.textAlign = 'center';
-  cx.fillStyle = 'rgba(239,232,220,0.95)';
+  cx.fillStyle = 'rgba(32,28,26,0.92)';
   cx.font = '52px Georgia, serif';
   const lines = wrapCanvasText(cx, fragment.text, 780);
   const lineHeight = 68;
   const startY = size/2 - ((lines.length - 1) * lineHeight) / 2;
   lines.forEach((line, i) => cx.fillText(line, size/2, startY + i * lineHeight));
 
-  cx.fillStyle = 'rgba(216,166,116,0.85)';
+  cx.fillStyle = 'rgba(20,110,120,0.85)';
   cx.font = '24px Georgia, serif';
   cx.fillText(fragment.loc.toUpperCase(), size/2, startY + lines.length * lineHeight + 46);
 
-  cx.fillStyle = 'rgba(216,166,116,0.5)';
+  cx.fillStyle = 'rgba(20,110,120,0.6)';
   cx.font = 'italic 22px Georgia, serif';
   cx.fillText('u', size/2, size - 60);
 
