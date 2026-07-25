@@ -1,4 +1,5 @@
-const story002 = {
+window.STORIES = window.STORIES || [];
+window.STORIES.push({
   contact: "Maya",
 
   existing: [
@@ -12,4 +13,4 @@ const story002 = {
   ],
 
   sent: true
-};
+});

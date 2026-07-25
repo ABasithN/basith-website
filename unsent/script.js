@@ -7,7 +7,7 @@
 
 (function () {
 
-  const STORIES = [story001, story002].filter(Boolean);
+  const STORIES = window.STORIES || [];
 
   const appEl = document.getElementById('app');
   const threadEl = document.getElementById('thread');

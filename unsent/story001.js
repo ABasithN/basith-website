@@ -13,7 +13,8 @@
            false -> stays in the box, never sent
 --------------------------------------------- */
 
-const story001 = {
+window.STORIES = window.STORIES || [];
+window.STORIES.push({
   contact: "Dad",
 
   existing: [
@@ -29,4 +30,4 @@ const story001 = {
   ],
 
   sent: false
-};
+});
