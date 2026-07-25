@@ -37,8 +37,11 @@
 
   #titlecard {
     position: fixed; inset: 0; z-index: 6;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     background: #ffffff;
+  }
+  #titleRow {
+    display: flex; flex-direction: row; align-items: center;
   }
   #titlecard .letter {
     font-size: 2rem; letter-spacing: 0.05em;
@@ -48,6 +51,16 @@
   #titlecard.in .letter { color: rgba(32,28,26,0.85); }
   #titlecard .letter.u { color: rgba(20,110,120,0.95) !important; }
   #titlecard.fading { background: rgba(255,255,255,0); transition: background 1s ease; }
+
+  #titleSub {
+    margin-top: 14px;
+    max-width: 280px;
+    text-align: center;
+    font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(32,28,26,0);
+    transition: color 1.4s ease;
+  }
+  #titlecard.in #titleSub { color: rgba(32,28,26,0.42); }
 
   #uMark {
     position: fixed; top: 16px; left: 22px; z-index: 9;
@@ -81,10 +94,10 @@
   .fragment.active { opacity: 1; transform: translateY(0); }
   .fragment.leaving { opacity: 0; transform: translateY(-14px); }
   .fragment-text {
-    font-size: 2.5rem; line-height: 1.55; font-weight: 400; letter-spacing: 0.01em;
+    font-size: 1.5rem; line-height: 1.55; font-weight: 400; letter-spacing: 0.01em;
   }
   .fragment-loc {
-    display: block; margin-top: 14px; font-size: 1.2rem; letter-spacing: 0.18em;
+    display: block; margin-top: 14px; font-size: 0.68rem; letter-spacing: 0.18em;
     text-transform: uppercase; color: rgba(20,110,120,0.85);
   }
 
@@ -110,11 +123,39 @@
     position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%);
     z-index: 8; padding: 6px 12px; cursor: pointer;
     border: none;
-    font-size: 0.9rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
     color: rgba(32,28,26,0.75); opacity: 0; transition: opacity 0.8s ease, color 0.3s ease;
   }
   #shareBtn.show { opacity: 1; }
   #shareBtn:hover { color: rgba(20,110,120,0.95); }
+
+  #genreBar {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 8; display: flex; gap: 10px; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.9s ease;
+  }
+  #genreBar.show { opacity: 1; pointer-events: auto; }
+  .genreBtn {
+    padding: 8px 15px; border-radius: 3px;
+    border: 1px solid rgba(32,28,26,0.16);
+    background: rgba(255,255,255,0.7);
+    color: rgba(32,28,26,0.5);
+    font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-family: Georgia, serif; cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .genreBtn:hover { color: rgba(20,110,120,0.85); border-color: rgba(20,110,120,0.4); }
+  .genreBtn.active {
+    color: rgba(20,110,120,0.95); border-color: rgba(20,110,120,0.6);
+    background: rgba(20,110,120,0.08);
+  }
+  .genreBtn.more {
+    color: rgba(32,28,26,0.35); border-style: dashed;
+    padding: 8px 12px;
+  }
+  .genreBtn.more:hover { color: rgba(32,28,26,0.7); border-color: rgba(32,28,26,0.4); }
 
   #hint {
     position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
@@ -140,6 +181,8 @@
 <div id="dots"><span></span><span></span><span></span></div>
 <div id="titlecard"></div>
 <div id="uMark" title="back to the start"><span id="uSpin">u</span></div>
+
+<div id="genreBar"></div>
 
 <div id="shareBtn">share this</div>
 <div id="hint">tap anywhere for the next one</div>
@@ -274,6 +317,97 @@ const RAW_FRAGMENTS = [
   { text: "Neighbors still wave across the fence.", loc: "Nagoya, Japan" },
   { text: "The school photo still hangs by the door.", loc: "Freetown, Sierra Leone" },
   { text: "The same song plays every Sunday morning.", loc: "Palermo, Italy" },
+
+  // genre-tagged batch — Pairs
+  { text: "Two toothbrushes lean into the same glass.", loc: "Lusaka, Zambia", genre: "pairs" },
+  { text: "Two towels dry on one hook.", loc: "Maputo, Mozambique", genre: "pairs" },
+  { text: "Another plate waits beside the sink.", loc: "Bamako, Mali", genre: "pairs" },
+  { text: "Two umbrellas share the smallest stand.", loc: "Vientiane, Laos", genre: "pairs" },
+  { text: "A second pillow keeps its shape.", loc: "Colombo, Sri Lanka", genre: "pairs" },
+  { text: "One blanket reaches both chairs.", loc: "Thimphu, Bhutan", genre: "pairs" },
+  { text: "Two pairs of slippers face the door.", loc: "Malé, Maldives", genre: "pairs" },
+  { text: "Another lunchbox fits inside the bag.", loc: "Chennai, India", genre: "pairs" },
+  { text: "Two chargers cross beneath the bed.", loc: "Lahore, Pakistan", genre: "pairs" },
+  { text: "The larger bowl stayed on the table.", loc: "Tashkent, Uzbekistan", genre: "pairs" },
+  { text: "Two raincoats drip into one tray.", loc: "Osaka, Japan", genre: "pairs" },
+  { text: "Another spoon rests beside the saucepan.", loc: "Taipei, Taiwan", genre: "pairs" },
+  { text: "The spare helmet hangs within reach.", loc: "Jakarta, Indonesia", genre: "pairs" },
+
+  // genre-tagged batch — Missing
+  { text: "One earring waited inside the soap dish.", loc: "Bishkek, Kyrgyzstan", genre: "missing" },
+  { text: "The frame kept its glass.", loc: "Baku, Azerbaijan", genre: "missing" },
+  { text: "One curtain ring never returned.", loc: "Isfahan, Iran", genre: "missing" },
+  { text: "A button outlived the shirt.", loc: "Abu Dhabi, United Arab Emirates", genre: "missing" },
+  { text: "One sock hid inside the duvet cover.", loc: "Sharjah, United Arab Emirates", genre: "missing" },
+  { text: "The bookmark remained without its book.", loc: "Sana'a, Yemen", genre: "missing" },
+  { text: "One chopstick reached the drawer.", loc: "Hangzhou, China", genre: "missing" },
+  { text: "A single battery rolled beneath the cabinet.", loc: "Chengdu, China", genre: "missing" },
+  { text: "The zipper ended before the jacket.", loc: "Xi'an, China", genre: "missing" },
+  { text: "The shoebox remembered different shoes.", loc: "Hong Kong", genre: "missing" },
+  { text: "The second sandal never appeared.", loc: "Davao, Philippines", genre: "missing" },
+  { text: "An empty flowerpot kept the saucer.", loc: "Surabaya, Indonesia", genre: "missing" },
+
+  // genre-tagged batch — Aftermath
+  { text: "Coffee rings circled yesterday's newspaper.", loc: "Gdańsk, Poland", genre: "aftermath" },
+  { text: "Crumbs gathered beneath the toaster.", loc: "Wrocław, Poland", genre: "aftermath" },
+  { text: "Soap bubbles clung to the tap.", loc: "Cluj-Napoca, Romania", genre: "aftermath" },
+  { text: "A cupboard door forgot to close.", loc: "Sofia, Bulgaria", genre: "aftermath" },
+  { text: "Steam blurred only half the mirror.", loc: "Plovdiv, Bulgaria", genre: "aftermath" },
+  { text: "Rice scattered beneath the counter.", loc: "Thessaloniki, Greece", genre: "aftermath" },
+  { text: "The hallway smelled faintly of polish.", loc: "Zagreb, Croatia", genre: "aftermath" },
+  { text: "A chair stood slightly away from the table.", loc: "Sarajevo, Bosnia and Herzegovina", genre: "aftermath" },
+  { text: "The sponge rested inside the bowl.", loc: "Podgorica, Montenegro", genre: "aftermath" },
+  { text: "A drawer stayed open by inches.", loc: "Skopje, North Macedonia", genre: "aftermath" },
+  { text: "Fresh peels filled the compost bin.", loc: "Tirana, Albania", genre: "aftermath" },
+
+  // genre-tagged batch — Mystery
+  { text: "One spoon lives behind the books.", loc: "Vilnius, Lithuania", genre: "mystery" },
+  { text: "The smallest bowl never stacks properly.", loc: "Riga, Latvia", genre: "mystery" },
+  { text: "Three dice sleep inside the sewing kit.", loc: "Minsk, Belarus", genre: "mystery" },
+  { text: "Every postcard faces the wall.", loc: "Chișinău, Moldova", genre: "mystery" },
+  { text: "One cupboard smells of crayons.", loc: "Akureyri, Iceland", genre: "mystery" },
+  { text: "The broom fits only one corner.", loc: "Oslo, Norway", genre: "mystery" },
+  { text: "The toolbox contains a teaspoon.", loc: "Stockholm, Sweden", genre: "mystery" },
+  { text: "The flashlight keeps fresh batteries without reason.", loc: "Gothenburg, Sweden", genre: "mystery" },
+
+  // genre-tagged batch — Rooms
+  { text: "The fridge hums through every conversation.", loc: "Malmö, Sweden", genre: "rooms" },
+  { text: "Sunlight reaches the same floorboard first.", loc: "Aarhus, Denmark", genre: "rooms" },
+  { text: "One cabinet door closes harder than the others.", loc: "Helsinki, Finland", genre: "rooms" },
+  { text: "The fan chooses one corner to ignore.", loc: "Tallinn, Estonia", genre: "rooms" },
+  { text: "Steam settles beneath the window latch.", loc: "Rotterdam, Netherlands", genre: "rooms" },
+  { text: "The washing machine finishes before sunrise.", loc: "Antwerp, Belgium", genre: "rooms" },
+  { text: "One floor tile answers every footstep.", loc: "Ghent, Belgium", genre: "rooms" },
+  { text: "Dust gathers behind the bread bin.", loc: "Brussels, Belgium", genre: "rooms" },
+  { text: "The hallway light hesitates before staying on.", loc: "Luxembourg City, Luxembourg", genre: "rooms" },
+  { text: "One shelf bends around the cookbooks.", loc: "Zurich, Switzerland", genre: "rooms" },
+  { text: "The doormat curls at one corner.", loc: "Geneva, Switzerland", genre: "rooms" },
+
+  // genre-tagged batch — Away
+  { text: "The aisle seat kept the better view.", loc: "Innsbruck, Austria", genre: "away" },
+  { text: "One platform ticket stayed inside the wallet.", loc: "Munich, Germany", genre: "away" },
+  { text: "A hotel keycard reached home first.", loc: "Hamburg, Germany", genre: "away" },
+  { text: "The suitcase returned heavier than it left.", loc: "Leipzig, Germany", genre: "away" },
+  { text: "One map opened along the same crease.", loc: "Dresden, Germany", genre: "away" },
+  { text: "Sand settled inside the backpack zipper.", loc: "Coimbra, Portugal", genre: "away" },
+  { text: "The boarding gate changed twice.", loc: "Toledo, Spain", genre: "away" },
+  { text: "A train ticket marked the wrong page.", loc: "Granada, Spain", genre: "away" },
+  { text: "One coin crossed two countries.", loc: "San Sebastián, Spain", genre: "away" },
+  { text: "The window seat collected fingerprints.", loc: "Marseille, France", genre: "away" },
+  { text: "Airport coffee cooled beside the backpack.", loc: "Bordeaux, France", genre: "away" },
+  { text: "A bus timetable lived inside the passport.", loc: "Strasbourg, France", genre: "away" },
+  { text: "The carry-on smelled faintly of detergent.", loc: "Nice, France", genre: "away" },
+
+  // genre-tagged batch — Ritual
+  { text: "Shoes line up beside the door each evening.", loc: "Bristol, England", genre: "ritual" },
+  { text: "The mailbox opens before breakfast.", loc: "Manchester, England", genre: "ritual" },
+  { text: "The windows stay open until the crows arrive.", loc: "York, England", genre: "ritual" },
+  { text: "Tea leaves settle before the newspaper opens.", loc: "Belfast, Northern Ireland", genre: "ritual" },
+  { text: "The bins reach the curb before daylight.", loc: "Cork, Ireland", genre: "ritual" },
+  { text: "Every evening ends with the balcony door.", loc: "Inverness, Scotland", genre: "ritual" },
+  { text: "The laundry waits for Saturday.", loc: "Bologna, Italy", genre: "ritual" },
+  { text: "Every morning starts with the smallest saucepan.", loc: "Florence, Italy", genre: "ritual" },
+  { text: "The watering can empties before sunset.", loc: "Venice, Italy", genre: "ritual" },
 ];
 
 function shuffle(arr) {
@@ -284,7 +418,7 @@ function shuffle(arr) {
   }
   return a;
 }
-const FRAGMENTS = shuffle(RAW_FRAGMENTS);
+let FRAGMENTS = shuffle(RAW_FRAGMENTS);
 
 // ---- starfield ----
 const canvas = document.getElementById('stars');
@@ -324,12 +458,19 @@ requestAnimationFrame(drawStars);
 // ---- title: "humans" scatters down to "u" on first input ----
 const titlecard = document.getElementById('titlecard');
 const uMark = document.getElementById('uMark');
+const titleRow = document.createElement('div');
+titleRow.id = 'titleRow';
+titlecard.appendChild(titleRow);
 "humans".split('').forEach((ch) => {
   const span = document.createElement('span');
   span.className = 'letter' + (ch === 'u' ? ' u' : '');
   span.textContent = ch;
-  titlecard.appendChild(span);
+  titleRow.appendChild(span);
 });
+const titleSub = document.createElement('div');
+titleSub.id = 'titleSub';
+titleSub.textContent = 'traces of ordinary lives, from around the world';
+titlecard.appendChild(titleSub);
 let introActive = true;
 let titleDismissed = false;
 
@@ -350,6 +491,9 @@ function dismissTitle() {
       el.style.opacity = '0';
     }
   });
+  titleSub.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+  titleSub.style.opacity = '0';
+  titleSub.style.transform = 'translateY(18px)';
   setTimeout(() => {
     titlecard.classList.add('fading');
     setTimeout(() => {
@@ -358,6 +502,7 @@ function dismissTitle() {
       introActive = false;
       renderFragment(index);
       shareBtn.classList.add('show');
+      genreBar.classList.add('show');
       document.getElementById('hint').style.opacity = 1;
       setTimeout(() => { document.getElementById('hint').style.opacity = 0; }, 4200);
     }, 900);
@@ -370,6 +515,60 @@ uMark.addEventListener('click', () => location.reload());
 const stage = document.getElementById('stage');
 const dots = document.getElementById('dots');
 const shareBtn = document.getElementById('shareBtn');
+const genreBar = document.getElementById('genreBar');
+let activeGenre = null;
+
+// ordered by how many fragments each bucket currently has, fullest first,
+// so whichever group shows by default is never a thin, half-empty room
+const GENRES = [
+  { key: 'away', label: 'Away' },
+  { key: 'pairs', label: 'Pairs' },
+  { key: 'missing', label: 'Missing' },
+  { key: 'aftermath', label: 'Aftermath' },
+  { key: 'rooms', label: 'Rooms' },
+  { key: 'ritual', label: 'Ritual' },
+  { key: 'mystery', label: 'Mystery' },
+];
+function chunk(arr, size) {
+  const out = [];
+  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+  return out;
+}
+const genreGroups = chunk(GENRES, 3);
+let groupIndex = 0;
+
+function renderGenreBar() {
+  genreBar.innerHTML = '';
+  genreGroups[groupIndex].forEach((g) => {
+    const btn = document.createElement('div');
+    btn.className = 'genreBtn' + (activeGenre === g.key ? ' active' : '');
+    btn.dataset.genre = g.key;
+    btn.textContent = g.label;
+    genreBar.appendChild(btn);
+  });
+  const moreBtn = document.createElement('div');
+  moreBtn.className = 'genreBtn more';
+  moreBtn.textContent = '···';
+  genreBar.appendChild(moreBtn);
+}
+renderGenreBar();
+
+genreBar.addEventListener('click', (e) => {
+  if (e.target.closest('.genreBtn.more')) {
+    groupIndex = (groupIndex + 1) % genreGroups.length;
+    renderGenreBar();
+    return;
+  }
+  const btn = e.target.closest('.genreBtn');
+  if (!btn) return;
+  const genre = btn.dataset.genre;
+  activeGenre = (activeGenre === genre) ? null : genre; // tap again to return to the full mix
+  const pool = activeGenre ? RAW_FRAGMENTS.filter((f) => f.genre === activeGenre) : RAW_FRAGMENTS;
+  FRAGMENTS = shuffle(pool);
+  index = 0;
+  renderFragment(index);
+  renderGenreBar();
+});
 let index = 0;
 let currentEl = null;
 let animating = false;
@@ -412,14 +611,14 @@ function next() {
 // ---- input: tap or click anywhere advances to the next fragment ----
 // (the very first tap/click, wherever it lands, also dismisses the title)
 function handlePrimaryInput(e) {
-  if (e.target.closest('#shareBtn') || e.target.closest('#uMark')) return;
+  if (e.target.closest('#shareBtn') || e.target.closest('#uMark') || e.target.closest('#genreBar')) return;
   if (introActive) { dismissTitle(); return; }
   next();
 }
 window.addEventListener('click', handlePrimaryInput);
 window.addEventListener('touchend', (e) => {
   if (!e.changedTouches.length) return;
-  if (e.target.closest('#shareBtn') || e.target.closest('#uMark')) return; // let those buttons handle their own tap
+  if (e.target.closest('#shareBtn') || e.target.closest('#uMark') || e.target.closest('#genreBar')) return;
   e.preventDefault(); // stop the browser's follow-up synthetic click from double-firing navigation
   handlePrimaryInput(e);
 }, { passive: false });
