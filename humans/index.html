@@ -87,14 +87,17 @@
 
   .fragment {
     position: absolute;
-    text-align: center; max-width: 480px; padding: 0 28px;
-    opacity: 0; transform: translateY(14px);
+    text-align: center;
+    width: min(90vw, 700px);
+    padding: 0 20px;
+    opacity: 0;
+    transform: translateY(14px);
     transition: opacity 1.1s ease, transform 1.1s ease;
   }
   .fragment.active { opacity: 1; transform: translateY(0); }
   .fragment.leaving { opacity: 0; transform: translateY(-14px); }
   .fragment-text {
-    font-size: 2.5rem; line-height: 1.55; font-weight: 400; letter-spacing: 0.01em;
+    font-size: 2.5rem; line-height: 1.3; font-weight: 400; letter-spacing: 0.01em;
   }
   .fragment-loc {
     display: block; margin-top: 14px; font-size: 1rem; letter-spacing: 0.18em;
