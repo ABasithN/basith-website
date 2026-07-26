@@ -2,8 +2,8 @@ window.STORIES.push({
   contact: "Amma",
 
   history: [
-    { when: "Yesterday", from: "them", text: "Did you eat?" },
-    { when: "Yesterday", from: "me", text: "Yeah ❤️" }
+    { when: "Tue, 7 Jan", from: "them", text: "Did you eat?" },
+    { when: "Tue, 7 Jan", from: "me", text: "Yeah ❤️" }
   ],
 
   existing: [
@@ -11,10 +11,10 @@ window.STORIES.push({
   ],
 
   draft: [
-    { text: "Mine too.", pause: "medium" },
+    { text: "Mine too, maa. I want to mvoe back.", pause: "medium" },
     { text: "", pause: "long" },
     { text: "I'll visit soon.", pause: "medium" }
   ],
 
-  sent: false
+  sent: true
 });
