@@ -13,7 +13,7 @@ window.STORIES.push({
   draft: [
     { text: "I knew you would.", pause: "short" },
     { text: "", pause: "medium" },
-    { text: "Proud of you.", pause: "medium" }
+    { text: "PROUD OF YOU <3", pause: "medium" }
   ],
 
   sent: true
