@@ -224,3 +224,5 @@ beginBtn.addEventListener('click', () => {
     runStory(nextStory());
   }
 });
+
+})();
