@@ -2,8 +2,8 @@ window.STORIES.push({
   contact: "Dad",
 
   history: [
-    { when: "18 Jun", from: "them", text: "Drive safe." },
-    { when: "18 Jun", from: "me", text: "Will do." }
+    { when: "Wed, 18 Jun", from: "them", text: "Drive safe." },
+    { when: "Wed, 18 Jun", from: "me", text: "Will do." }
   ],
 
   existing: [
@@ -11,7 +11,7 @@ window.STORIES.push({
   ],
 
   draft: [
-    { text: "I don't know how to tell you this.", pause: "long" },
+    { text: "I don't know how to tell you this. But I miss you, Dad", pause: "long" },
     { text: "", pause: "short" },
     { text: "I'll call tonight.", pause: "medium" }
   ],
