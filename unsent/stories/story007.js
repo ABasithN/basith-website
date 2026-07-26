@@ -2,8 +2,8 @@ window.STORIES.push({
   contact: "Flat 302",
 
   history: [
-    { when: "Yesterday", from: "them", text: "Courier's with me." },
-    { when: "Yesterday", from: "me", text: "Thank you!" }
+    { when: "Thur, 3 Apr", from: "them", text: "Courier's with me." },
+    { when: "Thur, 3 Apr", from: "me", text: "Thank you!" }
   ],
 
   existing: [
@@ -11,10 +11,10 @@ window.STORIES.push({
   ],
 
   draft: [
-    { text: "Couldn't sleep.", pause: "medium" },
+    { text: "I've been struggling to get some sleep.", pause: "medium" },
     { text: "", pause: "short" },
-    { text: "Thanks for checking.", pause: "medium" }
+    { text: "I passed out. Thanks for checking.", pause: "medium" }
   ],
 
-  sent: false
+  sent: true
 });
