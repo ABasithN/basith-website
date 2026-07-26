@@ -116,8 +116,6 @@
     // If not sent, the drafted text is simply left sitting in the box —
     // that's the point. We don't clean it up before moving on.
 
-    await wait(pauseDuration('medium'), signal);
-    await advance(signal);
   }
 
   // -------------------- playback loop --------------------
@@ -182,38 +180,47 @@
     })();
   }
 
-  // -------------------- input: tap or swipe up --------------------
+ // -------------------- input: tap or swipe up --------------------
 
-  let touchStartY = null;
-  let lastAdvance = 0;
+let touchStartY = null;
+let lastAdvance = 0;
+let introActive = true;
 
-  function triggerAdvance() {
-    const now = Date.now();
-    if (now - lastAdvance < 500) return; // ignore duplicate touch+click firing
-    lastAdvance = now;
-    skipToNext();
-  }
+function triggerAdvance() {
+  if (introActive) return; // intro screen has its own button, ignore taps until dismissed
+  const now = Date.now();
+  if (now - lastAdvance < 500) return;
+  lastAdvance = now;
+  skipToNext();
+}
 
-  document.addEventListener('touchstart', (e) => {
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
+document.addEventListener('touchstart', (e) => {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
 
-  document.addEventListener('touchend', (e) => {
-    if (touchStartY === null) return;
-    touchStartY = null;
-    triggerAdvance();
-  }, { passive: true });
+document.addEventListener('touchend', (e) => {
+  if (touchStartY === null) return;
+  touchStartY = null;
+  triggerAdvance();
+}, { passive: true });
 
-  document.addEventListener('click', () => {
-    triggerAdvance();
-  });
+document.addEventListener('click', () => {
+  triggerAdvance();
+});
 
-  // -------------------- start --------------------
+// -------------------- start --------------------
+
+const introEl = document.getElementById('intro');
+const beginBtn = document.getElementById('begin-btn');
+
+beginBtn.addEventListener('click', () => {
+  introActive = false;
+  introEl.style.display = 'none';
+  appEl.classList.remove('hidden');
 
   if (STORIES.length === 0) {
     console.warn('UNSENT: no stories found.');
   } else {
     runStory(nextStory());
   }
-
-})();
+});
