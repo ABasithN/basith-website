@@ -2,8 +2,8 @@ window.STORIES.push({
   contact: "Rahul (HR)",
 
   history: [
-    { when: "Wed, 12 Feb", from: "them", text: "Heard you got a new job!" },
-    { when: "Wed, 12 Feb", from: "me", text: "Yes I did." }
+    { when: "12 Feb", from: "them", text: "Welcome aboard!" },
+    { when: "12 Feb", from: "me", text: "Looking forward to it." }
   ],
 
   existing: [
@@ -11,9 +11,9 @@ window.STORIES.push({
   ],
 
   draft: [
-    { text: "I still miss everyone there. Everyday.", pause: "medium" },
+    { text: "I still miss everyone.", pause: "medium" },
     { text: "", pause: "medium" },
-    { text: "Indeed. Everyone has been amazing.", pause: "short" }
+    { text: "Hope you're doing well too.", pause: "short" }
   ],
 
   sent: true

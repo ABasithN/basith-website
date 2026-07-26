@@ -2,18 +2,18 @@ window.STORIES.push({
   contact: "Dad",
 
   history: [
-    { when: "Wed, 18 Jun", from: "them", text: "Drive safe." },
-    { when: "Wed, 18 Jun", from: "me", text: "Will do." }
+    { when: "18 Jun", from: "them", text: "Drive safe." },
+    { when: "18 Jun", from: "me", text: "Will do." }
   ],
 
   existing: [
-    { from: "them", text: "Call me when you reach." }
+    { from: "them", text: "Call me when you are close to home" }
   ],
 
   draft: [
-    { text: "I don't know how to tell you this. But I miss you, Dad", pause: "long" },
+    { text: "I wish I were coming home for better reasons.", pause: "long" },
     { text: "", pause: "short" },
-    { text: "I'll call tonight.", pause: "medium" }
+    { text: "ok.", pause: "medium" } 
   ],
 
   sent: true

@@ -10,7 +10,7 @@ window.STORIES.push({
   draft: [
     { text: "Someone who couldn't forget your number.", pause: "long" },
     { text: "", pause: "medium" },
-    { text: "Sorry. Called by mistake. Wrong number.", pause: "short" }
+    { text: "Sorry, wrong chat.", pause: "short" }
   ],
 
   sent: true
