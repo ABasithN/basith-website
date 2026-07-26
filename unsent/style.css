@@ -90,6 +90,9 @@ body {
   line-height: 1.28;
   letter-spacing: -0.01em;
   word-wrap: break-word;
+}
+
+.bubble.sent-animate {
   opacity: 0;
   transform: translateY(6px);
   animation: bubble-in 500ms ease forwards;
@@ -111,6 +114,26 @@ body {
   background: #0B84FF;
   color: #ffffff;
   border-bottom-right-radius: 6px;
+}
+
+.bubble.history {
+  opacity: 0.5;
+}
+
+.bubble.history.them {
+  background: #EFEFF1;
+}
+
+.bubble.history.me {
+  background: #7FB8FF;
+}
+
+.time-label {
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: #8e8e93;
+  margin: 4px 0 2px 0;
 }
 
 /* -------------------- COMPOSE BAR -------------------- */

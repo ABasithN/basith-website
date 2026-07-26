@@ -76,27 +76,43 @@
     }
   }
 
-  function renderExisting(existing) {
-    threadEl.innerHTML = '';
-    (existing || []).forEach((msg) => {
-      const div = document.createElement('div');
-      div.className = 'bubble ' + (msg.from === 'me' ? 'me' : 'them');
-      div.textContent = msg.text;
-      threadEl.appendChild(div);
-    });
-  }
+  function renderThread(story) {
+  threadEl.innerHTML = '';
+  let lastWhen = null;
 
-  function appendSentBubble(text) {
+  (story.history || []).forEach((msg) => {
+    if (msg.when !== lastWhen) {
+      const label = document.createElement('div');
+      label.className = 'time-label';
+      label.textContent = msg.when;
+      threadEl.appendChild(label);
+      lastWhen = msg.when;
+    }
     const div = document.createElement('div');
-    div.className = 'bubble me';
-    div.textContent = text;
+    div.className = 'bubble history ' + (msg.from === 'me' ? 'me' : 'them');
+    div.textContent = msg.text;
     threadEl.appendChild(div);
-  }
+  });
 
-  async function playStory(story, signal) {
-    contactNameEl.textContent = story.contact || '';
-    renderExisting(story.existing);
-    setComposeText('');
+  (story.existing || []).forEach((msg) => {
+    const div = document.createElement('div');
+    div.className = 'bubble ' + (msg.from === 'me' ? 'me' : 'them');
+    div.textContent = msg.text;
+    threadEl.appendChild(div);
+  });
+}
+
+function appendSentBubble(text) {
+  const div = document.createElement('div');
+  div.className = 'bubble me sent-animate';
+  div.textContent = text;
+  threadEl.appendChild(div);
+}
+
+async function playStory(story, signal) {
+  contactNameEl.textContent = story.contact || '';
+  renderThread(story);
+  setComposeText('');
 
     // A pause before typing begins — the conversation already existed,
     // the visitor just arrived.
