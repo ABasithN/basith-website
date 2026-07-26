@@ -2,8 +2,8 @@ window.STORIES.push({
   contact: "Aisha",
 
   history: [
-    { when: "4 Apr", from: "them", text: "Happy birthday." },
-    { when: "4 Apr", from: "me", text: "Thank you :)" }
+    { when: "Fri, 4 Apr", from: "them", text: "Happy birthday." },
+    { when: "Fri, 4 Apr", from: "me", text: "Thank you :)" }
   ],
 
   existing: [
@@ -13,7 +13,7 @@ window.STORIES.push({
   draft: [
     { text: "I was, once.", pause: "medium" },
     { text: "", pause: "long" },
-    { text: "Hope you are too.", pause: "medium" }
+    { text: "Yes. Hope you are now.", pause: "medium" }
   ],
 
   sent: false
