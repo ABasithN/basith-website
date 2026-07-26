@@ -10,6 +10,7 @@
   const STORIES = window.STORIES || [];
 
   const appEl = document.getElementById('app');
+  const contactNameEl = document.getElementById('contact-name');
   const threadEl = document.getElementById('thread');
   const composeTextEl = document.getElementById('compose-text');
 
@@ -93,6 +94,7 @@
   }
 
   async function playStory(story, signal) {
+    contactNameEl.textContent = story.contact || '';
     renderExisting(story.existing);
     setComposeText('');
 

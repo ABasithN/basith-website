@@ -33,13 +33,41 @@ body {
   background: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   opacity: 1;
   transition: opacity 900ms ease;
 }
 
 #app.fade {
   opacity: 0;
+}
+
+/* -------------------- HEADER -------------------- */
+
+#header {
+  flex-shrink: 0;
+  height: 44px;
+  padding-top: env(safe-area-inset-top, 0px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#back-chevron {
+  position: absolute;
+  left: 10px;
+  top: calc(env(safe-area-inset-top, 0px) + 2px);
+  font-size: 26px;
+  font-weight: 400;
+  color: #0B84FF;
+}
+
+#contact-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1c1c1e;
+  margin-top: env(safe-area-inset-top, 0px);
 }
 
 /* -------------------- THREAD -------------------- */
@@ -91,7 +119,7 @@ body {
   flex-shrink: 0;
   display: flex;
   align-items: flex-end;
-  padding: 8px 14px calc(10px + env(safe-area-inset-bottom, 0px)) 14px;
+  padding: 8px 14px 8px 14px;
 }
 
 #compose-box {
@@ -126,4 +154,81 @@ body {
 
 @keyframes blink {
   50% { opacity: 0; }
+}
+
+/* -------------------- KEYBOARD (decorative only) -------------------- */
+
+#keyboard {
+  flex-shrink: 0;
+  background: #D1D3D9;
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px)) 4px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.kb-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.kb-row:last-child {
+  margin-bottom: 0;
+}
+
+.kb-row-mid {
+  padding: 0 16px;
+}
+
+.key {
+  flex: 1;
+  max-width: 34px;
+  height: 42px;
+  background: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: #1c1c1e;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.25);
+}
+
+.key-fn {
+  background: #AEB1B8;
+  color: #1c1c1e;
+  max-width: 40px;
+  flex: 0 0 40px;
+  font-size: 13px;
+}
+
+.key-shift, .key-del {
+  max-width: 42px;
+  flex: 0 0 42px;
+  font-size: 18px;
+}
+
+.kb-row-bottom {
+  gap: 6px;
+}
+
+.key-123, .key-globe, .key-return {
+  max-width: 62px;
+  flex: 0 0 62px;
+  font-size: 13px;
+}
+
+.key-space {
+  flex: 1;
+  max-width: none;
+  background: #ffffff;
+  border-radius: 5px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #1c1c1e;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.25);
 }
