@@ -2,12 +2,12 @@ window.STORIES.push({
   contact: "Little Bro",
 
   history: [
-    { when: "Monday", from: "them", text: "Need ₹500." },
-    { when: "Monday", from: "me", text: "Sent." }
+    { when: "Mon, 27 Jul", from: "them", text: "Need ₹500." },
+    { when: "Mon, 27 Jul", from: "me", text: "Sent." }
   ],
 
   existing: [
-    { from: "them", text: "Got the job." }
+    { from: "them", text: "Listen. I got the job." }
   ],
 
   draft: [
