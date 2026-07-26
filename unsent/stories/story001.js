@@ -1,33 +1,20 @@
-/* ---------------------------------------------
-   Story: Dad
-   Format guide:
-   - existing: message(s) already on screen when the page loads
-   - draft: an ordered list of "settled" states the compose
-     box passes through. The engine auto-computes the type/
-     delete animation between each state by diffing the text.
-     Just write what's fully visible at each pause — no need
-     to spell out individual keystrokes.
-   - pause: "short" | "medium" | "long" — how long it sits
-     before the next change begins
-   - sent: true -> becomes a blue bubble in the thread
-           false -> stays in the box, never sent
---------------------------------------------- */
-
-window.STORIES = window.STORIES || [];
 window.STORIES.push({
   contact: "Dad",
 
+  history: [
+    { when: "18 Jun", from: "them", text: "Drive safe." },
+    { when: "18 Jun", from: "me", text: "Will do." }
+  ],
+
   existing: [
-    { from: "them", text: "Drive safe." }
+    { from: "them", text: "Call me when you reach." }
   ],
 
   draft: [
-    { text: "I got the promotion today.", pause: "medium" },
+    { text: "I don't know how to tell you this.", pause: "long" },
     { text: "", pause: "short" },
-    { text: "I wish you were the first person I could tell.", pause: "long" },
-    { text: "I wish you were here.", pause: "long" },
-    { text: "Hope you're sleeping well.", pause: "long" }
+    { text: "I'll call tonight.", pause: "medium" }
   ],
 
-  sent: false
-});
+  sent: true
+}); 
