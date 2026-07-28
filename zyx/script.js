@@ -657,8 +657,7 @@ const LIVES = [
       { age: 36, text: 'First mission scrubbed four hours before launch.' },
       { age: 44, text: 'Forgot to be afraid, for eleven seconds.' }
     ]
-  }
-
+  },
    {
     id: 'poet', num: '19', name: 'A Poet', rgb: '224,180,200', tag: 'Reykjavik, Iceland',
     wide: true,
