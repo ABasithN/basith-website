@@ -16,5 +16,5 @@ window.STORIES.push({
     { text: "I'll visit soon.", pause: "medium" }
   ],
 
-  sent: false
+  sent: true
 });
