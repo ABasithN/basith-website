@@ -1,7 +1,10 @@
 window.STORIES.push({
   contact: "Unknown Number",
 
-  history: [],
+  history: [
+     {when: "Sun, 25 Feb" }
+
+],
 
   existing: [
     { from: "them", text: "Who is this?" }

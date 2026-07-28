@@ -1,9 +1,9 @@
 window.STORIES.push({
-  contact: "Amma",
+  contact: "Ammi",
 
   history: [
-    { when: "Yesterday", from: "them", text: "Did you eat?" },
-    { when: "Yesterday", from: "me", text: "Yeah ❤️" }
+    { when: "Sun, 25 Feb", from: "them", text: "Did you eat?" },
+    { when: "Sun, 25 Feb", from: "me", text: "Yeah ❤️" }
   ],
 
   existing: [
@@ -11,7 +11,7 @@ window.STORIES.push({
   ],
 
   draft: [
-    { text: "Mine too.", pause: "medium" },
+    { text: "Mine too. I want to come back", pause: "medium" },
     { text: "", pause: "long" },
     { text: "I'll visit soon.", pause: "medium" }
   ],

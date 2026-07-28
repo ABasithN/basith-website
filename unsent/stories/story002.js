@@ -1,6 +1,10 @@
-window.STORIES = window.STORIES || [];
 window.STORIES.push({
-  contact: "Maya",
+  contact: "Ann",
+
+ history: [
+    { when: "Mon, 4 May", from: "them", text: "Take care" },
+    { when: "Mon, 4 May", from: "me", text: "ok" }
+  ],
 
   existing: [
     { from: "them", text: "Happy birthday :) Thanks for remembering mine." }
@@ -14,3 +18,4 @@ window.STORIES.push({
 
   sent: true
 });
+

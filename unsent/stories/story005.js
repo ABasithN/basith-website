@@ -2,8 +2,8 @@ window.STORIES.push({
   contact: "Mrs. D'Souza",
 
   history: [
-    { when: "Teacher's Day", from: "me", text: "Hope you're doing well." },
-    { when: "Teacher's Day", from: "them", text: "Always rooting for you." }
+    { when: "Thu, 5 Sep", from: "me", text: "Happy Teacher's Day. Hope you're doing well." },
+    { when: "Thu, 5 Sep", from: "them", text: "Thank you. Remember, I am always rooting for you." }
   ],
 
   existing: [
