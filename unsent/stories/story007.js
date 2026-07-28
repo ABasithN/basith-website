@@ -16,5 +16,5 @@ window.STORIES.push({
     { text: "I passed out. Thanks for checking.", pause: "medium" }
   ],
 
-  sent: True
+  sent: true
 });
