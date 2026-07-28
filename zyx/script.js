@@ -658,6 +658,186 @@ const LIVES = [
       { age: 44, text: 'Forgot to be afraid, for eleven seconds.' }
     ]
   }
+
+   {
+    id: 'poet', num: '19', name: 'A Poet', rgb: '224,180,200', tag: 'Reykjavik, Iceland',
+    wide: true,
+    transitionStyle: 'pageturn',
+    ambientStyle: 'pages',
+    motif: (ctx, s, c) => {
+      ctx.strokeStyle = c; ctx.lineWidth = 2.5 * s;
+      ctx.beginPath();
+      ctx.moveTo(20*s,85*s); ctx.lineTo(75*s,20*s);
+      ctx.moveTo(45*s,55*s); ctx.lineTo(58*s,42*s);
+      ctx.moveTo(35*s,65*s); ctx.lineTo(48*s,52*s);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(20*s,85*s,3*s,0,Math.PI*2);
+      ctx.fillStyle = c; ctx.fill();
+    },
+    introHook: 'Thirty years of words. One line strangers still tattoo on themselves.',
+    bleed: "You chose to spend a lifetime saying the thing everyone else felt but couldn't word.",
+    worldIntroTitle: 'A Poet',
+    artifactLabel: 'Verse Log 07',
+    narrativeP1: 'You spent thirty years writing lines other people needed more than you did.',
+    narrativeP2: 'At fifty-two, a stranger showed you the line tattooed on her wrist, from a poem you wrote at your kitchen table on a bad Tuesday. You signed her book and said nothing about the Tuesday. Some things are only yours.',
+    poster: {
+      lead: 'In a parallel world,', headline: "I'm a Poet",
+      age: 52, place: 'Reykjavik, Iceland',
+      knownFor: 'The line strangers keep tattooing on themselves, from a poem written on a bad Tuesday.',
+      lifeLesson: 'The words that help most are rarely the ones that felt important while writing them.',
+      footer: 'Verse Log 07 · 64.1466°N, 21.9426°W · 2032'
+    },
+    realityMirror: 'You still write down the good lines, even with nowhere for them to go.',
+    milestones: [
+      { age: 20, text: 'First poem published. Read by fourteen people, twelve of them family.' },
+      { age: 28, text: 'Rejected from thirty-one journals in a single year.' },
+      { age: 40, text: 'A poem finally traveled further than you ever expected it to.' },
+      { age: 52, text: "A stranger's tattoo, from a line written on a bad Tuesday." }
+    ]
+  },
+  {
+    id: 'therapist', num: '20', name: 'A Therapist', rgb: '150,190,160', tag: 'Amsterdam, Netherlands',
+    wide: false,
+    transitionStyle: 'ripple',
+    ambientStyle: 'glow',
+    motif: (ctx, s, c) => {
+      ctx.strokeStyle = c; ctx.lineWidth = 2 * s;
+      ctx.beginPath();
+      for (let i=0; i<=60; i++) {
+        const ang = i*0.28;
+        const rad = i*0.55;
+        const x = 50*s + Math.cos(ang)*rad*s*0.32;
+        const y = 50*s + Math.sin(ang)*rad*s*0.32;
+        if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    },
+    introHook: 'Nineteen years of listening. One sentence that changed someone\u2019s whole year.',
+    bleed: 'You chose to hold other people\u2019s hardest sentences, one hour at a time.',
+    worldIntroTitle: 'A Therapist',
+    artifactLabel: 'Session Log 07',
+    narrativeP1: 'You spent nineteen years listening for the sentence underneath the sentence someone actually came in to say.',
+    narrativeP2: 'At forty-six, a client you had seen for four years said, offhand, that a single question you asked in year one changed the entire shape of his life since. You did not remember asking it. You wrote it down after he left, so you would not forget it this time.',
+    poster: {
+      lead: 'In a parallel world,', headline: "I'm a Therapist",
+      age: 46, place: 'Amsterdam, Netherlands',
+      knownFor: "A question, asked once, that changed the entire shape of someone's life.",
+      lifeLesson: 'You rarely know which sentence is the important one until years after you said it.',
+      footer: 'Session Log 07 · 52.3676°N, 4.9041°E · 2031'
+    },
+    realityMirror: 'You still ask better questions than the room usually needs, out of habit.',
+    milestones: [
+      { age: 24, text: 'First client. Said almost nothing useful for the entire hour.' },
+      { age: 30, text: 'Told, for the first time, that a session had helped. Nearly cried in the office.' },
+      { age: 38, text: 'Started keeping a private list of the sentences clients said that stayed with you.' },
+      { age: 46, text: "A question from year one, changing a life you did not realize you'd touched." }
+    ]
+  },
+  {
+    id: 'busker', num: '21', name: 'Musician on the Sidewalks', rgb: '230,120,90', tag: 'Barcelona, Spain',
+    wide: false,
+    transitionStyle: 'smoke',
+    ambientStyle: 'smoke',
+    motif: (ctx, s, c) => {
+      ctx.strokeStyle = c; ctx.lineWidth = 2.5 * s;
+      ctx.beginPath(); ctx.arc(42*s,65*s,18*s,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(42*s,40*s,11*s,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(42*s,29*s); ctx.lineTo(32*s,8*s);
+      ctx.stroke();
+    },
+    introHook: 'Six years on the same corner. One coin from a stranger who came back.',
+    bleed: 'You chose a stage nobody assigned you, and an audience that had somewhere else to be.',
+    worldIntroTitle: 'Musician on the Sidewalks',
+    artifactLabel: 'Corner Log 07',
+    narrativeP1: 'You spent six years playing the same corner, for an audience that mostly had somewhere else to be.',
+    narrativeP2: 'At twenty-four, a woman dropped a coin in your case, walked half a block, turned around, and asked you to play the same song again for her mother on a video call. You played it twice. She cried both times. You never learned her name.',
+    poster: {
+      lead: 'In a parallel world,', headline: "I'm a Sidewalk Musician",
+      age: 24, place: 'Barcelona, Spain',
+      knownFor: "Playing the same song twice for a stranger's mother, over a video call, on a sidewalk.",
+      lifeLesson: 'The best audience you will ever have did not plan on stopping.',
+      footer: 'Corner Log 07 · 41.3874°N, 2.1686°E · 2029'
+    },
+    realityMirror: 'You still half expect a coin to land whenever you catch yourself humming in public.',
+    milestones: [
+      { age: 17, text: 'Got moved along by three different shop owners in one afternoon.' },
+      { age: 19, text: 'Bought a proper amp with six months of coins, counted in a shoebox.' },
+      { age: 22, text: 'A stranger filmed you, and the video did more for you than the corner ever did.' },
+      { age: 24, text: "Playing the same song twice, for a mother you'd never meet." }
+    ]
+  },
+  {
+    id: 'healer', num: '22', name: 'A Healer', rgb: '255,230,190', tag: 'Ubud, Bali, Indonesia',
+    wide: true,
+    transitionStyle: 'flare',
+    ambientStyle: 'flicker',
+    motif: (ctx, s, c) => {
+      ctx.strokeStyle = c; ctx.lineWidth = 2.5 * s;
+      ctx.beginPath();
+      ctx.moveTo(50*s,85*s);
+      ctx.quadraticCurveTo(20*s,60*s,50*s,15*s);
+      ctx.quadraticCurveTo(80*s,60*s,50*s,85*s);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(50*s,82*s); ctx.lineTo(50*s,22*s);
+      ctx.stroke();
+    },
+    introHook: 'Twenty-six years of healing hands. One patient who came back just to say thank you, a decade later.',
+    bleed: "You chose to spend a lifetime with your hands on other people's pain.",
+    worldIntroTitle: 'A Healer',
+    artifactLabel: 'Healing Log 07',
+    narrativeP1: 'You spent twenty-six years learning that most healing is just someone finally being touched with attention.',
+    narrativeP2: 'At fifty-eight, a woman you had treated once, a decade earlier, found you again just to say the session was the first time in years she had felt safe in her own body. You did not fully remember her. You thanked her anyway, and meant it completely.',
+    poster: {
+      lead: 'In a parallel world,', headline: "I'm a Healer",
+      age: 58, place: 'Ubud, Bali, Indonesia',
+      knownFor: "A decade-later thank you, from someone whose name came back before her face did.",
+      lifeLesson: 'Most people are not looking to be fixed. They are looking to be met.',
+      footer: 'Healing Log 07 · 8.5069°S, 115.2625°E · 2033'
+    },
+    realityMirror: 'You still touch a shoulder a beat longer than most people would think to.',
+    milestones: [
+      { age: 26, text: 'First client cancelled twice before finally showing up.' },
+      { age: 34, text: 'Learned that silence works more often than technique does.' },
+      { age: 47, text: 'A referral from someone you had only seen once, years earlier.' },
+      { age: 58, text: 'A decade-later thank you, remembered before the face was.' }
+    ]
+  },
+  {
+    id: 'filmmaker', num: '23', name: 'A Filmmaker', rgb: '70,90,160', tag: 'Busan, South Korea',
+    wide: false,
+    transitionStyle: 'curtain',
+    ambientStyle: 'stagelight',
+    motif: (ctx, s, c) => {
+      ctx.strokeStyle = c; ctx.lineWidth = 2.5 * s;
+      ctx.strokeRect(20*s,40*s,60*s,40*s);
+      ctx.beginPath();
+      ctx.moveTo(20*s,40*s); ctx.lineTo(30*s,20*s); ctx.lineTo(90*s,20*s); ctx.lineTo(80*s,40*s);
+      ctx.stroke();
+    },
+    introHook: 'Fifteen years and four films nobody funded easily. One festival that stood up before the credits finished.',
+    bleed: 'You chose to keep making the film no one wanted to pay for.',
+    worldIntroTitle: 'A Filmmaker',
+    artifactLabel: 'Reel Log 07',
+    narrativeP1: 'You spent fifteen years making four films, none of which were easy to get anyone to pay for.',
+    narrativeP2: 'At forty-three, at a festival screening of the fourth one, the room stood up before the credits had even finished rolling. You stayed in your seat one extra beat, not from modesty, just to make sure it was real before you stood up too.',
+    poster: {
+      lead: 'In a parallel world,', headline: "I'm a Filmmaker",
+      age: 43, place: 'Busan, South Korea',
+      knownFor: 'A standing ovation that started before the credits did.',
+      lifeLesson: 'The film nobody wants to fund is usually the one worth finishing anyway.',
+      footer: 'Reel Log 07 · 35.1796°N, 129.0756°E · 2030'
+    },
+    realityMirror: 'You still watch the audience more than the screen, out of habit.',
+    milestones: [
+      { age: 22, text: 'First short film. Three people watched it, one of them asleep.' },
+      { age: 29, text: 'First feature rejected from every festival it was submitted to.' },
+      { age: 36, text: 'Second feature got in, but to the smallest festival on the list.' },
+      { age: 43, text: 'A standing ovation that started before the credits did.' }
+    ]
+  },
 ];
 
 const SITE_URL = 'www.basith.xyz/zyx';
