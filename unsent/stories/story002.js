@@ -7,7 +7,8 @@ window.STORIES.push({
   ],
 
   existing: [
-    { from: "them", text: "Happy birthday :) Thanks for remembering mine." }
+    { when: "Wed, 29 Jul", from: "them", text: "Take care" },    
+    { when: "Wed, 29 Jul", from: "them", text: "Happy birthday :) Thanks for remembering mine." }
   ],
 
   draft: [
