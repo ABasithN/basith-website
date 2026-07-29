@@ -1,12 +1,10 @@
 window.STORIES.push({
   contact: "Karthik",
 
-  history: [
-    { when: "Fri, 18 Sep", from: "them", text: "You crossed my office today." }
-  ],
 
   existing: [
-    { from: "them", text: "You looked happy." }
+{ when: "Fri, 18 Sep", from: "them", text: "You crossed my office today." }
+{ when: "Fri, 18 Sep", from: "them", text: "You looked happy." }
   ],
 
   draft: [
