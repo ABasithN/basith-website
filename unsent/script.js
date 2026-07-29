@@ -94,12 +94,19 @@
     threadEl.appendChild(div);
   });
 
-  (story.existing || []).forEach((msg) => {
-    const div = document.createElement('div');
-    div.className = 'bubble ' + (msg.from === 'me' ? 'me' : 'them');
-    div.textContent = msg.text;
-    threadEl.appendChild(div);
-  });
+  if (story.divider) {
+  const label = document.createElement('div');
+  label.className = 'time-label';
+  label.textContent = story.divider;
+  threadEl.appendChild(label);
+}
+
+   (story.existing || []).forEach((msg) => {
+     const div = document.createElement('div');
+     div.className = 'bubble ' + (msg.from === 'me' ? 'me' : 'them');
+     div.textContent = msg.text;
+     threadEl.appendChild(div);
+   });
 }
 
 function appendSentBubble(text) {
