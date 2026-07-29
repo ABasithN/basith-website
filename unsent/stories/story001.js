@@ -1,3 +1,5 @@
+window.STORIES = window.STORIES || [];
+
 window.STORIES.push({
   contact: "Appa",
 
