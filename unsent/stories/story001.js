@@ -1,25 +1,22 @@
-window.STORIES = window.STORIES || [];
-
-
 window.STORIES.push({
-  contact: "Ammi",
+  contact: "Appa",
 
   history: [
-    { when: "Tue, 11 Feb", from: "them", text: "Did you reach safely?" },
-    { when: "Tue, 11 Feb", from: "me", text: "Yeah. Just got in." },
-    { when: "Tue, 11 Feb", from: "them", text: "Eat something before you sleep." }
+    { when: "Sun, 02 Feb", from: "them", text: "Reached?" },
+    { when: "Sun, 02 Feb", from: "me", text: "Yeah." },
+    { when: "Sun, 02 Feb", from: "them", text: "Sleep early." }
   ],
 
-  divider: "Thu, 13 Feb",
+  divider: "Thu, 20 Mar",
 
   existing: [
-    { from: "them", text: "You sound different these days." }
+    { from: "them", text: "How's work?" }
   ],
 
   draft: [
-    { text: "I don't know how to be the old me anymore.", pause: "long" },
+    { text: "I don't think I'm happy anymore.", pause: "long" },
     { text: "", pause: "short" },
-    { text: "I'm okay. Just tired.", pause: "medium" }
+    { text: "Work's been busy. How are you?", pause: "medium" }
   ],
 
   sent: true
