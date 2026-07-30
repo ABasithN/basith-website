@@ -14,7 +14,7 @@ window.STORIES.push({
 
   draft: [
     { text: "Keep it. It probably belongs with you now.", pause: "long" },
-    { text: "Actually... throw it away.", pause: "medium" },
+    { text: "You can throw it away", pause: "medium" },
     { text: "", pause: "short" },
     { text: "You can donate it if you want.", pause: "medium" }
   ],

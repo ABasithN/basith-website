@@ -1,5 +1,6 @@
 window.STORIES = window.STORIES || [];
 
+
 window.STORIES.push({
   contact: "Appa",
 
@@ -12,7 +13,7 @@ window.STORIES.push({
   divider: "Thu, 20 Mar",
 
   existing: [
-    { from: "them", text: "How's work?" }
+    { from: "them", text: "Work is going good?" }
   ],
 
   draft: [
