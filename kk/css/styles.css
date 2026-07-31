@@ -20,9 +20,9 @@
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* ---- Motion ---- */
-  --ease-quiet: cubic-bezier(0.22, 0.61, 0.22, 1);
-  --dur-s: 600ms;
-  --dur-l: 900ms;
+  --ease-quiet: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-s: 650ms;
+  --dur-l: 1050ms;
 
   /* ---- Layout ---- */
   --gutter: clamp(24px, 6vw, 96px);
@@ -338,7 +338,7 @@ button {
   line-height: 1.85;
   color: var(--stone);
   max-width: 46ch;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .piece__details {
@@ -461,19 +461,31 @@ button {
 }
 
 .reveal.is-visible .reveal-child:nth-child(1) { transition-delay: 0ms; }
-.reveal.is-visible .reveal-child:nth-child(2) { transition-delay: 110ms; }
-.reveal.is-visible .reveal-child:nth-child(3) { transition-delay: 220ms; }
-.reveal.is-visible .reveal-child:nth-child(4) { transition-delay: 330ms; }
-.reveal.is-visible .reveal-child:nth-child(5) { transition-delay: 440ms; }
-.reveal.is-visible .reveal-child:nth-child(6) { transition-delay: 550ms; }
+.reveal.is-visible .reveal-child:nth-child(2) { transition-delay: 130ms; }
+.reveal.is-visible .reveal-child:nth-child(3) { transition-delay: 260ms; }
+.reveal.is-visible .reveal-child:nth-child(4) { transition-delay: 390ms; }
+.reveal.is-visible .reveal-child:nth-child(5) { transition-delay: 520ms; }
+.reveal.is-visible .reveal-child:nth-child(6) { transition-delay: 650ms; }
+
+/* Piece screens reveal in a deliberate sequence — gallery leads, then
+   title, then story, then metadata, and the reserve action arrives last,
+   once metadata has had its moment. Each step is a clear, short pause,
+   not a cascade. */
+.screen--piece .reveal.is-visible .reveal-child:nth-child(1) { transition-delay: 260ms; }  /* piece number, with the title */
+.screen--piece .reveal.is-visible .reveal-child:nth-child(2) { transition-delay: 320ms; }  /* title */
+.screen--piece .reveal.is-visible .reveal-child:nth-child(3) { transition-delay: 620ms; }  /* story */
+.screen--piece .reveal.is-visible .reveal-child:nth-child(4) { transition-delay: 980ms; }  /* metadata */
+.screen--piece .reveal.is-visible .reveal-child:nth-child(5) { transition-delay: 1450ms; } /* reserve — earned, not immediate */
+.screen--piece .reveal.is-visible .reveal-child:nth-child(6) { transition-delay: 1450ms; }
 
 /* The gallery is the first thing to appear in a piece — it should feel
-   revealed rather than switched on: a slight scale settles it into place. */
+   revealed rather than switched on: a slight scale settles it into place,
+   and the content behind it waits for that settle before it begins. */
 .piece__gallery {
   opacity: 0;
   transform: scale(1.015);
-  transition: opacity var(--dur-l) var(--ease-quiet),
-              transform 1100ms var(--ease-quiet);
+  transition: opacity 1300ms var(--ease-quiet),
+              transform 1400ms var(--ease-quiet);
 }
 
 .piece__gallery.is-visible {
