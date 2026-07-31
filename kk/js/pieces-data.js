@@ -10,7 +10,7 @@
  *   editorial — the styled, art-directed interpretation
  *   detail    — a close, tactile shot
  *
- * Story copy below is placeholder only — final copy is written separately.
+ * Story copy2 below is placeholder only — final copy is written separately.
  */
 
 const PIECES = [
@@ -18,20 +18,23 @@ const PIECES = [
     id: "001",
     title: "The Quiet Carry",
     story:
-      "It will sit on a shoulder that hasn't decided the shape of its day yet. Somewhere between a doorway and a train platform, it will hold what matters and let the rest wait outside. A hand will find its strap without looking. Years from now, someone will remember exactly where they were the first time they reached for it.",
+      "Designed for days that move with intention, this tote will become part of quiet routines, weekend bookstore visits, gallery afternoons and everyday commutes. It will carry more than essentials; it will carry the small objects that shape a day. The embroidered details invite a second look, while the understated form leaves room for everything else to
+speak.",
     images: [
   "assets/images/piece-001/piece-01-reality.svg",
   "assets/images/piece-001/piece-01-editorial.svg",
   "assets/images/piece-001/piece-01-detail.svg",
 ],
     details: {
+      Canvas Tote Bag: "Carry what quietly becomes part of your everyday.", 
       size: "One Size",
-      measurements: '14.5" W × 11" H × 4" D',
-      condition: "Excellent — gently carried",
-      price: "₹18,500",
+      condition: "Excellent",
+      price: "₹650",
     },
   },
-  {
+ 
+
+ {
     id: "002",
     title: "A Second Departure",
     story:
@@ -52,6 +55,6 @@ const PIECES = [
 
 // Instagram handle used to build the reservation link + prefilled message.
 const RESERVE_CONFIG = {
-  instagramHandle: "kuratedkouture",
+  instagramHandle: "kurated_kouture",
   messageTemplate: (piece) => `Hi, I'd like to reserve Piece ${piece.id}.`,
 };

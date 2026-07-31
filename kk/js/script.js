@@ -126,10 +126,13 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
+            // Reveal is a once-only entrance; stop observing so a fast
+            // scroll back and forth can't re-trigger or queue extra work.
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.35 }
+      { threshold: 0.3 }
     );
     targets.forEach((t) => observer.observe(t));
   }
