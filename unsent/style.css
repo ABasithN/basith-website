@@ -152,17 +152,18 @@ body {
   border-radius: 18px;
   border: 1px solid #D6D6DA;
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: flex-end;
 }
 
 #compose-text {
+  flex: 1;
+  min-width: 0;
   font-size: 17px;
   line-height: 1.28;
   letter-spacing: -0.01em;
   color: #1c1c1e;
   white-space: pre-wrap;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 #cursor {
