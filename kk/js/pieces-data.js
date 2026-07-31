@@ -20,10 +20,10 @@ const PIECES = [
     story:
       "It will sit on a shoulder that hasn't decided the shape of its day yet. Somewhere between a doorway and a train platform, it will hold what matters and let the rest wait outside. A hand will find its strap without looking. Years from now, someone will remember exactly where they were the first time they reached for it.",
     images: [
-      "assets/placeholders/piece-01-reality.svg",
-      "assets/placeholders/piece-01-editorial.svg",
-      "assets/placeholders/piece-01-detail.svg",
-    ],
+  "assets/images/piece-001/piece-01-reality.svg",
+  "assets/images/piece-001/piece-01-editorial.svg",
+  "assets/images/piece-001/piece-01-detail.svg",
+],
     details: {
       size: "One Size",
       measurements: '14.5" W × 11" H × 4" D',
@@ -37,10 +37,10 @@ const PIECES = [
     story:
       "It will travel again, though not the way it did before. This time, unhurried. It will wait by a door for someone who takes their time leaving. It will learn a new set of hands, a new rhythm of mornings. What it carried once, it will carry differently — lighter, maybe, or simply changed by the pause in between.",
     images: [
-      "assets/placeholders/piece-02-reality.svg",
-      "assets/placeholders/piece-02-editorial.svg",
-      "assets/placeholders/piece-02-detail.svg",
-    ],
+  "assets/images/piece-002/piece-02-reality.svg",
+  "assets/images/piece-002/piece-02-editorial.svg",
+  "assets/images/piece-002/piece-02-detail.svg",
+],
     details: {
       size: "One Size",
       measurements: '14.5" W × 11" H × 4" D',
