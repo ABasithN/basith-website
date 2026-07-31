@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurated Kouture — Every Piece Has a Next Life</title>
+<meta name="description" content="Kurated Kouture — a home for pre-loved fashion, reimagined for what comes next.">
 
+<!-- Typography: Instrument Serif (display) + Inter (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============================================================
+     CURSOR / GRAIN OVERLAY (ambient, decorative, non-interactive)
+     ============================================================ -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- ============================================================
+     PROGRESS RAIL — minimal interface, current position only
+     ============================================================ -->
+<nav class="rail" aria-label="Section progress">
+  <span class="rail__mark" data-rail-index="0"></span>
+</nav>
+
+<main id="scroll-container" class="scroll-container">
+
+  <!-- ============================================================
+       LANDING — logo / tagline / manifesto
+       ============================================================ -->
+  <section class="screen screen--landing" data-screen>
+    <div class="landing__inner reveal">
+      <p class="eyebrow reveal-child">Est. for what comes next</p>
+      <h1 class="logo reveal-child">Kurated&nbsp;Kouture</h1>
+      <p class="tagline reveal-child">Every piece has already lived one life.<br>This is where it begins another.</p>
+      <p class="manifesto reveal-child">
+        We do not sell clothing. We hold a small number of pieces —
+        chosen, not sourced — and imagine, honestly, what they might
+        become for someone else. No listings. No categories.
+        Just the next life of something that mattered once.
+      </p>
+      <button class="scroll-cue" type="button" data-scroll-next aria-label="Scroll to first piece">
+        <span class="scroll-cue__label">Begin</span>
+        <span class="scroll-cue__line" aria-hidden="true"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PIECES CONTAINER — populated at runtime from pieces-data.js
+       via #piece-template below. Do not hand-author piece markup.
+       ============================================================ -->
+  <div id="pieces-container"></div>
+
+  <!-- ============================================================
+       CLOSING — Instagram / brand philosophy
+       ============================================================ -->
+  <section class="screen screen--closing" data-screen>
+    <div class="closing__inner reveal">
+      <p class="eyebrow reveal-child">The collection continues</p>
+      <h2 class="closing__headline reveal-child">Nothing here stays<br>on a shelf for long.</h2>
+      <p class="closing__body reveal-child">
+        New pieces are found rarely and shared quietly.
+        Reservations happen one conversation at a time — the way
+        it should be, for things worth keeping.
+      </p>
+      <a class="btn-outline reveal-child"
+         href="https://instagram.com/kuratedkouture"
+         target="_blank" rel="noopener">Follow the collection</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     PIECE TEMPLATE — cloned once per entry in PIECES (pieces-data.js)
+     Fixed order, never changes: Hero → Title → Story → Details → Reserve
+     ============================================================ -->
+<template id="piece-template">
+  <section class="screen screen--piece" data-screen data-piece-id="">
+
+    <div class="piece__gallery" data-gallery>
+      <div class="piece__track" data-track>
+        <!-- .piece__frame img elements injected here -->
+      </div>
+      <div class="piece__gallery-index" data-gallery-index aria-hidden="true">
+        <!-- dot indicators injected here -->
+      </div>
+      <p class="piece__gallery-hint">Swipe to view</p>
+    </div>
+
+    <div class="piece__content reveal">
+      <p class="eyebrow reveal-child piece__number" data-piece-number></p>
+      <h2 class="piece__title reveal-child" data-piece-title></h2>
+      <p class="piece__story reveal-child" data-piece-story></p>
+
+      <dl class="piece__details reveal-child" data-piece-details>
+        <div class="piece__detail-row">
+          <dt>Size</dt><dd data-detail-size></dd>
+        </div>
+        <div class="piece__detail-row">
+          <dt>Measurements</dt><dd data-detail-measurements></dd>
+        </div>
+        <div class="piece__detail-row">
+          <dt>Condition</dt><dd data-detail-condition></dd>
+        </div>
+        <div class="piece__detail-row">
+          <dt>Price</dt><dd data-detail-price></dd>
+        </div>
+      </dl>
+
+      <button class="btn-outline reveal-child" type="button" data-reserve-btn>
+        Reserve via Instagram
+      </button>
+      <p class="piece__reserve-note reveal-child" data-reserve-note aria-live="polite"></p>
+    </div>
+
+  </section>
+</template>
+
+<script src="pieces-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
