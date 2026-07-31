@@ -138,7 +138,7 @@ button {
 }
 
 .landing__inner {
-  max-width: 640px;
+  max-width: 600px;
   padding: 0 var(--gutter);
   text-align: center;
   display: flex;
@@ -147,82 +147,75 @@ button {
 }
 
 .eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.28em;
+  font-size: 10px;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--bronze);
   font-weight: 400;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  opacity: 0.85;
 }
 
 .logo {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  font-size: clamp(2.5rem, 7vw, 4.75rem);
   line-height: 1.05;
   color: var(--warm-white);
-  margin-bottom: 28px;
+  margin-bottom: 36px;
   letter-spacing: 0.01em;
 }
 
 .tagline {
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
   color: var(--warm-white);
   font-weight: 300;
-  line-height: 1.5;
-  margin-bottom: 40px;
+  line-height: 1.6;
+  opacity: 0.92;
+  margin-bottom: 56px;
 }
 
 .manifesto {
-  font-size: 0.9rem;
-  color: var(--stone);
-  max-width: 460px;
-  margin-bottom: 64px;
+  font-size: 0.85rem;
+  line-height: 1.85;
+  color: var(--stone-dim);
+  max-width: 400px;
+  margin-bottom: 96px;
 }
 
 .scroll-cue {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  opacity: 0.55;
+  transition: opacity var(--dur-l) var(--ease-quiet);
+}
+
+.scroll-cue:hover,
+.scroll-cue:focus-visible {
+  opacity: 0.9;
 }
 
 .scroll-cue__label {
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-size: 10px;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--stone);
-  transition: color var(--dur-s) var(--ease-quiet);
-}
-
-.scroll-cue:hover .scroll-cue__label,
-.scroll-cue:focus-visible .scroll-cue__label {
-  color: var(--warm-white);
+  font-weight: 300;
 }
 
 .scroll-cue__line {
   width: 1px;
-  height: 46px;
-  background: var(--hairline-strong);
-  position: relative;
-  overflow: hidden;
+  height: 40px;
+  transform-origin: top;
+  background: linear-gradient(to bottom, var(--stone), transparent);
+  animation: breathe 4.5s var(--ease-quiet) infinite;
 }
 
-.scroll-cue__line::after {
-  content: "";
-  position: absolute;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--bronze);
-  animation: railFall 2.4s var(--ease-quiet) infinite;
-}
-
-@keyframes railFall {
-  0%   { top: -100%; }
-  60%  { top: 100%; }
-  100% { top: 100%; }
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; transform: scaleY(0.9); }
+  50%      { opacity: 1;   transform: scaleY(1); }
 }
 
 /* ==========================================================================
@@ -238,8 +231,8 @@ button {
 .piece__gallery {
   position: relative;
   width: 100%;
-  height: 62vh;
-  min-height: 340px;
+  height: 78vh;
+  min-height: 420px;
   flex-shrink: 0;
 }
 
@@ -279,33 +272,36 @@ button {
 
 .piece__gallery-index {
   position: absolute;
-  bottom: 20px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 8px;
+  gap: 9px;
 }
 
 .piece__gallery-index span {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--hairline-strong);
-  transition: background var(--dur-s) var(--ease-quiet);
+  transition: background var(--dur-l) var(--ease-quiet),
+              transform var(--dur-l) var(--ease-quiet);
 }
 
 .piece__gallery-index span.is-active {
   background: var(--bronze);
+  transform: scale(1.3);
 }
 
 .piece__gallery-hint {
   position: absolute;
-  top: 20px;
+  top: 24px;
   right: var(--gutter);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--stone-dim);
+  opacity: 0.6;
 }
 
 @media (max-width: 720px) {
@@ -316,64 +312,68 @@ button {
 .piece__content {
   flex: 1;
   width: 100%;
-  max-width: 620px;
-  padding: clamp(28px, 5vh, 56px) var(--gutter);
+  max-width: 560px;
+  padding: clamp(32px, 6vh, 64px) var(--gutter);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
 
 .piece__number {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  opacity: 0.75;
 }
 
 .piece__title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  line-height: 1.08;
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  line-height: 1.12;
   color: var(--warm-white);
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .piece__story {
-  font-size: 0.98rem;
+  font-size: 0.96rem;
+  line-height: 1.85;
   color: var(--stone);
-  max-width: 52ch;
-  margin-bottom: 36px;
+  max-width: 46ch;
+  margin-bottom: 48px;
 }
 
 .piece__details {
   border-top: 1px solid var(--hairline);
-  margin-bottom: 36px;
+  margin-bottom: 40px;
+  opacity: 0.8;
 }
 
 .piece__detail-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 14px 0;
+  padding: 12px 0;
   border-bottom: 1px solid var(--hairline);
   gap: 24px;
 }
 
 .piece__detail-row dt {
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  font-size: 10px;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--stone-dim);
   flex-shrink: 0;
 }
 
 .piece__detail-row dd {
-  font-size: 0.92rem;
-  color: var(--warm-white);
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--stone);
   text-align: right;
 }
 
 .piece__reserve-note {
-  margin-top: 14px;
-  font-size: 0.8rem;
+  margin-top: 18px;
+  font-size: 0.78rem;
   color: var(--bronze);
   min-height: 1.2em;
   opacity: 0;
@@ -420,27 +420,28 @@ button {
    ========================================================================== */
 
 .btn-outline {
-  display: inline-block;
-  padding: 16px 40px;
-  border: 1px solid var(--hairline-strong);
-  color: var(--warm-white);
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 2px 10px;
+  border: none;
+  border-bottom: 1px solid var(--hairline-strong);
+  color: var(--stone);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  font-weight: 300;
   background: transparent;
-  transition: border-color var(--dur-s) var(--ease-quiet),
-              color var(--dur-s) var(--ease-quiet),
-              background-color var(--dur-s) var(--ease-quiet);
+  transition: border-color var(--dur-l) var(--ease-quiet),
+              color var(--dur-l) var(--ease-quiet),
+              letter-spacing var(--dur-l) var(--ease-quiet);
 }
 
 .btn-outline:hover,
 .btn-outline:focus-visible {
   border-color: var(--bronze);
   color: var(--bronze);
-}
-
-.btn-outline:active {
-  background-color: rgba(176, 141, 101, 0.08);
+  letter-spacing: 0.18em;
 }
 
 /* ==========================================================================
@@ -449,29 +450,36 @@ button {
 
 .reveal-child {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(8px) scale(0.99);
   transition: opacity var(--dur-l) var(--ease-quiet),
               transform var(--dur-l) var(--ease-quiet);
 }
 
 .reveal.is-visible .reveal-child {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .reveal.is-visible .reveal-child:nth-child(1) { transition-delay: 0ms; }
-.reveal.is-visible .reveal-child:nth-child(2) { transition-delay: 90ms; }
-.reveal.is-visible .reveal-child:nth-child(3) { transition-delay: 180ms; }
-.reveal.is-visible .reveal-child:nth-child(4) { transition-delay: 270ms; }
-.reveal.is-visible .reveal-child:nth-child(5) { transition-delay: 360ms; }
-.reveal.is-visible .reveal-child:nth-child(6) { transition-delay: 450ms; }
+.reveal.is-visible .reveal-child:nth-child(2) { transition-delay: 110ms; }
+.reveal.is-visible .reveal-child:nth-child(3) { transition-delay: 220ms; }
+.reveal.is-visible .reveal-child:nth-child(4) { transition-delay: 330ms; }
+.reveal.is-visible .reveal-child:nth-child(5) { transition-delay: 440ms; }
+.reveal.is-visible .reveal-child:nth-child(6) { transition-delay: 550ms; }
 
+/* The gallery is the first thing to appear in a piece — it should feel
+   revealed rather than switched on: a slight scale settles it into place. */
 .piece__gallery {
   opacity: 0;
-  transition: opacity var(--dur-l) var(--ease-quiet);
+  transform: scale(1.015);
+  transition: opacity var(--dur-l) var(--ease-quiet),
+              transform 1100ms var(--ease-quiet);
 }
 
-.piece__gallery.is-visible { opacity: 1; }
+.piece__gallery.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
 
 /* ---- Respect reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
@@ -480,16 +488,16 @@ button {
   .piece__frame img,
   .rail__mark,
   .btn-outline,
-  .scroll-cue__label,
+  .scroll-cue,
+  .scroll-cue__line,
   .piece__gallery-index span,
   .piece__reserve-note {
     transition: none !important;
     animation: none !important;
   }
   .reveal-child { opacity: 1; transform: none; }
-  .piece__gallery { opacity: 1; }
+  .piece__gallery { opacity: 1; transform: none; }
   .piece__frame img { opacity: 1; }
-  .scroll-cue__line::after { display: none; }
 }
 
 /* ==========================================================================
@@ -497,11 +505,14 @@ button {
    ========================================================================== */
 
 @media (max-width: 720px) {
-  .piece__gallery { height: 52vh; }
-  .piece__content { max-width: 100%; }
+  .piece__gallery { height: 58vh; min-height: 380px; }
+  .piece__content { max-width: 100%; padding-top: 40px; }
+  .piece__story { max-width: none; }
   .piece__detail-row dd { max-width: 55%; }
+  .manifesto { margin-bottom: 72px; }
+  .landing__inner { padding: 0 clamp(24px, 8vw, 48px); }
 }
 
 @media (min-width: 1400px) {
-  .piece__gallery { height: 68vh; }
+  .piece__gallery { height: 82vh; }
 }
