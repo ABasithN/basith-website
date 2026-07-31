@@ -1,20 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" width="1200" height="1500">
   <defs>
-    <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#141414"/>
       <stop offset="55%" stop-color="#0D0D0D"/>
       <stop offset="100%" stop-color="#171512"/>
     </linearGradient>
-    <filter id="grain6">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="6" result="noise"/>
+    <filter id="grain5">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5" result="noise"/>
       <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0.85  0 0 0 0 0.8  0 0 0 0 0.7  0 0 0 0.03 0"/>
     </filter>
   </defs>
-  <rect width="1200" height="1500" fill="url(#g6)"/>
-  <rect width="1200" height="1500" filter="url(#grain6)"/>
+  <rect width="1200" height="1500" fill="url(#g5)"/>
+  <rect width="1200" height="1500" filter="url(#grain5)"/>
   <line x1="600" y1="0" x2="600" y2="1500" stroke="#3a3530" stroke-width="1" opacity="0.25"/>
   <line x1="0" y1="750" x2="1200" y2="750" stroke="#3a3530" stroke-width="1" opacity="0.25"/>
   <circle cx="600" cy="750" r="1" fill="#B08D65" opacity="0"/>
   <text x="600" y="770" font-family="Georgia, serif" font-size="22" letter-spacing="6" fill="#8C8577" text-anchor="middle">PIECE 02</text>
-  <text x="600" y="800" font-family="Georgia, serif" font-size="13" letter-spacing="4" fill="#5c574e" text-anchor="middle">DETAIL</text>
+  <text x="600" y="800" font-family="Georgia, serif" font-size="13" letter-spacing="4" fill="#5c574e" text-anchor="middle">EDITORIAL</text>
 </svg>
