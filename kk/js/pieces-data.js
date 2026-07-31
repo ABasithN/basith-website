@@ -30,7 +30,7 @@ type: "Canvas Tote",
 
 size: "One Size",
 
-measurements: '14.5" W × 11" H,
+measurements: '37 × 28 cm',
 
 condition: "Excellent",
 
