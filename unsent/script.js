@@ -46,9 +46,10 @@
     });
   }
 
-  function setComposeText(text) {
-    composeTextEl.textContent = text;
-  }
+function setComposeText(text) {
+  composeTextEl.innerHTML =
+    text + '<span id="cursor"></span>';
+}
 
   function commonPrefixLength(a, b) {
     let i = 0;
