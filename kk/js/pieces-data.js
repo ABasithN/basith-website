@@ -18,18 +18,23 @@ const PIECES = [
     id: "001",
     title: "The Quiet Carry",
     story:
-      "Designed for days that move with intention, this tote will become part of quiet routines, weekend bookstore visits, gallery afternoons and everyday commutes. It will carry more than essentials; it will carry the small objects that shape a day. The embroidered details invite a second look, while the understated form leaves room for everything else to
-speak.",
+      "Designed for days that move with intention, this tote will become part of quiet routines, weekend bookstore visits, gallery afternoons and everyday commutes. It will carry more than essentials; it will carry the small objects that shape a day. The embroidered details invite a second look, while the understated form leaves room for everything else to speak.",
     images: [
-  "assets/images/piece-001/piece-01-reality.svg",
-  "assets/images/piece-001/piece-01-editorial.svg",
-  "assets/images/piece-001/piece-01-detail.svg",
+  "assets/images/piece-001/piece-01-reality.webp",
+  "assets/images/piece-001/piece-01-editorial.webp",
+  "assets/images/piece-001/piece-01-detail.webp",
 ],
-    details: {
-      Canvas Tote Bag: "Carry what quietly becomes part of your everyday.", 
-      size: "One Size",
-      condition: "Excellent",
-      price: "₹650",
+    
+details: {
+type: "Canvas Tote",
+
+size: "One Size",
+
+measurements: '14.5" W × 11" H,
+
+condition: "Excellent",
+
+price: "₹650",
     },
   },
  
