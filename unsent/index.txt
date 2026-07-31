@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#ffffff">
+<title>UNSENT</title>
+
+<!-- Open Graph -->
+<meta property="og:title" content="UNSENT">
+<meta property="og:description" content="An archive of messages that were never sent.">
+<meta property="og:image" content="https://basith.xyz/unsent/unsent-preview.jpg">
+<meta property="og:url" content="https://basith.xyz/unsent/">
+<meta property="og:type" content="website">
+
+<!-- Twitter/X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UNSENT">
+<meta name="twitter:description" content="An archive of messages that were never sent.">
+<meta name="twitter:image" content="https://basith.xyz/unsent/unsent-preview.jpg">
+
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+  <div id="intro">
+  <div class="intro-bubble">Experience the invisible emotional distance between what we feel and what we allow ourselves to say.</div>
+  <h1 id="intro-title">UNSENT</h1>
+  <button id="begin-btn">Tap to begin</button>
+</div>
+
+<div id="app" class="hidden">
+    <div id="header">
+      <span id="back-chevron">&#8249;</span>
+      <span id="contact-name"></span>
+    </div>
+
+    <div id="thread"></div>
+
+    <div id="compose-bar">
+      <div id="compose-box">
+  <span id="compose-text"></span>
+</div> 
+    </div>
+
+    <div id="keyboard" aria-hidden="true">
+      <div class="kb-row">
+        <span class="key">Q</span><span class="key">W</span><span class="key">E</span><span class="key">R</span><span class="key">T</span><span class="key">Y</span><span class="key">U</span><span class="key">I</span><span class="key">O</span><span class="key">P</span>
+      </div>
+      <div class="kb-row kb-row-mid">
+        <span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key">F</span><span class="key">G</span><span class="key">H</span><span class="key">J</span><span class="key">K</span><span class="key">L</span>
+      </div>
+      <div class="kb-row">
+        <span class="key key-fn key-shift">&#8679;</span><span class="key">Z</span><span class="key">X</span><span class="key">C</span><span class="key">V</span><span class="key">B</span><span class="key">N</span><span class="key">M</span><span class="key key-fn key-del">&#9003;</span>
+      </div>
+      <div class="kb-row kb-row-bottom">
+        <span class="key key-fn key-123">123</span>
+        <span class="key key-fn key-globe">&#127760;</span>
+        <span class="key key-space">space</span>
+        <span class="key key-fn key-return">return</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story data files -->
+  <script src="stories/story001.js?v=3"></script>
+  <script src="stories/story002.js?v=3"></script> 
+  <script src="stories/story003.js?v=3"></script>
+  <script src="stories/story005.js?v=3"></script>
+  <script src="stories/story006.js?v=3"></script>
+  <script src="stories/story007.js?v=3"></script>
+  <script src="stories/story008.js?v=3"></script>
+  <script src="stories/story009.js?v=3"></script>
+  <script src="stories/story010.js?v=3"></script> 
+  <script src="stories/story011.js?v=3"></script>
+  <script src="stories/story012.js?v=3"></script>
+  <script src="stories/story013.js?v=3"></script>
+  <script src="stories/story014.js?v=3"></script>
+  <script src="stories/story015.js?v=3"></script>
+  <script src="stories/story016.js?v=3"></script>
+  <script src="stories/story017.js?v=3"></script>
+  <script src="stories/story018.js?v=3"></script>
+  <script src="stories/story019.js?v=3"></script>
+  <script src="stories/story020.js?v=3"></script>
+  <script src="stories/story021.js?v=3"></script>
+  <script src="stories/story022.js?v=3"></script>
+  <script src="stories/story023.js?v=3"></script>
+  <script src="stories/story024.js?v=3"></script>
+  <script src="stories/story025.js?v=3"></script>
+  <script src="stories/story026.js?v=3"></script>
+  <script src="stories/story027.js?v=3"></script>
+  <script src="stories/story028.js?v=3"></script>
+  <script src="stories/story029.js?v=3"></script>
+  <script src="stories/story030.js?v=3"></script>
+  <script src="stories/story031.js?v=3"></script>
+  <script src="stories/story032.js?v=3"></script>
+  <script src="stories/story033.js?v=3"></script>
+  <script src="stories/story034.js?v=3"></script>
+  <script src="stories/story035.js?v=3"></script>
+  <script src="stories/story036.js?v=3"></script>
+  <script src="stories/story037.js?v=3"></script>
+  <script src="stories/story038.js?v=3"></script>
+  <script src="stories/story039.js?v=3"></script>
+  <script src="stories/story040.js?v=3"></script>
+  <script src="stories/story041.js?v=3"></script>
+
+
+  <!-- Engine -->
+  <script src="script.js?v=3"></script>
+</body>
+</html>
