@@ -131,10 +131,10 @@
       beforeFirstLine: 750,
     },
     live: {
-      lineGap: 950,          // pause before each line within a node
-      beforeChoices: 650,    // pause after the last line before choices appear
-      beforeAutoAdvance: 750,// pause before an auto-advancing node continues
-      afterChoicePick: 550,  // pause after the visitor picks, before reply
+      lineGap: 1800,          // pause before each line within a node
+      beforeChoices: 1400,    // pause after the last line before choices appear
+      beforeAutoAdvance: 1700,// pause before an auto-advancing node continues
+      afterChoicePick: 1200,  // pause after the visitor picks, before reply
       urgentBelow: 15,       // seconds remaining before the timer pulses
     },
     collapse: {
