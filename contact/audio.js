@@ -8,8 +8,8 @@
 
 (() => {
 
-    const contact = new Audio("audio/contact.wav");
-    const disconnect = new Audio("audio/disconnect.wav");
+    const contact = new Audio("audio/contact.mp3");
+    const disconnect = new Audio("audio/disconnect.mp3");
 
     contact.preload = "auto";
     disconnect.preload = "auto";
