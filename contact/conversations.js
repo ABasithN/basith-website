@@ -15,10 +15,7 @@ window.CONTACT_CONVERSATIONS = [
 
             lines: [
 
-                "CONNECTION ESTABLISHED",
-
-                "...",
-
+                
                 "Can you hear me?",
 
                 "Please don't leave.",
@@ -26,7 +23,6 @@ window.CONTACT_CONVERSATIONS = [
                 "I don't know how long this bridge will stay open.",
 
                 "I've been trying to reach someone.",
-
                 "For what feels like years.",
 
                 "You're the first person who's answered.",
