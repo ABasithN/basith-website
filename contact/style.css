@@ -1,0 +1,738 @@
+/* ==========================================================================
+   CONTACT — style.css
+
+   The unit is a physical object, not a screen. Everything here reinforces
+   that: matte surfaces, recessed glass, machined edges, one warm accent
+   used only for the thing that's actually alive (the LED, the needle,
+   focus states). Nothing glows, nothing is neon, nothing is gradients
+   for their own sake.
+
+   TOKENS -> RESET -> PANEL BODY -> PLATE -> DISPLAY -> GAUGE -> READOUT
+   -> BOOT LOG -> TRANSMISSION -> ACTION -> RELAY BUTTON -> CHOICES
+   -> STATUS -> OVERLAYS -> MOTION -> RESPONSIVE
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------- */
+/* TOKENS                                                                  */
+/* ---------------------------------------------------------------------- */
+
+:root {
+  /* Surfaces — warm graphite, not neutral gray. This is machined metal
+     under indoor light, not a UI dark-mode background. */
+  --surface-bench:      #101010;   /* the desk the unit sits on (desktop) */
+  --panel:               #1c1b19;  /* the unit's outer body */
+  --panel-raised:        #242220;  /* plate / bezel highlight */
+  --panel-edge:          #0a0a09;  /* seams, deep shadow */
+
+  --glass:               #0b0c0a;  /* recessed display glass */
+  --glass-edge:          #050504;
+
+  /* Ink — warm off-white for primary text, dimmed warm gray for labels */
+  --ink:                 #e9e4d8;
+  --ink-dim:             #8c8778;
+  --ink-faint:           #565349;
+
+  /* The one accent. Amber LED — instrumentation, not decoration. */
+  --led:                 #ff9245;
+  --led-dim:             #6b4423;
+  --led-glow:            rgba(255, 146, 69, 0.35);
+
+  --hairline:            #38352c;
+  --hairline-strong:     #47443a;
+
+  /* Type */
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+
+  /* Rhythm */
+  --unit-max-width: 460px;
+  --edge: clamp(20px, 6vw, 28px);
+  --radius-panel: 22px;
+  --radius-control: 14px;
+
+  --ease-mech: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-med: 320ms;
+  --dur-slow: 900ms;
+}
+
+/* ---------------------------------------------------------------------- */
+/* RESET                                                                   */
+/* ---------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--surface-bench);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled { cursor: default; }
+
+ul, li { list-style: none; margin: 0; padding: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--led);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* PANEL BODY                                                              */
+/* ---------------------------------------------------------------------- */
+
+.unit {
+  position: relative;
+  width: 100%;
+  max-width: var(--unit-max-width);
+  height: 100dvh;
+  max-height: 900px;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(180deg, var(--panel-raised) 0%, var(--panel) 14%, var(--panel) 100%);
+  overflow: hidden;
+  isolation: isolate;
+
+  padding:
+    calc(env(safe-area-inset-top, 0px) + var(--edge))
+    calc(env(safe-area-inset-right, 0px) + var(--edge))
+    calc(env(safe-area-inset-bottom, 0px) + var(--edge))
+    calc(env(safe-area-inset-left, 0px) + var(--edge));
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 0 0 1px var(--panel-edge);
+}
+
+/* On real desktop viewports the unit reads as an object resting on a
+   bench, not a page that stretches full-bleed. */
+@media (min-width: 560px) and (min-height: 720px) {
+  .unit {
+    height: min(860px, 92dvh);
+    border-radius: var(--radius-panel);
+    box-shadow:
+      0 40px 80px -30px rgba(0, 0, 0, 0.7),
+      0 2px 0 rgba(255, 255, 255, 0.03) inset,
+      0 0 0 1px var(--panel-edge);
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* PLATE                                                                   */
+/* ---------------------------------------------------------------------- */
+
+.plate {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.plate__mark {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--ink);
+}
+
+.plate__id {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.hairline {
+  flex: 0 0 auto;
+  height: 1px;
+  margin: 16px 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--hairline) 12%,
+    var(--hairline) 88%,
+    transparent 100%
+  );
+}
+
+/* ---------------------------------------------------------------------- */
+/* DISPLAY                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.display {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.display__label {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+
+.display__led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--led-dim);
+  box-shadow: none;
+  transition: background var(--dur-med) var(--ease-mech), box-shadow var(--dur-med) var(--ease-mech);
+}
+
+/* Lit whenever the unit is actively doing something: booting, connected */
+.unit[data-state='boot'] .display__led,
+.unit[data-state='connecting'] .display__led,
+.unit[data-state='handshake'] .display__led,
+.unit[data-state='live'] .display__led {
+  background: var(--led);
+  box-shadow: 0 0 8px 1px var(--led-glow);
+}
+
+.display__glass {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(120% 140% at 50% -10%, #14140f 0%, var(--glass) 55%, var(--glass-edge) 100%);
+  border-radius: var(--radius-control);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  padding: clamp(18px, 4vh, 28px) clamp(16px, 4vw, 22px);
+  overflow: hidden;
+}
+
+.face {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+/* ---------------------------------------------------------------------- */
+/* GAUGE                                                                   */
+/* ---------------------------------------------------------------------- */
+
+.gauge {
+  flex: 0 0 auto;
+  width: clamp(96px, 30vw, 132px);
+  margin: 0 auto clamp(14px, 3vh, 22px);
+}
+
+.gauge__dial { width: 100%; height: auto; display: block; }
+
+.gauge__ring {
+  fill: none;
+  stroke: var(--hairline-strong);
+  stroke-width: 1.5;
+}
+
+.gauge__ticks line {
+  stroke: var(--ink-faint);
+  stroke-width: 1.5;
+}
+
+.gauge__ticks .tick--major {
+  stroke: var(--ink-dim);
+  stroke-width: 2;
+}
+
+.gauge__needle {
+  stroke: var(--led);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transform-origin: 100px 100px;
+  filter: drop-shadow(0 0 3px var(--led-glow));
+  transition: transform var(--dur-slow) var(--ease-mech);
+}
+
+.gauge__hub {
+  fill: var(--panel-raised);
+  stroke: var(--ink-faint);
+  stroke-width: 1.5;
+}
+
+/* Slow continuous drift while the unit searches; JS sets rotation via
+   the --needle-angle custom property during boot, then hands control
+   back to discrete per-message ticks while live. */
+.unit[data-state='boot'] .gauge__needle {
+  animation: needle-seek 2600ms ease-in-out infinite;
+}
+
+@keyframes needle-seek {
+  0%   { transform: rotate(-46deg); }
+  50%  { transform: rotate(46deg); }
+  100% { transform: rotate(-46deg); }
+}
+
+/* ---------------------------------------------------------------------- */
+/* READOUT                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.readout {
+  flex: 0 0 auto;
+  text-align: center;
+  margin-bottom: clamp(14px, 3vh, 20px);
+}
+
+.readout__row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.readout__label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--ink-faint);
+}
+
+.readout__value {
+  font-size: clamp(20px, 6vw, 26px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------------- */
+/* BOOT LOG                                                                */
+/* ---------------------------------------------------------------------- */
+
+.boot-log {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.boot-log li {
+  --line-opacity: 1;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  opacity: 0;
+  transform: translateY(4px);
+  animation: log-line-in var(--dur-med) var(--ease-mech) forwards;
+  transition: opacity 700ms var(--ease-mech);
+}
+
+.boot-log li[data-final] {
+  color: var(--led);
+}
+
+/* Rolling diagnostics: age dims the line. Recalculates automatically as
+   script.js appends new <li> — no JS bookkeeping required. */
+.boot-log li:nth-last-child(1) { --line-opacity: 1; }
+.boot-log li:nth-last-child(2) { --line-opacity: 0.7; }
+.boot-log li:nth-last-child(3) { --line-opacity: 0.45; }
+.boot-log li:nth-last-child(4) { --line-opacity: 0.2; }
+.boot-log li:nth-last-child(n + 5) { --line-opacity: 0; }
+
+@keyframes log-line-in {
+  to { opacity: var(--line-opacity); transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------------------- */
+/* TRANSMISSION                                                            */
+/* ---------------------------------------------------------------------- */
+
+.face--transmission {
+  gap: clamp(12px, 3vh, 18px);
+}
+
+.transmission__meta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 4vw, 20px);
+  padding-bottom: clamp(12px, 3vh, 18px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.transmission__origin-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.transmission__meta-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--ink-faint);
+}
+
+.transmission__origin {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transmission__meta-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--hairline-strong);
+}
+
+.transmission__timer {
+  margin-left: auto;
+  font-size: clamp(22px, 6vw, 28px);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--led);
+}
+
+.transmission__timer[data-urgent] {
+  animation: timer-pulse 1000ms ease-in-out infinite;
+}
+
+@keyframes timer-pulse {
+  50% { opacity: 0.45; }
+}
+
+.transmission__stream {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: clamp(22px, 6vh, 38px);
+  padding-right: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hairline-strong) transparent;
+}
+
+.transmission__stream::-webkit-scrollbar { width: 4px; }
+.transmission__stream::-webkit-scrollbar-thumb {
+  background: var(--hairline-strong);
+  border-radius: 2px;
+}
+
+/* Individual message — typography carries the emotion, no bubble, no card.
+   Deliberately left-aligned while the gauge and readout above stay
+   perfectly centered: the instrument is engineered, the words aren't. */
+.message {
+  font-family: var(--font-serif);
+  font-size: clamp(15px, 4.2vw, 17px);
+  line-height: 1.6;
+  color: var(--ink);
+  text-align: left;
+  max-width: 92%;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: message-in var(--dur-med) var(--ease-mech) forwards;
+}
+
+.pending-ellipsis {
+  font-family: var(--font-serif);
+  font-size: clamp(15px, 4.2vw, 17px);
+  color: var(--ink-dim);
+  letter-spacing: 0.35em;
+  animation: pending-pulse 1400ms ease-in-out infinite;
+}
+
+@keyframes pending-pulse {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 0.85; }
+}
+
+.message--system {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+.message--visitor {
+  color: var(--ink-dim);
+  font-style: italic;
+}
+
+@keyframes message-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------------------- */
+/* ACTION                                                                  */
+/* ---------------------------------------------------------------------- */
+
+.action {
+  flex: 0 0 auto;
+  min-height: 84px;
+  display: flex;
+  align-items: stretch;
+}
+
+/* ---------------------------------------------------------------------- */
+/* RELAY BUTTON                                                            */
+/* ---------------------------------------------------------------------- */
+
+.relay-button {
+  flex: 1 1 auto;
+  border-radius: var(--radius-control);
+  background: linear-gradient(180deg, #2d2a25 0%, #201e1a 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.55) inset,
+    0 8px 0 #000,
+    0 14px 22px rgba(0, 0, 0, 0.55);
+  transform: translateY(0);
+  transition: transform var(--dur-fast) var(--ease-mech),
+              box-shadow var(--dur-fast) var(--ease-mech),
+              opacity var(--dur-med) var(--ease-mech);
+}
+
+.relay-button__face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 84px;
+}
+
+.relay-button__label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.relay-button:not(:disabled):active,
+.relay-button.is-pressed {
+  transform: translateY(7px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.02) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.7) inset,
+    0 1px 0 var(--panel-edge),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.relay-button:disabled {
+  opacity: 0.35;
+}
+
+.relay-button:not(:disabled) .relay-button__label {
+  color: var(--ink);
+}
+
+.relay-button:not(:disabled)::after {
+  content: '';
+}
+
+/* ---------------------------------------------------------------------- */
+/* CHOICES                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.choices {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.choice {
+  border-radius: var(--radius-control);
+  background: linear-gradient(180deg, #262420 0%, #1c1a17 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 4px 0 var(--panel-edge),
+    0 6px 10px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+  transition: transform var(--dur-fast) var(--ease-mech),
+              box-shadow var(--dur-fast) var(--ease-mech);
+}
+
+.choice:active,
+.choice.is-pressed {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 1px 0 var(--panel-edge),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------------------------------------------------------------------- */
+/* STATUS                                                                  */
+/* ---------------------------------------------------------------------- */
+
+.status {
+  flex: 0 0 auto;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  transition: background var(--dur-med) var(--ease-mech);
+}
+
+.unit[data-state='live'] .status__dot,
+.unit[data-state='connecting'] .status__dot,
+.unit[data-state='handshake'] .status__dot {
+  background: var(--led);
+}
+
+.status__text {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ---------------------------------------------------------------------- */
+/* OVERLAYS                                                                */
+/* ---------------------------------------------------------------------- */
+
+.screen-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.screen-flash.is-flashing {
+  animation: flash-pulse var(--dur-fast) var(--ease-mech);
+}
+
+@keyframes flash-pulse {
+  0%   { opacity: 0; }
+  35%  { opacity: 0.55; }
+  100% { opacity: 0; }
+}
+
+/* Ambient shimmer — inert by default. audio.js / script.js may toggle
+   .is-active later to layer a near-invisible grain over the glass;
+   the element already exists so no markup changes are needed for it. */
+.ambient-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ---------------------------------------------------------------------- */
+/* STATE VISIBILITY                                                        */
+/* ---------------------------------------------------------------------- */
+
+.unit[data-state='boot'] #gaugeFace,
+.unit[data-state='idle'] #gaugeFace {
+  display: flex;
+}
+
+.unit[data-state='connecting'] #gaugeFace,
+.unit[data-state='handshake'] #gaugeFace,
+.unit[data-state='live'] #gaugeFace,
+.unit[data-state='collapsing'] #gaugeFace {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/* SHORT VIEWPORTS — iPhone Safari with visible chrome, small phones       */
+/* ---------------------------------------------------------------------- */
+
+/* 100dvh already shrinks .unit as Safari's bars show/hide, so the panel
+   itself is never obscured — but on short/older phones the fixed edges
+   (plate, hairlines, button) can eat into the room messages need. This
+   pass compresses rhythm, never content: nothing here changes what's
+   shown, only how tightly it's packed. */
+@media (max-height: 700px) {
+  :root {
+    --edge: 16px;
+    --radius-control: 12px;
+  }
+
+  .hairline { margin: 10px 0; }
+  .display__label { margin-bottom: 6px; }
+  .gauge { margin-bottom: 8px; }
+  .readout { margin-bottom: 8px; }
+  .action { min-height: 60px; }
+  .relay-button__face { min-height: 60px; }
+  .status { margin-top: 10px; }
+}
+
+@media (max-height: 560px) {
+  .gauge { display: none; }
+  .transmission__meta { padding-bottom: 8px; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* MOTION                                                                  */
+/* ---------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+  .unit[data-state='boot'] .gauge__needle { animation: none; }
+}

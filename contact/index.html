@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#161616" />
+  <title>CONTACT</title>
+  <meta name="description" content="A machine is waiting. It will choose who it reaches." />
 
+  <!-- Type: IBM Plex Mono for instrumentation / chrome, IBM Plex Serif for transmitted
+       messages. Same family, two registers — the machine's voice and the visitor's. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!--
+    The whole product is one physical unit. `data-state` on <main> drives every
+    visual mode from CSS/JS: "boot" -> "idle" -> "connecting" -> "handshake"
+    -> "live" -> "collapsing". No routing, no separate screens — one panel
+    that changes state. "handshake" is the beat after CONNECTION ESTABLISHED
+    where the bridge is open but nobody has spoken yet.
+  -->
+  <main class="unit" data-state="boot">
+
+    <!-- Full-panel overlays. Empty on purpose — boot/connect flashes and the
+         ambient shimmer both animate these instead of touching real content,
+         so no HTML changes are needed to add or tune either effect later. -->
+    <div class="screen-flash" id="screenFlash" aria-hidden="true"></div>
+    <div class="ambient-noise" aria-hidden="true"></div>
+
+    <!-- Name plate. Fixed, never interactive. Unit number is assigned per
+         visitor by script.js — this is just the resting placeholder. -->
+    <header class="plate">
+      <span class="plate__mark">CONTACT</span>
+      <span class="plate__id" id="unitId">FIELD UNIT 04291</span>
+    </header>
+
+    <div class="hairline" role="presentation"></div>
+
+    <!-- DISPLAY: the instrument face. Everything the machine reports lives here. -->
+    <section class="display" aria-label="Monitor">
+      <div class="display__label">
+        <span>Monitor</span>
+        <span class="display__led" id="displayLed" aria-hidden="true"></span>
+      </div>
+
+      <div class="display__glass">
+
+        <!-- Idle / boot face: dial gauge + window readout -->
+        <div class="face face--gauge" id="gaugeFace">
+          <div class="gauge" id="gauge" aria-hidden="true">
+            <svg class="gauge__dial" viewBox="0 0 200 200">
+              <circle class="gauge__ring" cx="100" cy="100" r="86"></circle>
+              <g class="gauge__ticks" id="gaugeTicks"></g>
+              <line
+                class="gauge__needle"
+                id="gaugeNeedle"
+                x1="100" y1="100" x2="100" y2="26"
+              ></line>
+              <circle class="gauge__hub" cx="100" cy="100" r="5"></circle>
+            </svg>
+          </div>
+
+          <div class="readout">
+            <div class="readout__row">
+              <span class="readout__label">WINDOW</span>
+              <span class="readout__value" id="windowValue">&mdash;&mdash;.&mdash;&mdash;</span>
+            </div>
+          </div>
+
+          <!-- Boot diagnostics, printed line by line, replaced by conversation log -->
+          <ul class="boot-log" id="bootLog" aria-live="polite"></ul>
+        </div>
+
+        <!-- Conversation face: transmissions + choices, hidden until contact begins -->
+        <div class="face face--transmission" id="transmissionFace" hidden>
+          <div class="transmission__meta">
+            <div class="transmission__origin-block">
+              <span class="transmission__meta-label">Origin</span>
+              <span class="transmission__origin" id="originLabel">&mdash;</span>
+            </div>
+            <div class="transmission__meta-divider" role="presentation"></div>
+            <span class="transmission__timer" id="bridgeTimer">00:00</span>
+          </div>
+          <div
+            class="transmission__stream"
+            id="transmissionStream"
+            role="log"
+            aria-live="polite"
+          ></div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="hairline" role="presentation"></div>
+
+    <!-- ACTION: exactly one control lives here at a time — the relay button,
+         or up to three response choices. Never both. -->
+    <section class="action" id="actionPanel" aria-label="Controls">
+      <button
+        type="button"
+        class="relay-button"
+        id="contactButton"
+        disabled
+        aria-disabled="true"
+      >
+        <span class="relay-button__face">
+          <span class="relay-button__label">Establish Contact</span>
+        </span>
+      </button>
+
+      <div class="choices" id="choices" hidden role="group" aria-label="Response"></div>
+    </section>
+
+    <!-- STATUS: single line, always present, always true -->
+    <footer class="status">
+      <span class="status__dot" id="statusDot" aria-hidden="true"></span>
+      <span class="status__text" id="statusText">Awaiting Contact</span>
+    </footer>
+
+  </main>
+
+  <!-- Conversation data first, then audio, then behavior -->
+  <script src="conversations.js"></script>
+  <script src="script.js"></script> 
+  <script src="audio.js"></script>
+</body>
+</html>
