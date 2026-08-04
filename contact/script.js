@@ -686,11 +686,32 @@
   contactButtonEl.addEventListener('click', () => {
     if (StateMachine.current !== 'idle' || contactButtonEl.disabled) return;
 
-    const conversations = window.CONTACT_CONVERSATIONS || [];
+    const conversations = (window.CONTACT_CONVERSATIONS || []).filter(Boolean);
 
-const available = conversations.filter(c => c);
+function pickWeighted(list) {
 
-const conversation = pick(available); 
+    const pool = [];
+
+    list.forEach(conversation => {
+
+       const weight = {
+    common: 80,
+    uncommon: 17,
+    rare: 3
+}[conversation.rarity] || 80;
+
+for (let i = 0; i < weight; i++) {
+    pool.push(conversation);
+}
+
+    });
+
+    return pick(pool);
+
+}
+
+const conversation = pickWeighted(conversations);
+
     if (!conversation) return; // conversations.js not loaded — fail quiet, stay idle
 
     const duration = conversation.bridgeDuration || 75;
