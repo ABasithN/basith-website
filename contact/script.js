@@ -686,11 +686,14 @@
   contactButtonEl.addEventListener('click', () => {
     if (StateMachine.current !== 'idle' || contactButtonEl.disabled) return;
 
-    const conversation = pick(window.CONTACT_CONVERSATIONS || []);
+    const conversations = window.CONTACT_CONVERSATIONS || [];
+
+const available = conversations.filter(c => c);
+
+const conversation = pick(available); 
     if (!conversation) return; // conversations.js not loaded — fail quiet, stay idle
 
-    const [min, max] = conversation.durationRange || [180, 300];
-    const duration = randomInt(min, max);
+    const duration = conversation.bridgeDuration || 75;
     // Rolled once per connection. Unused today; exists so future effects
     // (flicker rate, dropped words, distortion, early-collapse odds) can
     // be derived from "this was a bad connection" without touching
