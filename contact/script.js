@@ -614,15 +614,25 @@ choicesEl.hidden = false;
       await wait(TIMING.live.beforeChoices);
       if (StateMachine.current !== 'live') return;
       showChoices(node.choices, async (choice) => {
-        appendMessage(choice.label, { speaker: 'visitor' });
-        await wait(TIMING.live.afterChoicePick);
-        playNode(conversation, choice.next);
-      });
-    } else if (node.next) {
-      await wait(TIMING.live.beforeAutoAdvance);
-      playNode(conversation, node.next);
-    }
 
+    appendMessage(choice.label, { speaker: 'visitor' });
+
+    await wait(TIMING.live.afterChoicePick);
+
+    console.log("NEXT NODE:", choice.next);
+
+    await playNode(conversation, choice.next);
+
+});
+    } else if (node.next) {
+
+    await wait(TIMING.live.beforeAutoAdvance);
+
+    console.log("AUTO:", node.next);
+
+    await playNode(conversation, node.next);
+
+}
 // node.end (or no continuation): the conversation rests here.
 // The bridge timer, not the dialogue tree, decides when it's over.
 
