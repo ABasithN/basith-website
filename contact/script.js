@@ -346,12 +346,19 @@
         // One-shot control: disable the whole group the instant one is
         // pressed so a double-tap can't fire two paths.
         Array.from(choicesEl.children).forEach((c) => { c.disabled = true; });
-        Emitter.emit('choice', { label: choice.label, next: choice.next });
-        onPick(choice);
+       setStatus('● RECEIVING...');
+
+Emitter.emit('choice', {
+    label: choice.label,
+    next: choice.next
+});
+
+onPick(choice);
       });
       choicesEl.appendChild(btn);
     });
-    choicesEl.hidden = false;
+setStatus('● AWAITING RESPONSE');     
+choicesEl.hidden = false;
   }
 
   function setStatus(text) {
@@ -497,7 +504,7 @@
     async enter() {
       setFace('gauge');
       setButtonEnabled(true);
-      setStatus('Awaiting Contact');
+      setStatus('● AWAITING CONTACT');
     },
     async exit() {
       setButtonEnabled(false);
@@ -510,7 +517,7 @@
 
   StateMachine.register('connecting', {
     async enter(ctx) {
-      setStatus('Establishing Contact');
+      setStatus('● RECEIVING TRANSMISSION');
 
       await wait(TIMING.press.beforeClick);
       Emitter.emit('relay-click');
@@ -526,8 +533,8 @@
       await wait(TIMING.press.retract);
       await wait(TIMING.press.silence);
 
-      appendMessage('CONNECTION ESTABLISHED', { speaker: 'system' });
-      setStatus('Bridge Open');
+      
+      setStatus('● SIGNAL STABLE');
       Emitter.emit('bridge-open', {
         origin: ctx.conversation.origin,
         bridgeQuality: ctx.bridgeQuality,
@@ -562,7 +569,7 @@
 
   StateMachine.register('live', {
     async enter(ctx) {
-      setStatus('Signal Live');
+     setStatus('● RECEIVING...'); 
       await playNode(ctx.conversation, ctx.conversation.start, {
         // Fires once, after the very first line of the whole connection —
         // "Can you hear me?" lands, and only then does the clock start.
@@ -629,7 +636,7 @@
   StateMachine.register('collapsing', {
     async enter() {
       hideChoices();
-      setStatus('Bridge Collapsing');
+      setStatus('● SIGNAL LOST');
       triggerFlicker();
 
       await wait(TIMING.collapse.beforeMessage);

@@ -3,7 +3,7 @@ const Conversation001 = {
     title: "The Weather Was Different",
     rarity: "common",
     origin: "Arctic Archive",
-    bridgeDuration: 64,
+    bridgeDuration: 52,
     start: "opening",
     nodes: {
         opening: {
@@ -69,7 +69,7 @@ const Conversation002 = {
     title: "Piano Keys",
     rarity: "uncommon",
     origin: "Orbital Habitat",
-    bridgeDuration: 81,
+    bridgeDuration: 47,
     start: "opening",
     nodes: {
         opening: {
@@ -179,7 +179,7 @@ const Conversation004 = {
     title: "The Last Garden",
     rarity: "rare",
     origin: "The Garden",
-    bridgeDuration: 90,
+    bridgeDuration: 47,
     start: "opening",
     nodes: {
         opening: {
@@ -243,7 +243,7 @@ const Conversation005 = {
     title: "Nine Minutes, Nine",
     rarity: "uncommon",
     origin: "Station Nine",
-    bridgeDuration: 54,
+    bridgeDuration: 20,
     start: "opening",
     nodes: {
         opening: {
@@ -288,7 +288,7 @@ const Conversation006 = {
     title: "Static Kindness",
     rarity: "common",
     origin: "Deep Ocean Colony",
-    bridgeDuration: 58,
+    bridgeDuration: 48,
     start: "opening",
     nodes: {
         opening: {
@@ -332,7 +332,7 @@ const Conversation007 = {
     title: "Elias Again",
     rarity: "rare",
     origin: "UNKNOWN",
-    bridgeDuration: 70,
+    bridgeDuration: 44,
     start: "opening",
     nodes: {
         opening: {
@@ -396,7 +396,7 @@ const Conversation008 = {
     title: "The Archive Keeps Everything",
     rarity: "uncommon",
     origin: "The Archive",
-    bridgeDuration: 76,
+    bridgeDuration: 40,
     start: "opening",
     nodes: {
         opening: {
@@ -460,7 +460,7 @@ const Conversation009 = {
     title: "Ash Bridge Crossing",
     rarity: "rare",
     origin: "Ash Bridge",
-    bridgeDuration: 88,
+    bridgeDuration: 28,
     start: "opening",
     nodes: {
         opening: {
@@ -503,7 +503,7 @@ const Conversation010 = {
     title: "Rain That Doesn't Stop",
     rarity: "common",
     origin: "The Rain",
-    bridgeDuration: 50,
+    bridgeDuration: 30,
     start: "opening",
     nodes: {
         opening: {
@@ -546,7 +546,7 @@ const Conversation011 = {
     title: "Mira's Voicemail",
     rarity: "uncommon",
     origin: "UNKNOWN",
-    bridgeDuration: 60,
+    bridgeDuration: 40,
     start: "opening",
     nodes: {
         opening: {
@@ -610,7 +610,7 @@ const Conversation012 = {
     title: "Fourth Frequency",
     rarity: "rare",
     origin: "Temporal Observatory",
-    bridgeDuration: 66,
+    bridgeDuration: 46,
     start: "opening",
     nodes: {
         opening: {
@@ -696,7 +696,7 @@ const Conversation014 = {
     title: "Underground Choir",
     rarity: "uncommon",
     origin: "Underground Civilization",
-    bridgeDuration: 62,
+    bridgeDuration: 38,
     start: "opening",
     nodes: {
         opening: {
@@ -802,7 +802,7 @@ const Conversation016 = {
     title: "Elias's Sister",
     rarity: "rare",
     origin: "UNKNOWN",
-    bridgeDuration: 72,
+    bridgeDuration: 51,
     start: "opening",
     nodes: {
         opening: {
@@ -866,7 +866,7 @@ const Conversation017 = {
     title: "Letters No One Reads",
     rarity: "common",
     origin: "Arctic Archive",
-    bridgeDuration: 48,
+    bridgeDuration: 28,
     start: "opening",
     nodes: {
         opening: {
@@ -909,7 +909,7 @@ const Conversation018 = {
     title: "The Boy From Station Nine",
     rarity: "uncommon",
     origin: "Station Nine",
-    bridgeDuration: 44,
+    bridgeDuration: 29,
     start: "opening",
     nodes: {
         opening: {
@@ -952,7 +952,7 @@ const Conversation019 = {
     title: "Mira Waits",
     rarity: "rare",
     origin: "The Garden",
-    bridgeDuration: 84,
+    bridgeDuration: 44,
     start: "opening",
     nodes: {
         opening: {
@@ -1016,7 +1016,7 @@ const Conversation020 = {
     title: "The Last Bridge",
     rarity: "rare",
     origin: "Ash Bridge",
-    bridgeDuration: 96,
+    bridgeDuration: 46,
     start: "opening",
     nodes: {
         opening: {
