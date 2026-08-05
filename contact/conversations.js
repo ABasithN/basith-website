@@ -1,2176 +1,2726 @@
-const Conversation001 = {
-    id: "001",
-    title: "The Weather Was Different",
+const Conversation021 = {
+    id: "021",
+    title: "The Poet's Questions",
     rarity: "common",
-    origin: "Arctic Archive",
+    origin: "A Poet",
     bridgeDuration: 63,
     start: "opening",
     nodes: {
         opening: {
             speaker: "future",
             lines: [
-                "You're there.",
-                "I log these calls. Nobody usually answers.",
-                "Weather, mostly. Someone has to write it down."
+                "I don't have long. Maybe this once, maybe never again.",
+                "I'm a poet. That's all I'll say about myself.",
+                "I want to know what people write about, where you are."
             ],
             choices: [
-                { label: "What do you log?", next: "askLog" },
-                { label: "Why does it matter?", next: "askMatter" }
+                { label: "Mostly complaints", next: "smallComplaints" },
+                { label: "Barely by hand", next: "barelyWrite" }
             ]
         },
-        askLog: {
+        smallComplaints: {
             speaker: "future",
             lines: [
-                "Snow. Rain. What used to fall and doesn't anymore.",
-                "It doesn't do what it used to."
+                "Traffic. Weather. The usual.",
+                "Sounds almost peaceful, hearing that."
             ],
             next: "middle"
         },
-        askMatter: {
+        barelyWrite: {
             speaker: "future",
             lines: [
-                "Somebody should remember what normal looked like.",
-                "Might as well be me."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "I keep a page just for snow. Mostly blank now.",
-                "Complained about it my whole life.",
-                "Didn't know I'd miss the complaining."
-            ],
-            choices: [
-                { label: "I remember snow too.", next: "remember" },
-                { label: "Tell me what it was like.", next: "describe" }
-            ]
-        },
-        remember: {
-            speaker: "future",
-            lines: [
-                "Then you know the sound it makes. Nobody believes me when I describe it.",
-                "Good. Hold onto that."
-            ],
-            next: "late"
-        },
-        describe: {
-            speaker: "future",
-            lines: [
-                "Quiet. Loud in a quiet way, if that makes sense.",
-                "Everything sounded closer under it."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "I write the blank pages anyway. Someone should know what's missing.",
-                "You writing this down too?"
-            ],
-            choices: [
-                { label: "I'll remember it for you.", next: "promise" },
-                { label: "What else has changed?", next: "more" }
-            ]
-        },
-        promise: {
-            speaker: "future",
-            lines: [
-                "Good.",
-                "That's all I wanted, really."
-            ],
-            next: "urgency"
-        },
-        more: {
-            speaker: "future",
-            lines: [
-                "Too much to list before this cuts out.",
-                "Snow's the one I miss."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "There's a sound before it goes.",
-                "Starting now.",
-                "..."
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "If you see snow — really look at—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation002 = {
-    id: "002",
-    title: "Piano Keys",
-    rarity: "uncommon",
-    origin: "Orbital Habitat",
-    bridgeDuration: 59,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "Hang on — there. Sorry.",
-                "Caught me mid-crime. Playing something. Badly.",
-                "Nine keys still work up here."
-            ],
-            choices: [
-                { label: "Play it for me.", next: "playAsk" },
-                { label: "What's it about?", next: "aboutAsk" }
-            ]
-        },
-        playAsk: {
-            speaker: "future",
-            lines: [
-                "Not really a song for an audience.",
-                "But — fine. Don't laugh."
-            ],
-            next: "middle"
-        },
-        aboutAsk: {
-            speaker: "future",
-            lines: [
-                "Home. Badly disguised as a song about a window.",
-                "Everyone up here writes that one eventually."
+                "Typed, then. Still counts.",
+                "What's left when nobody writes by hand."
             ],
             next: "middle"
         },
         middle: {
             speaker: "future",
             lines: [
-                "Nobody taught me. Diagram and nine working keys.",
-                "You get good at making do with what still works."
+                "I need to ask fast, in case this cuts.",
+                "Do people still fall in love the same way? Slowly, I mean."
             ],
             choices: [
-                { label: "I wish I could hear the whole thing.", next: "wishHear" },
-                { label: "What happened to the rest of the keys?", next: "askKeys" }
+                { label: "Some do, mostly rush", next: "rushIt" },
+                { label: "Harder, distracted", next: "distracted" }
             ]
         },
-        wishHear: {
+        rushIt: {
             speaker: "future",
             lines: [
-                "Me too, honestly.",
-                "Maybe next time. If there's a next time."
+                "Rushing it. That tracks with some things I've heard.",
+                "Not everything, though."
             ],
             next: "late"
         },
-        askKeys: {
+        distracted: {
             speaker: "future",
             lines: [
-                "Salt air. Bad wiring. Take your pick.",
-                "The nine that work are stubborn. I like that about them."
+                "Distracted by what, exactly.",
+                "Never mind. I think I already know."
             ],
             next: "late"
         },
         late: {
             speaker: "future",
             lines: [
-                "Everyone up here has a version of this. A thing that still works.",
-                "You hold onto it harder than you'd expect."
+                "One more. This might be the only chance I get.",
+                "Is anyone still hopeful, where you are?"
             ],
             choices: [
-                { label: "I'm still here.", next: "stillHere" },
-                { label: "What's yours called?", next: "askName" }
+                { label: "Some of us", next: "someHopeful" },
+                { label: "Hard to say", next: "hardToSay" }
             ]
         },
-        stillHere: {
+        someHopeful: {
             speaker: "future",
             lines: [
-                "Good. Stay a second more."
+                "Good. Write that down somewhere.",
+                "Someone should."
             ],
             next: "urgency"
         },
-        askName: {
+        hardToSay: {
             speaker: "future",
             lines: [
-                "Doesn't have one. Didn't think it'd need one."
+                "Fair answer. Braver than most.",
+                "I'll take it."
             ],
             next: "urgency"
         },
         urgency: {
             speaker: "future",
             lines: [
-                "Heading into shadow.",
-                "Takes the signal every time—",
-                "Wait."
+                "It's going. I can feel it going.",
+                "I won't get this back—"
             ],
             next: "ending"
         },
         ending: {
             speaker: "future",
             lines: [
-                "One more working key and I'd have told you whi—"
+                "Thank you for answering. I needed to kno—"
             ],
             end: true
         }
     }
 };
 
-const Conversation003 = {
-    id: "003",
-    title: "Wrong Number",
+const Conversation022 = {
+    id: "022",
+    title: "The Musician Wants To Know",
     rarity: "common",
-    origin: "UNKNOWN",
-    bridgeDuration: 65,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "Okay — this is either a prank or the weirdest day of my life.",
-                "You're not supposed to be here. Neither am I.",
-                "I was trying to reach my brother."
-            ],
-            choices: [
-                { label: "Where's your brother?", next: "askBrother" },
-                { label: "I don't understand.", next: "confused" }
-            ]
-        },
-        askBrother: {
-            speaker: "future",
-            lines: [
-                "Station Nine. I get the wrong bridge constantly.",
-                "It's honestly embarrassing at this point."
-            ],
-            next: "middle"
-        },
-        confused: {
-            speaker: "future",
-            lines: [
-                "Join the club. Nobody explains how these actually work.",
-                "You just get whoever answers."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "He'd know what to say right now. He always does.",
-                "I mostly just talk until the line decides I'm done."
-            ],
-            choices: [
-                { label: "You're doing fine.", next: "reassure" },
-                { label: "What would you tell him?", next: "askTell" }
-            ]
-        },
-        reassure: {
-            speaker: "future",
-            lines: [
-                "Ha. Appreciate that. Even from a wrong number."
-            ],
-            next: "late"
-        },
-        askTell: {
-            speaker: "future",
-            lines: [
-                "That I miss the arguing. Sounds stupid out loud.",
-                "It isn't, though."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "This is probably the closest I get to reaching him today.",
-                "Weird way to spend a wrong number."
-            ],
-            choices: [
-                { label: "I'm glad it was me.", next: "glad" },
-                { label: "Try again tomorrow.", next: "tryAgain" }
-            ]
-        },
-        glad: {
-            speaker: "future",
-            lines: [
-                "Yeah. Me too, actually."
-            ],
-            next: "urgency"
-        },
-        tryAgain: {
-            speaker: "future",
-            lines: [
-                "Will do. Eventually it has to land right."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "Wait, it's going.",
-                "Of course.",
-                "The one time someone picks u—"
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "If you get a wrong number too, don't hang up so fa—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation004 = {
-    id: "004",
-    title: "The Last Garden",
-    rarity: "rare",
-    origin: "The Garden",
-    bridgeDuration: 59,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "I'm outside. Mind if I keep working.",
-                "Only hour the light's right.",
-                "Used to be a hundred gardens. One now. I tend it."
-            ],
-            choices: [
-                { label: "What are you planting?", next: "askPlanting" },
-                { label: "Who sends the seeds?", next: "askSeeds" }
-            ]
-        },
-        askPlanting: {
-            speaker: "future",
-            lines: [
-                "Something that won't grow here.",
-                "Plant it anyway."
-            ],
-            next: "middle"
-        },
-        askSeeds: {
-            speaker: "future",
-            lines: [
-                "Strangers, mostly. Sometimes just a name, no seed at all.",
-                "I put the names in the soil too."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "There's a row near the fence. Mira asked for that one.",
-                "Never met her. I just do as she asks."
-            ],
-            choices: [
-                { label: "Why do you trust her?", next: "askTrust" },
-                { label: "I remember Mira.", next: "sayRemember" }
-            ]
-        },
-        askTrust: {
-            speaker: "future",
-            lines: [
-                "Don't, really. Do it anyway.",
-                "Some things only stay alive if somebody keeps digging."
-            ],
-            next: "late"
-        },
-        sayRemember: {
-            speaker: "future",
-            lines: [
-                "Do you.",
-                "...",
-                "Tell me about her sometime. Not today, I think."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "The soil doesn't care whose name it is.",
-                "Neither do I, anymore. I just dig."
-            ],
-            choices: [
-                { label: "That's its own kind of faith.", next: "faith" },
-                { label: "I wish I had a garden like this.", next: "wishGarden" }
-            ]
-        },
-        faith: {
-            speaker: "future",
-            lines: [
-                "Maybe. Never called it that before."
-            ],
-            next: "urgency"
-        },
-        wishGarden: {
-            speaker: "future",
-            lines: [
-                "Start with one name.",
-                "It grows from there, somehow."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "Light's going.",
-                "So is this.",
-                "...",
-                "Figures."
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "Tell someone to water the row by the fen—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation005 = {
-    id: "005",
-    title: "Nine Minutes, Nine",
-    rarity: "uncommon",
-    origin: "Station Nine",
-    bridgeDuration: 54,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "Nine minutes. Always nine.",
-                "Station's named for it, apparently.",
-                "Worked the relay with a man named Elias."
-            ],
-            choices: [
-                { label: "Tell me about him.", next: "askElias" },
-                { label: "Why nine?", next: "askNine" }
-            ]
-        },
-        askElias: {
-            speaker: "future",
-            lines: [
-                "Good at the job. Bad at leaving on good terms.",
-                "Or maybe that was me."
-            ],
-            next: "middle"
-        },
-        askNine: {
-            speaker: "future",
-            lines: [
-                "He said the number chose the place, not the other way around.",
-                "Laughed then. Don't now."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "He's off shift. Long time.",
-                "Nobody says where."
-            ],
-            choices: [
-                { label: "Do you miss him?", next: "askMiss" },
-                { label: "What would you say to him?", next: "askSay" }
-            ]
-        },
-        askMiss: {
-            speaker: "future",
-            lines: [
-                "Wouldn't put it that way.",
-                "But the relay's quieter without him. That's something."
-            ],
-            next: "late"
-        },
-        askSay: {
-            speaker: "future",
-            lines: [
-                "That someone still counts. That's it. That's the whole thing."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "I count anyway, whether he hears it or not.",
-                "Habit's outlived the reason for it, probably."
-            ],
-            choices: [
-                { label: "I don't think it has.", next: "reassure" },
-                { label: "Why?", next: "askWhy" }
-            ]
-        },
-        reassure: {
-            speaker: "future",
-            lines: [
-                "Appreciate you saying that."
-            ],
-            next: "urgency"
-        },
-        askWhy: {
-            speaker: "future",
-            lines: [
-                "Because someone should still be counted.",
-                "Even if it's just me doing it."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "Nobody says where.",
-                "Counting anyway.",
-                "Almost up."
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "If you hear his name, tell him someone still cou—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation006 = {
-    id: "006",
-    title: "Static Kindness",
-    rarity: "common",
-    origin: "Deep Ocean Colony",
-    bridgeDuration: 57,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "It's loud down here.",
-                "Not sound. Pressure.",
-                "Like something's always about to give."
-            ],
-            choices: [
-                { label: "Are you okay?", next: "askOkay" },
-                { label: "How do you live like that?", next: "askLive" }
-            ]
-        },
-        askOkay: {
-            speaker: "future",
-            lines: [
-                "You get used to it. Mostly.",
-                "Nice of you to ask, though."
-            ],
-            next: "middle"
-        },
-        askLive: {
-            speaker: "future",
-            lines: [
-                "You stop noticing what you can't fix.",
-                "Focus on what's still soft instead."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "Nobody's unkind down here. Almost a rule.",
-                "This close to the dark, you stop wasting words."
-            ],
-            choices: [
-                { label: "That sounds hard.", next: "sayHard" },
-                { label: "That sounds peaceful.", next: "sayPeaceful" }
-            ]
-        },
-        sayHard: {
-            speaker: "future",
-            lines: [
-                "It was. Isn't anymore.",
-                "Forgot how to be sharp with people. Don't miss it."
-            ],
-            next: "late"
-        },
-        sayPeaceful: {
-            speaker: "future",
-            lines: [
-                "It is, actually. Didn't expect that answer, did you.",
-                "Neither did I, the first year."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "Everyone down here's gentle with everyone else.",
-                "It's the only thing that makes the pressure bearable."
-            ],
-            choices: [
-                { label: "I'll try to be gentler too.", next: "tryGentle" },
-                { label: "I wish it were like that everywhere.", next: "wishEverywhere" }
-            ]
-        },
-        tryGentle: {
-            speaker: "future",
-            lines: [
-                "Good. Costs you nothing."
-            ],
-            next: "urgency"
-        },
-        wishEverywhere: {
-            speaker: "future",
-            lines: [
-                "Doesn't have to take the dark to learn it.",
-                "Wish someone had told me that sooner."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "Pressure does something to the line.",
-                "Should let you go before it decide—"
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "Be kind up there. It's cheaper than you thi—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation007 = {
-    id: "007",
-    title: "Elias Again",
-    rarity: "rare",
-    origin: "UNKNOWN",
-    bridgeDuration: 67,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "Sorry — for a second I thought — never mind. Hi.",
-                "Keep hoping the bridge gets it wrong in my favor.",
-                "Looking for someone. Station Nine, if that's anything to you?"
-            ],
-            choices: [
-                { label: "Who is he?", next: "askWho" },
-                { label: "I don't understand.", next: "confused" }
-            ]
-        },
-        askWho: {
-            speaker: "future",
-            lines: [
-                "Someone I worked with. Someone I owe an answer to.",
-                "Eleven bridges now. None of them him."
-            ],
-            next: "middle"
-        },
-        confused: {
-            speaker: "future",
-            lines: [
-                "Sorry, I know how it sounds.",
-                "Eleven bridges chasing one person. It's a lot, I know."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "He left before I asked him something.",
-                "Small thing at the time."
-            ],
-            choices: [
-                { label: "What did you want to ask him?", next: "askAsk" },
-                { label: "Keep trying. He might answer.", next: "keepTrying" }
-            ]
-        },
-        askAsk: {
-            speaker: "future",
-            lines: [
-                "Whether he blamed me for the transfer.",
-                "Got heavier the longer I sat on it."
-            ],
-            next: "late"
-        },
-        keepTrying: {
-            speaker: "future",
-            lines: [
-                "Twelve, then thirteen.",
-                "Someone said the bridge remembers who you're looking for."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "Want that to be true more than I can say.",
-                "You're not him. I know before you even speak now."
-            ],
-            choices: [
-                { label: "I'm sorry.", next: "saySorry" },
-                { label: "You'll find him.", next: "sayFind" }
-            ]
-        },
-        saySorry: {
-            speaker: "future",
-            lines: [
-                "Not your fault. Appreciate it anyway."
-            ],
-            next: "urgency"
-        },
-        sayFind: {
-            speaker: "future",
-            lines: [
-                "Hope so.",
-                "Fourteen, if I have to."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "Not upset.",
-                "Just — recalibrating, agai—"
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "If you meet an Elias — ask if he still thinks about the tra—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation008 = {
-    id: "008",
-    title: "The Archive Keeps Everything",
-    rarity: "uncommon",
-    origin: "The Archive",
-    bridgeDuration: 62,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "One moment. Logging the timestamp.",
-                "Habit. It's the job.",
-                "I have a shelf of things nobody asked me to keep."
-            ],
-            choices: [
-                { label: "Like what?", next: "askLike" },
-                { label: "Why keep them?", next: "askWhyKeep" }
-            ]
-        },
-        askLike: {
-            speaker: "future",
-            lines: [
-                "A recording. A grocery list. A key to a door that isn't there.",
-                "None of it useful. All of it mine."
-            ],
-            next: "middle"
-        },
-        askWhyKeep: {
-            speaker: "future",
-            lines: [
-                "Used to call it a virtue.",
-                "Not sure what I'd call it now."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "Realized I was keeping things instead of people, eventually.",
-                "The shelf filled right when I emptied out."
-            ],
-            choices: [
-                { label: "That sounds lonely.", next: "sayLonely" },
-                { label: "What's on the shelf that matters most?", next: "askMost" }
-            ]
-        },
-        sayLonely: {
-            speaker: "future",
-            lines: [
-                "Was. Working on it.",
-                "This helps, actually. More than you'd think."
-            ],
-            next: "late"
-        },
-        askMost: {
-            speaker: "future",
-            lines: [
-                "A letter I never sent.",
-                "Keep meaning to."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "Maybe this counts as sending it. A little.",
-                "Funny what a stranger can absolve, accidentally."
-            ],
-            choices: [
-                { label: "I remember.", next: "sayRemember" },
-                { label: "Send it. Really send it.", next: "urgeSend" }
-            ]
-        },
-        sayRemember: {
-            speaker: "future",
-            lines: [
-                "Good. That's the job done, then."
-            ],
-            next: "urgency"
-        },
-        urgeSend: {
-            speaker: "future",
-            lines: [
-                "Maybe I will.",
-                "Feels smaller, saying it out loud to someone."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "The bridge doesn't log itself.",
-                "No time to note the—",
-                "..."
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "File this under things I should've said soon—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation009 = {
-    id: "009",
-    title: "Ash Bridge Crossing",
-    rarity: "rare",
-    origin: "Ash Bridge",
-    bridgeDuration: 53,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "First voice since the crossing.",
-                "Keep expecting it to still be loud.",
-                "It isn't. That's the strange part."
-            ],
-            choices: [
-                { label: "What happened at the crossing?", next: "askCrossing" },
-                { label: "You're safe now.", next: "sayNowSafe" }
-            ]
-        },
-        askCrossing: {
-            speaker: "future",
-            lines: [
-                "Everyone talks about it like one moment.",
-                "It's a hundred small ones. Stacked."
-            ],
-            next: "middle"
-        },
-        sayNowSafe: {
-            speaker: "future",
-            lines: [
-                "Don't know that yet.",
-                "Hope you're right."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "Crossed anyway. Still don't know what's on this side.",
-                "Quiet's almost worse than the noise was."
-            ],
-            choices: [
-                { label: "What do you remember most?", next: "askRemember" },
-                { label: "I'm here. Keep going.", next: "sayKeepGoing" }
-            ]
-        },
-        askRemember: {
-            speaker: "future",
-            lines: [
-                "The station. Just the shape of it, mostly.",
-                "Everything else went soft."
-            ],
-            next: "late"
-        },
-        sayKeepGoing: {
-            speaker: "future",
-            lines: [
-                "Okay.",
-                "Okay, staying on."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "Something's pulling at the line.",
-                "Like the crossing didn't finish with me."
-            ],
-            choices: [
-                { label: "What do you mean?", next: "askMean" },
-                { label: "Hold on. I'm still here.", next: "holdOn" }
-            ]
-        },
-        askMean: {
-            speaker: "future",
-            lines: [
-                "I rem—",
-                "..."
-            ],
-            next: "urgency"
-        },
-        holdOn: {
-            speaker: "future",
-            lines: [
-                "Trying.",
-                "..."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "the station.",
-                "..."
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "If you cross something like it — don't look back till you'r—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation010 = {
-    id: "010",
-    title: "Rain That Doesn't Stop",
-    rarity: "common",
-    origin: "The Rain",
-    bridgeDuration: 56,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "Talk louder. Coming down hard.",
-                "Always coming down hard.",
-                "Nine years of it where I am."
-            ],
-            choices: [
-                { label: "How do you manage?", next: "askManage" },
-                { label: "What do you miss most?", next: "askMiss" }
-            ]
-        },
-        askManage: {
-            speaker: "future",
-            lines: [
-                "Stopped counting. Started again.",
-                "You find a rhythm in it, eventually."
-            ],
-            next: "middle"
-        },
-        askMiss: {
-            speaker: "future",
-            lines: [
-                "Dry. Almost forgot what it sounds like.",
-                "Silence, mostly. I miss silence."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "You learn to talk through it or you stop talking altogether.",
-                "I chose the first one. Barely."
-            ],
-            choices: [
-                { label: "I'm listening. Keep talking.", next: "keepTalking" },
-                { label: "Does it ever let up?", next: "askLetUp" }
-            ]
-        },
-        keepTalking: {
-            speaker: "future",
-            lines: [
-                "Appreciate that.",
-                "Not everyone has the patience for it."
-            ],
-            next: "late"
-        },
-        askLetUp: {
-            speaker: "future",
-            lines: [
-                "Never has. Might not ever.",
-                "Doesn't mean you stop living in it."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "Sorry. I know I sound tired of it.",
-                "Some days I am. Not today, somehow."
-            ],
-            choices: [
-                { label: "Why not today?", next: "askWhyNot" },
-                { label: "I don't understand.", next: "confused" }
-            ]
-        },
-        askWhyNot: {
-            speaker: "future",
-            lines: [
-                "You answered.",
-                "Doesn't take much, some days."
-            ],
-            next: "urgency"
-        },
-        confused: {
-            speaker: "future",
-            lines: [
-                "Neither do I, honestly.",
-                "Just felt true saying it."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "Thunder now.",
-                "Always takes the line with i—"
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "If it starts where you are, don't wait for it to sto—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation011 = {
-    id: "011",
-    title: "Mira's Voicemail",
-    rarity: "uncommon",
-    origin: "UNKNOWN",
-    bridgeDuration: 64,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "This is going to sound strange. I'm not calling to talk to you, exactly.",
-                "Hoping you'll pass something on. If you ever meet her.",
-                "Her name's Mira."
-            ],
-            choices: [
-                { label: "Tell me about her.", next: "askAbout" },
-                { label: "What do you want her to know?", next: "askKnow" }
-            ]
-        },
-        askAbout: {
-            speaker: "future",
-            lines: [
-                "Left the longest voicemails. Saved every one.",
-                "Still listen out of order, on purpose."
-            ],
-            next: "middle"
-        },
-        askKnow: {
-            speaker: "future",
-            lines: [
-                "That I finally answered the last one.",
-                "Took three years."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "It makes her sound like she's still deciding what to say next.",
-                "I like that. Keeps her close, somehow."
-            ],
-            choices: [
-                { label: "Why not tell her yourself?", next: "askWhyNot" },
-                { label: "Some replies take time.", next: "sayTakeTime" }
-            ]
-        },
-        askWhyNot: {
-            speaker: "future",
-            lines: [
-                "The bridges never find her, only people who might know her.",
-                "Closest thing I have to trying."
-            ],
-            next: "late"
-        },
-        sayTakeTime: {
-            speaker: "future",
-            lines: [
-                "Three years is a lot of time, though.",
-                "Long enough to know I meant it, at least."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "So I keep trying. Bridge after bridge.",
-                "Someone has to eventually be the right one."
-            ],
-            choices: [
-                { label: "I'll remember her name.", next: "rememberName" },
-                { label: "She'd want to know you tried.", next: "sheKnows" }
-            ]
-        },
-        rememberName: {
-            speaker: "future",
-            lines: [
-                "Mira.",
-                "Thank you for that."
-            ],
-            next: "urgency"
-        },
-        sheKnows: {
-            speaker: "future",
-            lines: [
-                "Hope so.",
-                "Hope so more than I can say."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "Fading.",
-                "Always fades right at the important par—",
-                "..."
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "Tell her the garden by the fence is still—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation012 = {
-    id: "012",
-    title: "Fourth Frequency",
-    rarity: "rare",
-    origin: "Temporal Observatory",
-    bridgeDuration: 62,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "Fourth frequency. Almost nobody comes through on this one.",
-                "Heard about it. Didn't expect to hear through it. Neat trick.",
-                "Officially decommissioned, this line."
-            ],
-            choices: [
-                { label: "Why do you monitor it then?", next: "askMonitor" },
-                { label: "What's special about it?", next: "askSpecial" }
-            ]
-        },
-        askMonitor: {
-            speaker: "future",
-            lines: [
-                "Boredom. Curiosity. Poor judgment.",
-                "Pick whichever sounds better on a report."
-            ],
-            next: "middle"
-        },
-        askSpecial: {
-            speaker: "future",
-            lines: [
-                "Too honest, they say. Doesn't hold long.",
-                "Explains a lot about tonight, then."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "Most nights, nothing. Tonight, you. Lucky me, I guess.",
-                "Not overthinking it. Definitely not."
-            ],
-            choices: [
-                { label: "Maybe it's not luck.", next: "sayNotLuck" },
-                { label: "I'm glad it was tonight.", next: "sayGladTonight" }
-            ]
-        },
-        sayNotLuck: {
-            speaker: "future",
-            lines: [
-                "Careful. That's how people end up believing in things.",
-                "...I might already."
-            ],
-            next: "late"
-        },
-        sayGladTonight: {
-            speaker: "future",
-            lines: [
-                "Me too. Best conversation all month, and I mean that."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "Wish this frequency behaved like the others. Longer, less honest.",
-                "Trade-offs, I suppose."
-            ],
-            choices: [
-                { label: "Honest is better.", next: "sayHonestBetter" },
-                { label: "I'll remember this one.", next: "sayRememberThis" }
-            ]
-        },
-        sayHonestBetter: {
-            speaker: "future",
-            lines: [
-                "Easy for you to say. You get to leave.",
-                "Kidding. Mostly."
-            ],
-            next: "urgency"
-        },
-        sayRememberThis: {
-            speaker: "future",
-            lines: [
-                "Good. Somebody should."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "Never holds long. Too honest for that.",
-                "Figures.",
-                "Best conversation all mont—"
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "If it finds you again, don't tell anyone how you got throu—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation013 = {
-    id: "013",
-    title: "The Quiet Kitchen",
-    rarity: "common",
-    origin: "Quantum Refuge",
-    bridgeDuration: 60,
-    start: "opening",
-    nodes: {
-        opening: {
-            speaker: "future",
-            lines: [
-                "One second, flour on my hands — there.",
-                "Sorry, love. Mid-something, as always.",
-                "I cook for people who never ask."
-            ],
-            choices: [
-                { label: "Why cook if they don't ask?", next: "askWhyCook" },
-                { label: "That sounds like love.", next: "sayLove" }
-            ]
-        },
-        askWhyCook: {
-            speaker: "future",
-            lines: [
-                "Easier than talking. Always has been.",
-                "The food says it for us, mostly."
-            ],
-            next: "middle"
-        },
-        sayLove: {
-            speaker: "future",
-            lines: [
-                "Maybe it is. Never called it that.",
-                "Sounds nicer than 'coping', I'll admit."
-            ],
-            next: "middle"
-        },
-        middle: {
-            speaker: "future",
-            lines: [
-                "Everyone here's lost something. Nobody says it out loud.",
-                "So we eat instead. Feels less like a confession."
-            ],
-            choices: [
-                { label: "What did you lose?", next: "askLost" },
-                { label: "I understand.", next: "sayUnderstand" }
-            ]
-        },
-        askLost: {
-            speaker: "future",
-            lines: [
-                "Not today. Ask me something easier.",
-                "...thank you for asking, though."
-            ],
-            next: "late"
-        },
-        sayUnderstand: {
-            speaker: "future",
-            lines: [
-                "Do you.",
-                "Then you know why the kitchen stays busy."
-            ],
-            next: "late"
-        },
-        late: {
-            speaker: "future",
-            lines: [
-                "Come by if you're ever near. I'll feed you without asking questions.",
-                "That's the whole offer, really."
-            ],
-            choices: [
-                { label: "I'd like that.", next: "sayLike" },
-                { label: "That's a kind offer.", next: "sayKind" }
-            ]
-        },
-        sayLike: {
-            speaker: "future",
-            lines: [
-                "Good. I'll set a place."
-            ],
-            next: "urgency"
-        },
-        sayKind: {
-            speaker: "future",
-            lines: [
-                "Costs me nothing. Gives me everything, some nights."
-            ],
-            next: "urgency"
-        },
-        urgency: {
-            speaker: "future",
-            lines: [
-                "Something's beeping.",
-                "Oven or bridge.",
-                "Could be eithe—"
-            ],
-            next: "ending"
-        },
-        ending: {
-            speaker: "future",
-            lines: [
-                "If you cook for someone who won't ask, that's how you kno—"
-            ],
-            end: true
-        }
-    }
-};
-
-const Conversation014 = {
-    id: "014",
-    title: "Underground Choir",
-    rarity: "uncommon",
-    origin: "Underground Civilization",
+    origin: "A Musician",
     bridgeDuration: 66,
     start: "opening",
     nodes: {
         opening: {
             speaker: "future",
             lines: [
-                "Caught us between songs! Give me a sec to sneak out.",
-                "Sing more than we talk down here. Travels better through rock.",
-                "Forty of us, most nights."
+                "I might only get this one shot, so I'll be quick.",
+                "I'm a musician. Nothing else about me matters right now.",
+                "Do people still dance? Just for fun, not for anything else."
             ],
             choices: [
-                { label: "What do you sing about?", next: "askAbout" },
-                { label: "Sing something for me.", next: "askSing" }
+                { label: "Yeah, at parties", next: "yesEverywhere" },
+                { label: "Not as much", next: "notAsMuch" }
             ]
         },
-        askAbout: {
+        yesEverywhere: {
             speaker: "future",
             lines: [
-                "The surface. None of us have seen it.",
-                "We sing about things we've only been told exist."
+                "Good. Really good, actually.",
+                "That's one thing I was scared to ask about."
             ],
             next: "middle"
         },
-        askSing: {
+        notAsMuch: {
             speaker: "future",
             lines: [
-                "Alone I'm nothing, you want the forty.",
-                "But — fine. One line. Don't tell them."
+                "Why not? Too busy? Too tired?",
+                "Both, probably."
             ],
             next: "middle"
         },
         middle: {
             speaker: "future",
             lines: [
-                "Sounds truer with forty voices believing it at once.",
-                "Only time the tunnels don't feel like tunnels."
+                "What does music sound like now. Loud? Quiet? Sad?",
+                "I need to know if it changed."
             ],
             choices: [
-                { label: "I wish I could hear all forty.", next: "wishForty" },
-                { label: "Do you believe the songs?", next: "askBelieve" }
+                { label: "All kinds", next: "allKinds" },
+                { label: "Kind of sad", next: "kindOfSad" }
             ]
         },
-        wishForty: {
+        allKinds: {
             speaker: "future",
             lines: [
-                "You and me both, honestly.",
-                "It's better than anything I could do alone."
+                "That's the right answer, I think.",
+                "Music's not supposed to agree on one mood."
             ],
             next: "late"
         },
-        askBelieve: {
+        kindOfSad: {
             speaker: "future",
             lines: [
-                "Some nights. Other nights it's just nice to be loud together.",
-                "Either way works, if you ask me."
+                "Makes sense. People write what's true.",
+                "Doesn't mean it's all bad news, though."
             ],
             next: "late"
         },
         late: {
             speaker: "future",
             lines: [
-                "Nobody remembers who started it. Just kept going.",
-                "Suppose that's how most good things survive down here."
+                "This might be it for me, so — one last thing.",
+                "Do people still sing together? In groups, I mean."
             ],
             choices: [
-                { label: "I'll listen for it someday.", next: "sayListen" },
-                { label: "Keep singing.", next: "sayKeepSinging" }
+                { label: "Sometimes, in groups", next: "concertsChurches" },
+                { label: "Mostly headphones", next: "headphones" }
             ]
         },
-        sayListen: {
+        concertsChurches: {
             speaker: "future",
             lines: [
-                "You won't find it. But nice thought."
+                "That's enough. That's more than enough, actually."
             ],
             next: "urgency"
         },
-        sayKeepSinging: {
+        headphones: {
             speaker: "future",
             lines: [
-                "Always do."
+                "Alone, then. Together, but alone.",
+                "I was worried you'd say that."
             ],
             next: "urgency"
         },
         urgency: {
             speaker: "future",
             lines: [
-                "Calling me back.",
-                "Signal doesn't reach far from the chambe—"
+                "Signal's dying. I can feel it dying.",
+                "This was my one shot at this—"
             ],
             next: "ending"
         },
         ending: {
             speaker: "future",
             lines: [
-                "If you ever see the surface, sing something up there for u—"
+                "Keep singing together if you can. It matte—"
             ],
             end: true
         }
     }
 };
 
-const Conversation015 = {
-    id: "015",
-    title: "The Man Who Counts Days",
-    rarity: "common",
-    origin: "Mars Research Relay",
-    bridgeDuration: 53,
+const Conversation023 = {
+    id: "023",
+    title: "The Scientist's Last Query",
+    rarity: "uncommon",
+    origin: "A Scientist",
+    bridgeDuration: 73,
     start: "opening",
     nodes: {
         opening: {
             speaker: "future",
             lines: [
-                "Day one thousand, something.",
-                "Stopped writing the number.",
-                "First new voice in a while."
+                "I have one shot at this. I won't waste it on small talk.",
+                "I'm a scientist. That's all you need to know about me.",
+                "Tell me honestly: how bad is the weather where you are?"
             ],
             choices: [
-                { label: "Are you alone out there?", next: "askAlone" },
-                { label: "What do you do all day?", next: "askDo" }
+                { label: "Getting worse", next: "gettingWorse" },
+                { label: "Bad, not everywhere", next: "notEverywhere" }
             ]
         },
-        askAlone: {
+        gettingWorse: {
             speaker: "future",
             lines: [
-                "Mostly. The relay keeps me company. Sort of.",
-                "Talk to it sometimes. Like it'll answer."
+                "Thought so. That lines up with what little data we have.",
+                "Keep answering honestly. It matters more than you know."
             ],
             next: "middle"
         },
-        askDo: {
+        notEverywhere: {
             speaker: "future",
             lines: [
-                "Count. Wait. Maintain what needs maintaining.",
-                "Not much of a list, I know."
+                "Not everywhere yet. Note the word yet.",
+                "I need to know how people are responding to it."
             ],
             next: "middle"
         },
         middle: {
             speaker: "future",
             lines: [
-                "It never does. The relay, I mean.",
-                "You did, though."
+                "Are people doing anything about it? Really doing something?",
+                "Not talking. Doing."
             ],
             choices: [
-                { label: "I'm glad I did.", next: "sayGlad" },
-                { label: "What do you talk to it about?", next: "askAboutWhat" }
+                { label: "Some are trying", next: "someIgnore" },
+                { label: "Slow, but changing", next: "slowChange" }
             ]
         },
-        sayGlad: {
+        someIgnore: {
             speaker: "future",
             lines: [
-                "Me too.",
-                "Don't get many days like this one."
+                "Some is better than none. I'll hold onto that.",
+                "Ignoring it costs more than people think."
             ],
             next: "late"
         },
-        askAboutWhat: {
+        slowChange: {
             speaker: "future",
             lines: [
-                "Nothing important. Just to hear a voice, mine or otherwise.",
-                "Turns out that matters more than I thought it would."
+                "Slow is still something. Slow can still work, if it's early enough.",
+                "Tell me it's early enough."
             ],
             next: "late"
         },
         late: {
             speaker: "future",
             lines: [
-                "This'll be day one thousand, something, plus one.",
-                "The day it answered back."
+                "Last question, and it's the one I actually need answered.",
+                "Do you believe it can still be fixed?"
             ],
             choices: [
-                { label: "I won't forget this either.", next: "wontForget" },
-                { label: "Stay safe out there.", next: "staySafe" }
+                { label: "I want to believe", next: "wantBelieve" },
+                { label: "I don't know", next: "dontKnow" }
             ]
         },
-        wontForget: {
+        wantBelieve: {
             speaker: "future",
             lines: [
-                "Good. Somebody should keep the count too."
+                "That's more than most people give me.",
+                "Hold onto wanting to. It counts for something."
             ],
             next: "urgency"
         },
-        staySafe: {
+        dontKnow: {
             speaker: "future",
             lines: [
-                "Trying to. Most days."
+                "Honest answer. I respect that more than false hope.",
+                "Not knowing isn't the same as giving up."
             ],
             next: "urgency"
         },
         urgency: {
             speaker: "future",
             lines: [
-                "Relay's cycling down for the storm.",
-                "Doesn't ask if I'm read—"
+                "The line's breaking up. Of course it is, right now.",
+                "I need you to remember what I asked—"
             ],
             next: "ending"
         },
         ending: {
             speaker: "future",
             lines: [
-                "Day one thousand, something, plus one voice that answer—"
+                "Whatever you do, don't stop trying to fi—"
             ],
             end: true
         }
     }
 };
 
-const Conversation016 = {
-    id: "016",
-    title: "Elias's Sister",
+const Conversation024 = {
+    id: "024",
+    title: "The Historian Asking Backwards",
+    rarity: "uncommon",
+    origin: "A Historian",
+    bridgeDuration: 74,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I don't know if this connection comes back. Assume it doesn't.",
+                "I study history. That's the only thing I'll tell you about myself.",
+                "First question: what year is it for you, right now?"
+            ],
+            choices: [
+                { label: "Tell them the year", next: "tellYear" },
+                { label: "Why does it matter?", next: "whyMatters" }
+            ]
+        },
+        tellYear: {
+            speaker: "future",
+            lines: [
+                "Good. That helps me more than you'd think.",
+                "The records past this point get messy for us."
+            ],
+            next: "middle"
+        },
+        whyMatters: {
+            speaker: "future",
+            lines: [
+                "Because half our records from around now are gone.",
+                "Fires, floods, bad storage. Pick one."
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "What's the biggest thing happening in the news right now?",
+                "Just the biggest one. I don't need details."
+            ],
+            choices: [
+                { label: "Political mess", next: "political" },
+                { label: "Fast-changing tech", next: "techChanging" }
+            ]
+        },
+        political: {
+            speaker: "future",
+            lines: [
+                "A mess. That word shows up a lot in the records too.",
+                "Consistent, at least."
+            ],
+            next: "late"
+        },
+        techChanging: {
+            speaker: "future",
+            lines: [
+                "That tracks. Everything after this point moves fast.",
+                "Faster than people expected, from what's left of the records."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last thing, and it's the one that actually brought me here.",
+                "Do people know something's about to change? Do they feel it?"
+            ],
+            choices: [
+                { label: "Feels different lately", next: "feelsDifferent" },
+                { label: "Just normal life", next: "normalLives" }
+            ]
+        },
+        feelsDifferent: {
+            speaker: "future",
+            lines: [
+                "They're right to feel that.",
+                "I wish I could tell you more. I really can't."
+            ],
+            next: "urgency"
+        },
+        normalLives: {
+            speaker: "future",
+            lines: [
+                "Maybe that's for the best, actually.",
+                "Not everyone needs to carry it."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "It's fading. I knew it would, eventually.",
+                "This is going in the record, whatever's left of i—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Someone, someday, should know you answered honestl—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation025 = {
+    id: "025",
+    title: "The Doctor's Worry",
+    rarity: "common",
+    origin: "A Doctor",
+    bridgeDuration: 65,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I might not get this chance again, so I'll ask straight.",
+                "I'm a doctor. I won't say more than that.",
+                "How are people doing, really? Not fine. Really."
+            ],
+            choices: [
+                { label: "Mostly tired", next: "tired" },
+                { label: "Depends who you ask", next: "depends" }
+            ]
+        },
+        tired: {
+            speaker: "future",
+            lines: [
+                "Tired shows up a lot when I ask this.",
+                "Tired of what, if you had to guess."
+            ],
+            next: "middle"
+        },
+        depends: {
+            speaker: "future",
+            lines: [
+                "Fair. It always depends.",
+                "Tell me about the people it's hardest for."
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Are people looking after each other? Actually checking in?",
+                "Not just online. In person."
+            ],
+            choices: [
+                { label: "Some are, but alone", next: "feelAlone" },
+                { label: "More than you'd think", next: "moreThanThink" }
+            ]
+        },
+        feelAlone: {
+            speaker: "future",
+            lines: [
+                "That's the part I worry about most.",
+                "Alone costs more than people realize."
+            ],
+            next: "late"
+        },
+        moreThanThink: {
+            speaker: "future",
+            lines: [
+                "Good. I needed to hear that more than I expected.",
+                "Keep doing that. It matters more than medicine, some days."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "One more, and it's the important one.",
+                "If someone you know is struggling, do you actually ask them?"
+            ],
+            choices: [
+                { label: "I try to", next: "tryTo" },
+                { label: "Not often enough", next: "notOften" }
+            ]
+        },
+        tryTo: {
+            speaker: "future",
+            lines: [
+                "Trying counts for more than you think.",
+                "Keep trying, even badly."
+            ],
+            next: "urgency"
+        },
+        notOften: {
+            speaker: "future",
+            lines: [
+                "Start today, then. While you still can.",
+                "That's not a lecture. That's a request."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "It's going. I can feel it slipping.",
+                "Please, just remember what I aske—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Check on someone today. Please, before you fo—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation026 = {
+    id: "026",
+    title: "The Teacher Wants To Know",
+    rarity: "common",
+    origin: "A Teacher",
+    bridgeDuration: 70,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I don't know if I get another try at this, so quickly.",
+                "I'm a teacher. That's all I'll say about me.",
+                "What are kids being taught right now? The important stuff, not facts."
+            ],
+            choices: [
+                { label: "Mostly tests", next: "mostlyTests" },
+                { label: "Some teach kindness", next: "teachKindness" }
+            ]
+        },
+        mostlyTests: {
+            speaker: "future",
+            lines: [
+                "Tests. Some things really don't change.",
+                "Do the kids seem to enjoy any of it?"
+            ],
+            next: "middle"
+        },
+        teachKindness: {
+            speaker: "future",
+            lines: [
+                "That's good to hear. Genuinely.",
+                "Does it actually stick, do you think?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Are kids scared about the future? Do they talk about it?",
+                "I need to know if they're scared."
+            ],
+            choices: [
+                { label: "Some are scared", next: "seeNews" },
+                { label: "Kids stay hopeful", next: "moreHopeful" }
+            ]
+        },
+        seeNews: {
+            speaker: "future",
+            lines: [
+                "They shouldn't have to carry that so young.",
+                "But I understand why they do."
+            ],
+            next: "late"
+        },
+        moreHopeful: {
+            speaker: "future",
+            lines: [
+                "That's the best thing you've told me so far.",
+                "Hold onto that. Protect it, even."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last one, and it matters most to me.",
+                "Do kids still get to just play? Not learn. Just play."
+            ],
+            choices: [
+                { label: "Yes, less than before", next: "yesLess" },
+                { label: "Not much, too scheduled", next: "notMuch" }
+            ]
+        },
+        yesLess: {
+            speaker: "future",
+            lines: [
+                "Less than before, but yes.",
+                "I'll take yes. I needed a yes."
+            ],
+            next: "urgency"
+        },
+        notMuch: {
+            speaker: "future",
+            lines: [
+                "Scheduled. That word again.",
+                "Let them play more, if you can. Please."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "It's cutting out. I knew it would eventually.",
+                "Tell them play matters, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Let the kids play. That's the whole messag—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation027 = {
+    id: "027",
+    title: "The Farmer Asking About the Land",
+    rarity: "uncommon",
+    origin: "A Farmer",
+    bridgeDuration: 73,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "This might be my only shot, so I'll ask plain.",
+                "I work the land. That's all I'll tell you about myself.",
+                "How's the soil where you are? Still good, or tired?"
+            ],
+            choices: [
+                { label: "Some good, some worn", next: "someGood" },
+                { label: "Getting harder", next: "gettingHarder" }
+            ]
+        },
+        someGood: {
+            speaker: "future",
+            lines: [
+                "Some good is more than I expected to hear.",
+                "Are people still working it by hand, or is it all machines now?"
+            ],
+            next: "middle"
+        },
+        gettingHarder: {
+            speaker: "future",
+            lines: [
+                "Harder. Figured as much.",
+                "Are people still working it by hand, or is it all machines now?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Machines, mostly, or still real hands in the dirt?",
+                "I need to know if the work's still human."
+            ],
+            choices: [
+                { label: "Mostly machines", next: "mostlyMachines" },
+                { label: "Still real hands", next: "stillHands" }
+            ]
+        },
+        mostlyMachines: {
+            speaker: "future",
+            lines: [
+                "Fewer hands. That's the direction I feared.",
+                "Faster, I'm sure. Not sure it's better."
+            ],
+            next: "late"
+        },
+        stillHands: {
+            speaker: "future",
+            lines: [
+                "Good. That's genuinely good to hear.",
+                "Some things are worth keeping slow."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last question. Does anyone still grow food just to share it?",
+                "Not to sell. To give away."
+            ],
+            choices: [
+                { label: "Yeah, plenty still do", next: "stillDo" },
+                { label: "Less, costs money now", next: "costsMoney" }
+            ]
+        },
+        stillDo: {
+            speaker: "future",
+            lines: [
+                "That's the best thing I've heard all conversation.",
+                "Keep doing that, whatever else changes."
+            ],
+            next: "urgency"
+        },
+        costsMoney: {
+            speaker: "future",
+            lines: [
+                "Everything costs money now. That one hurts a bit.",
+                "Try to keep some of it free, if you can."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Signal's going. Figured it would, out here.",
+                "Take care of the land while you still ca—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Grow something and give it away. That's al—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation028 = {
+    id: "028",
+    title: "The Engineer's Diagnostic",
+    rarity: "uncommon",
+    origin: "An Engineer",
+    bridgeDuration: 69,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I've got one window here. I'll use it well.",
+                "I'm an engineer. That's all I'll tell you about myself.",
+                "What do your cities actually look like right now?"
+            ],
+            choices: [
+                { label: "Crowded, building fast", next: "crowdedBuilding" },
+                { label: "Some boom, some fall", next: "boomingFalling" }
+            ]
+        },
+        crowdedBuilding: {
+            speaker: "future",
+            lines: [
+                "Fast building. That usually means fast mistakes too.",
+                "Is the power grid keeping up with any of it?"
+            ],
+            next: "middle"
+        },
+        boomingFalling: {
+            speaker: "future",
+            lines: [
+                "Uneven. That's about what I expected.",
+                "Is the power grid keeping up with any of it?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Power. Water. The boring stuff that actually matters.",
+                "Is any of it breaking down where you are?"
+            ],
+            choices: [
+                { label: "More outages now", next: "outages" },
+                { label: "Holds up, but worry", next: "holdsUp" }
+            ]
+        },
+        outages: {
+            speaker: "future",
+            lines: [
+                "More outages. Noted, and not good news.",
+                "That's usually where things start to slip."
+            ],
+            next: "late"
+        },
+        holdsUp: {
+            speaker: "future",
+            lines: [
+                "Worry's not nothing. Worry usually means people are paying attention.",
+                "Better than not noticing at all."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last thing, and it's the one I actually care about.",
+                "Is anyone building things to last, or just to sell?"
+            ],
+            choices: [
+                { label: "Mostly to sell", next: "toSell" },
+                { label: "Some build to last", next: "toLast" }
+            ]
+        },
+        toSell: {
+            speaker: "future",
+            lines: [
+                "Figured. That's the pattern that gets us here.",
+                "Push back on that, where you can."
+            ],
+            next: "urgency"
+        },
+        toLast: {
+            speaker: "future",
+            lines: [
+                "Good. Build more like them, if you can convince anyone.",
+                "Lasting is underrated."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Losing the connection. Expected, honestly.",
+                "Build things to last, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Fix the boring things first. That's the real messag—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation029 = {
+    id: "029",
+    title: "The Astronomer Looking Down",
     rarity: "rare",
-    origin: "UNKNOWN",
+    origin: "An Astronomer",
+    bridgeDuration: 71,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I might not get another window like this. Ever.",
+                "I study the sky. That's all you need to know about me.",
+                "Can you still see the stars where you are, at night?"
+            ],
+            choices: [
+                { label: "Some places, not city", next: "somePlaces" },
+                { label: "Barely, too much light", next: "barely" }
+            ]
+        },
+        somePlaces: {
+            speaker: "future",
+            lines: [
+                "Some places is more than I hoped for, honestly.",
+                "Do people still go out of their way to see them?"
+            ],
+            next: "middle"
+        },
+        barely: {
+            speaker: "future",
+            lines: [
+                "Too much light. That's what the old records suggested too.",
+                "Do people still go out of their way to see them?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Do people still look up on purpose? Not by accident.",
+                "I need to know if anyone still bothers."
+            ],
+            choices: [
+                { label: "Some do, it's rare", next: "someDo" },
+                { label: "Mostly screens instead", next: "screensInstead" }
+            ]
+        },
+        someDo: {
+            speaker: "future",
+            lines: [
+                "Rare's fine. Rare still counts.",
+                "I was scared you'd say nobody does at all."
+            ],
+            next: "late"
+        },
+        screensInstead: {
+            speaker: "future",
+            lines: [
+                "Screens instead of the sky. That one stings a little.",
+                "Tell me that's not the whole story, though."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last question, and it's the real reason I called.",
+                "If you looked up tonight, would it still feel like it mattered?"
+            ],
+            choices: [
+                { label: "Yeah, it matters", next: "alwaysMatters" },
+                { label: "I should look more", next: "dontLookUp" }
+            ]
+        },
+        alwaysMatters: {
+            speaker: "future",
+            lines: [
+                "That's the answer I needed.",
+                "Some things really don't change, then. Good."
+            ],
+            next: "urgency"
+        },
+        dontLookUp: {
+            speaker: "future",
+            lines: [
+                "Start tonight, then. While it's still there to see.",
+                "It won't wait for you forever."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Signal's dying with the light, seems fitting.",
+                "Look up tonight, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "The sky's still there. Don't forget to loo—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation030 = {
+    id: "030",
+    title: "The Child Who Found the Frequency",
+    rarity: "rare",
+    origin: "A Child",
+    bridgeDuration: 71,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I'm not supposed to be on this, but I found it and I don't know if it works again.",
+                "I'm just a kid. That's all I'm allowed to say.",
+                "Is it true you had actual animals just walking around outside?"
+            ],
+            choices: [
+                { label: "Yeah, all kinds", next: "yesAnimals" },
+                { label: "Fewer, but still some", next: "fewerAnimals" }
+            ]
+        },
+        yesAnimals: {
+            speaker: "future",
+            lines: [
+                "That's so cool. I've only seen pictures.",
+                "Did you get to actually touch them and stuff?"
+            ],
+            next: "middle"
+        },
+        fewerAnimals: {
+            speaker: "future",
+            lines: [
+                "Still some is still cool to me.",
+                "Did you get to actually touch them and stuff?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Was it true you could just go outside whenever you wanted?",
+                "No permission, no schedule, just go?"
+            ],
+            choices: [
+                { label: "Yeah, played outside", next: "playedOutside" },
+                { label: "Depends where you lived", next: "dependsWhere" }
+            ]
+        },
+        playedOutside: {
+            speaker: "future",
+            lines: [
+                "That sounds amazing, not gonna lie.",
+                "We mostly stay inside where I am."
+            ],
+            next: "late"
+        },
+        dependsWhere: {
+            speaker: "future",
+            lines: [
+                "Depends where. Okay, that makes sense.",
+                "We mostly stay inside where I am."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Okay, last one, I think someone's coming.",
+                "Were people happy back then? Like, actually happy?"
+            ],
+            choices: [
+                { label: "A lot of us were", next: "lotWere" },
+                { label: "Some were, not all", next: "someWere" }
+            ]
+        },
+        lotWere: {
+            speaker: "future",
+            lines: [
+                "A lot were. I'll remember that.",
+                "That's a good thing to remember."
+            ],
+            next: "urgency"
+        },
+        someWere: {
+            speaker: "future",
+            lines: [
+                "Some. Okay. I'll take some.",
+                "Better than none, I think."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "It's getting fuzzy, I think it's about to cut out.",
+                "I have to go before someone catch—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Go outside today, okay? For me. Ple—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation031 = {
+    id: "031",
+    title: "The Artist Asking About Beauty",
+    rarity: "common",
+    origin: "An Artist",
+    bridgeDuration: 62,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I don't know if I get another try, so I'll ask what matters.",
+                "I make art. That's all I'll say about me.",
+                "Do people still make things just because they're beautiful?"
+            ],
+            choices: [
+                { label: "Yeah, still some do", next: "stillSomeDo" },
+                { label: "Mostly for money now", next: "mostlyMoney" }
+            ]
+        },
+        stillSomeDo: {
+            speaker: "future",
+            lines: [
+                "Good. That's not nothing.",
+                "Do people go out of their way to see it?"
+            ],
+            next: "middle"
+        },
+        mostlyMoney: {
+            speaker: "future",
+            lines: [
+                "Figured that might be the answer.",
+                "Do people go out of their way to see it anyway?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Museums, galleries, walls in the street.",
+                "Do people actually stop and look?"
+            ],
+            choices: [
+                { label: "Some do, quickly", next: "quickly" },
+                { label: "Not really, too rushed", next: "tooRushed" }
+            ]
+        },
+        quickly: {
+            speaker: "future",
+            lines: [
+                "Quickly's still looking.",
+                "I'll take quickly over nothing."
+            ],
+            next: "late"
+        },
+        tooRushed: {
+            speaker: "future",
+            lines: [
+                "Rushed past art. That's a strange kind of loss.",
+                "Nobody notices it happening, I bet."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last one. Would you make something if nobody ever saw it?",
+                "Just for yourself. No audience."
+            ],
+            choices: [
+                { label: "Yeah, I think so", next: "yesThinkSo" },
+                { label: "Honestly, probably not", next: "probablyNot" }
+            ]
+        },
+        yesThinkSo: {
+            speaker: "future",
+            lines: [
+                "That's the real answer, I think.",
+                "The rest is just noise around it."
+            ],
+            next: "urgency"
+        },
+        probablyNot: {
+            speaker: "future",
+            lines: [
+                "Honest. Most people wouldn't, if they said it straight.",
+                "Doesn't make the art less real, though."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Losing this. Faster than I hoped.",
+                "Make something today, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Make it for yourself first. That's the who—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation032 = {
+    id: "032",
+    title: "The Journalist Chasing the Truth",
+    rarity: "uncommon",
+    origin: "A Journalist",
+    bridgeDuration: 66,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "One shot at this. I'll ask like it's the last interview I get.",
+                "I report the news. That's all I'll say about myself.",
+                "Do people still trust what they read or watch?"
+            ],
+            choices: [
+                { label: "Not really, not anymore", next: "notReally" },
+                { label: "Some sources, not all", next: "someSources" }
+            ]
+        },
+        notReally: {
+            speaker: "future",
+            lines: [
+                "That's what I was afraid of.",
+                "Do people even try to check what's true?"
+            ],
+            next: "middle"
+        },
+        someSources: {
+            speaker: "future",
+            lines: [
+                "Some is better than none, I suppose.",
+                "Do people even try to check what's true?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Checking facts. Slowing down before believing something.",
+                "Does anyone actually do that anymore?"
+            ],
+            choices: [
+                { label: "A few, most don't bother", next: "fewBother" },
+                { label: "People are trying harder", next: "tryingHarder" }
+            ]
+        },
+        fewBother: {
+            speaker: "future",
+            lines: [
+                "That's how it starts. A few, then fewer.",
+                "I've seen where that road ends."
+            ],
+            next: "late"
+        },
+        tryingHarder: {
+            speaker: "future",
+            lines: [
+                "That's actually hopeful. Genuinely.",
+                "Keep trying harder. It compounds."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last one, and it's personal for me.",
+                "Would you still tell the truth if it cost you something?"
+            ],
+            choices: [
+                { label: "I hope so", next: "hopeSo" },
+                { label: "Depends how much", next: "dependsMuch" }
+            ]
+        },
+        hopeSo: {
+            speaker: "future",
+            lines: [
+                "Hope's a start.",
+                "It's more than a lot of people offer me."
+            ],
+            next: "urgency"
+        },
+        dependsMuch: {
+            speaker: "future",
+            lines: [
+                "Honest, at least.",
+                "Most people won't even admit that part."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Cutting out. Feels almost fitting, given my job.",
+                "Keep asking questions, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Don't stop checking what's true. That's al—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation033 = {
+    id: "033",
+    title: "The Architect Asking About Home",
+    rarity: "common",
+    origin: "An Architect",
+    bridgeDuration: 73,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I don't know if this window opens again, so I'll be direct.",
+                "I design buildings. That's all I'll say about myself.",
+                "Do people still feel like their homes are actually home?"
+            ],
+            choices: [
+                { label: "Mostly, yeah", next: "mostlyYeah" },
+                { label: "Less than before", next: "lessThanBefore" }
+            ]
+        },
+        mostlyYeah: {
+            speaker: "future",
+            lines: [
+                "Good. That's the whole point of the job, really.",
+                "Are old buildings still standing, or torn down for new ones?"
+            ],
+            next: "middle"
+        },
+        lessThanBefore: {
+            speaker: "future",
+            lines: [
+                "That's what I feared hearing.",
+                "Are old buildings still standing, or torn down for new ones?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "The old ones. The ones with history in the walls.",
+                "Do people fight to keep them, or let them go?"
+            ],
+            choices: [
+                { label: "Some fight to keep them", next: "fightKeep" },
+                { label: "Mostly torn down now", next: "tornDown" }
+            ]
+        },
+        fightKeep: {
+            speaker: "future",
+            lines: [
+                "Good. Buildings remember things people forget.",
+                "Worth the fight, most of the time."
+            ],
+            next: "late"
+        },
+        tornDown: {
+            speaker: "future",
+            lines: [
+                "Figured. New is easier to sell than old.",
+                "Doesn't mean it's better, though."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last thing. Do cities still have places to just sit and do nothing?",
+                "Benches. Parks. No purpose required."
+            ],
+            choices: [
+                { label: "Yeah, still plenty", next: "stillPlenty" },
+                { label: "Fewer than they used to", next: "fewerThanUsed" }
+            ]
+        },
+        stillPlenty: {
+            speaker: "future",
+            lines: [
+                "Good. Keep those. Fight for those too.",
+                "Cities need places that ask nothing of you."
+            ],
+            next: "urgency"
+        },
+        fewerThanUsed: {
+            speaker: "future",
+            lines: [
+                "Everything gets a price tag eventually, doesn't it.",
+                "Try to keep a few free."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Signal's shaking loose. I knew this was borrowed time.",
+                "Keep the old buildings, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Save the ones with history in the wal—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation034 = {
+    id: "034",
+    title: "The Nurse Asking Who's Cared For",
+    rarity: "uncommon",
+    origin: "A Nurse",
+    bridgeDuration: 69,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I might not get another chance at this, so straight to it.",
+                "I work in a hospital. That's all I'll say about myself.",
+                "Do people get the care they actually need, where you are?"
+            ],
+            choices: [
+                { label: "Depends on money", next: "dependsMoney" },
+                { label: "Mostly, but it's slow", next: "mostlySlow" }
+            ]
+        },
+        dependsMoney: {
+            speaker: "future",
+            lines: [
+                "That's the answer that scares me most.",
+                "Are the people caring for others okay themselves?"
+            ],
+            next: "middle"
+        },
+        mostlySlow: {
+            speaker: "future",
+            lines: [
+                "Slow, but mostly. I'll take that.",
+                "Are the people caring for others okay themselves?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Nurses. Doctors. The ones doing the caring.",
+                "Is anyone looking after them too?"
+            ],
+            choices: [
+                { label: "They're stretched", next: "stretched" },
+                { label: "Some places try to", next: "somePlacesTry" }
+            ]
+        },
+        stretched: {
+            speaker: "future",
+            lines: [
+                "Thought so. Same story here, worse probably.",
+                "Nobody plans for the people doing the planning."
+            ],
+            next: "late"
+        },
+        somePlacesTry: {
+            speaker: "future",
+            lines: [
+                "Some is more than none.",
+                "Tell them someone from far away noticed the effort."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last question, and it's the one I actually needed to ask.",
+                "If you were scared and alone, would someone come?"
+            ],
+            choices: [
+                { label: "I think so", next: "thinkSo" },
+                { label: "I'm honestly not sure", next: "notSure" }
+            ]
+        },
+        thinkSo: {
+            speaker: "future",
+            lines: [
+                "That's a good thing to be able to say.",
+                "Don't take it for granted."
+            ],
+            next: "urgency"
+        },
+        notSure: {
+            speaker: "future",
+            lines: [
+                "That's the part worth fixing, then.",
+                "Be the one who comes, for someone else."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "It's slipping. Faster than I'd like.",
+                "Be the one who comes, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Check on someone tonight. That's the real reque—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation035 = {
+    id: "035",
+    title: "The Chef Asking About the Table",
+    rarity: "common",
+    origin: "A Chef",
+    bridgeDuration: 69,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I don't know if I get this chance twice, so let's use it well.",
+                "I cook for a living. That's all I'll say about me.",
+                "Do families still sit down and eat together?"
+            ],
+            choices: [
+                { label: "Sometimes, not often", next: "sometimesNotOften" },
+                { label: "Yeah, most nights", next: "mostNights" }
+            ]
+        },
+        sometimesNotOften: {
+            speaker: "future",
+            lines: [
+                "That's what I was afraid you'd say.",
+                "Is anyone still cooking real meals, or mostly ordering in?"
+            ],
+            next: "middle"
+        },
+        mostNights: {
+            speaker: "future",
+            lines: [
+                "Good. That's rarer than you'd think, from what I hear.",
+                "Is anyone still cooking real meals, or mostly ordering in?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Real food, made by hand. Not delivered in a box.",
+                "Does that still happen much?"
+            ],
+            choices: [
+                { label: "Less than it used to", next: "lessThanUsed" },
+                { label: "Yeah, plenty still cook", next: "stillCook" }
+            ]
+        },
+        lessThanUsed: {
+            speaker: "future",
+            lines: [
+                "Everyone's short on time, I bet.",
+                "It's the first thing people give up."
+            ],
+            next: "late"
+        },
+        stillCook: {
+            speaker: "future",
+            lines: [
+                "Good. Cooking's how people say things they can't say out loud.",
+                "Glad that's not gone yet."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last thing. When you eat with someone, does it feel like something?",
+                "Or just fuel, these days?"
+            ],
+            choices: [
+                { label: "Still feels special", next: "stillFeels" },
+                { label: "Mostly just fuel now", next: "mostlyFuel" }
+            ]
+        },
+        stillFeels: {
+            speaker: "future",
+            lines: [
+                "Good. Don't lose that. Ever.",
+                "That's the whole reason I do this job."
+            ],
+            next: "urgency"
+        },
+        mostlyFuel: {
+            speaker: "future",
+            lines: [
+                "That's a shame, honestly.",
+                "Try to make one meal mean something soon."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Cutting out. The oven timer outlasted this bridge, go figure.",
+                "Cook for someone tonight, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Sit down and eat with someone. That's al—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation036 = {
+    id: "036",
+    title: "The Sailor Asking About the Sea",
+    rarity: "uncommon",
+    origin: "A Sailor",
+    bridgeDuration: 70,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I might only get this one window, so let's not waste it.",
+                "I work the sea. That's all I'll say about myself.",
+                "Is the ocean still clean where you are, or is it choking?"
+            ],
+            choices: [
+                { label: "Some parts clean", next: "somePartsClean" },
+                { label: "Getting worse, honestly", next: "gettingWorseSea" }
+            ]
+        },
+        somePartsClean: {
+            speaker: "future",
+            lines: [
+                "Some is more than I expected, truthfully.",
+                "Do people still travel it, or is everyone flying now?"
+            ],
+            next: "middle"
+        },
+        gettingWorseSea: {
+            speaker: "future",
+            lines: [
+                "That matches what little we know.",
+                "Do people still travel it, or is everyone flying now?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Ships. Slow travel. Watching the water for days.",
+                "Does anyone still do it for the sake of it?"
+            ],
+            choices: [
+                { label: "A few do, for fun", next: "fewForFun" },
+                { label: "Not really, too slow now", next: "tooSlowNow" }
+            ]
+        },
+        fewForFun: {
+            speaker: "future",
+            lines: [
+                "Good. The sea teaches you patience nothing else does.",
+                "Glad a few still learn it."
+            ],
+            next: "late"
+        },
+        tooSlowNow: {
+            speaker: "future",
+            lines: [
+                "Everyone's in a hurry, I take it.",
+                "The sea doesn't care how much of a hurry you're in."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last question. Have you ever stood and just watched the water?",
+                "Not for a reason. Just watched it."
+            ],
+            choices: [
+                { label: "Yeah, once or twice", next: "onceOrTwice" },
+                { label: "Honestly, never really", next: "neverReally" }
+            ]
+        },
+        onceOrTwice: {
+            speaker: "future",
+            lines: [
+                "Then you already know what I mean.",
+                "Do it again soon."
+            ],
+            next: "urgency"
+        },
+        neverReally: {
+            speaker: "future",
+            lines: [
+                "Find water and just stand there sometime.",
+                "It changes something in you, quietly."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Signal's rocking with the waves, feels about right.",
+                "Go find water, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Stand by the water sometime soon. That's al—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation037 = {
+    id: "037",
+    title: "The Athlete Asking About Play",
+    rarity: "common",
+    origin: "An Athlete",
+    bridgeDuration: 71,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I don't know if I get another shot, so quick and honest, okay?",
+                "I play sports for a living. That's all I'll say.",
+                "Do people still play just for fun? Not to win anything."
+            ],
+            choices: [
+                { label: "Yeah, plenty still do", next: "plentyStillDo" },
+                { label: "Mostly about winning now", next: "mostlyWinning" }
+            ]
+        },
+        plentyStillDo: {
+            speaker: "future",
+            lines: [
+                "Good. That's the part I was scared we'd lose.",
+                "Do kids still play pickup games, no coaches, no scores?"
+            ],
+            next: "middle"
+        },
+        mostlyWinning: {
+            speaker: "future",
+            lines: [
+                "Figured. Everything gets competitive eventually.",
+                "Do kids still play pickup games, no coaches, no scores?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Just kids, a ball, no adults watching and scoring.",
+                "Does that still happen?"
+            ],
+            choices: [
+                { label: "Some still do that", next: "someStillDo" },
+                { label: "All organized now", next: "everythingOrganized" }
+            ]
+        },
+        someStillDo: {
+            speaker: "future",
+            lines: [
+                "Good. That's where the love of it actually starts.",
+                "Everything after that is just extra."
+            ],
+            next: "late"
+        },
+        everythingOrganized: {
+            speaker: "future",
+            lines: [
+                "Organized. Scheduled. Scored.",
+                "Sounds exhausting for a kid, honestly."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last one. Do you move your body just because it feels good?",
+                "Not for a goal. Just because."
+            ],
+            choices: [
+                { label: "Sometimes, yeah", next: "sometimesYeah" },
+                { label: "Honestly, rarely", next: "honestlyRarely" }
+            ]
+        },
+        sometimesYeah: {
+            speaker: "future",
+            lines: [
+                "Good. Keep that. It's rarer than winning.",
+                "Nobody tells you that part."
+            ],
+            next: "urgency"
+        },
+        honestlyRarely: {
+            speaker: "future",
+            lines: [
+                "Try it today, even a little.",
+                "It doesn't need to be a workout."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Clock's running out on this too, funny enough.",
+                "Go move for the fun of it, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Play like nobody's keeping score. That's al—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation038 = {
+    id: "038",
+    title: "The Photographer Chasing Memory",
+    rarity: "uncommon",
+    origin: "A Photographer",
+    bridgeDuration: 73,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I might not get another try, so I'll ask what I actually came for.",
+                "I take pictures. That's all I'll say about myself.",
+                "Do people still print photos, or is it all just on screens?"
+            ],
+            choices: [
+                { label: "Almost all screens now", next: "almostAllScreens" },
+                { label: "Some still print them", next: "somePrintThem" }
+            ]
+        },
+        almostAllScreens: {
+            speaker: "future",
+            lines: [
+                "Figured. Easier to lose a screen than a shoebox, though.",
+                "Do people take photos to remember, or just to post?"
+            ],
+            next: "middle"
+        },
+        somePrintThem: {
+            speaker: "future",
+            lines: [
+                "Good. Paper survives things screens don't.",
+                "Do people take photos to remember, or just to post?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "The reason behind the picture. That's what I need to know.",
+                "Remembering, or showing off?"
+            ],
+            choices: [
+                { label: "Mostly showing off", next: "showingOff" },
+                { label: "Still mostly to remember", next: "toRemember" }
+            ]
+        },
+        showingOff: {
+            speaker: "future",
+            lines: [
+                "That's what I was afraid of.",
+                "The best photos were never for anyone else."
+            ],
+            next: "late"
+        },
+        toRemember: {
+            speaker: "future",
+            lines: [
+                "Good. That's the whole point I've always believed in.",
+                "Keep taking them for that reason."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last thing. Do you have a photo of someone you've lost?",
+                "One you actually go back and look at?"
+            ],
+            choices: [
+                { label: "Yeah, I do", next: "yesIDo" },
+                { label: "Not really, I should", next: "notReallyShould" }
+            ]
+        },
+        yesIDo: {
+            speaker: "future",
+            lines: [
+                "Go look at it again soon.",
+                "That's the whole job, really. Keeping people looked at."
+            ],
+            next: "urgency"
+        },
+        notReallyShould: {
+            speaker: "future",
+            lines: [
+                "Find one. Today, if you can.",
+                "It matters more than it seems like it should."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Losing the picture on my end too, that's funny.",
+                "Go look at that photo, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Take one today, just to remember. That's al—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation039 = {
+    id: "039",
+    title: "The Pilot Asking About Distance",
+    rarity: "uncommon",
+    origin: "A Pilot",
+    bridgeDuration: 71,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I don't know if this comes back, so let's not waste the window.",
+                "I fly for a living. That's all I'll say about myself.",
+                "Can people still travel wherever they want, or are borders closed?"
+            ],
+            choices: [
+                { label: "Mostly open, still", next: "mostlyOpen" },
+                { label: "Harder than it used to be", next: "harderThanUsed" }
+            ]
+        },
+        mostlyOpen: {
+            speaker: "future",
+            lines: [
+                "Good. That's not nothing, these days.",
+                "Do people still travel just to see somewhere new?"
+            ],
+            next: "middle"
+        },
+        harderThanUsed: {
+            speaker: "future",
+            lines: [
+                "That's the direction I feared.",
+                "Do people still travel just to see somewhere new?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "Not for work. Not to escape anything. Just to see it.",
+                "Does that still happen much?"
+            ],
+            choices: [
+                { label: "Yeah, people still do", next: "peopleStillDo" },
+                { label: "Fewer can afford to", next: "fewerAfford" }
+            ]
+        },
+        peopleStillDo: {
+            speaker: "future",
+            lines: [
+                "Good. The world's worth seeing while it's still there to see.",
+                "Glad people still bother."
+            ],
+            next: "late"
+        },
+        fewerAfford: {
+            speaker: "future",
+            lines: [
+                "Money again. Always money.",
+                "That one's older than either of us, probably."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last question. From way up there, does the world still look big?",
+                "Or does it feel small now?"
+            ],
+            choices: [
+                { label: "Still feels pretty big", next: "stillBig" },
+                { label: "Feels smaller these days", next: "feelsSmaller" }
+            ]
+        },
+        stillBig: {
+            speaker: "future",
+            lines: [
+                "Good. Don't let anyone convince you otherwise.",
+                "It's bigger than most people ever bother to see."
+            ],
+            next: "urgency"
+        },
+        feelsSmaller: {
+            speaker: "future",
+            lines: [
+                "Go somewhere new, then. Remind yourself.",
+                "It's bigger than it feels from one spot."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Losing altitude on this signal, if that makes sense.",
+                "Go see somewhere new, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "The world's still worth seeing. That's al—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation040 = {
+    id: "040",
+    title: "The Librarian Asking About Books",
+    rarity: "common",
+    origin: "A Librarian",
+    bridgeDuration: 65,
+    start: "opening",
+    nodes: {
+        opening: {
+            speaker: "future",
+            lines: [
+                "I might not get this chance twice, so let's use it well.",
+                "I look after books. That's all I'll say about myself.",
+                "Do people still read? Real books, cover to cover?"
+            ],
+            choices: [
+                { label: "Some do, not many", next: "someNotMany" },
+                { label: "More than you'd think", next: "moreThanThinkBooks" }
+            ]
+        },
+        someNotMany: {
+            speaker: "future",
+            lines: [
+                "Some is still something.",
+                "Do libraries still exist where you are?"
+            ],
+            next: "middle"
+        },
+        moreThanThinkBooks: {
+            speaker: "future",
+            lines: [
+                "Good. Better than I hoped, honestly.",
+                "Do libraries still exist where you are?"
+            ],
+            next: "middle"
+        },
+        middle: {
+            speaker: "future",
+            lines: [
+                "A quiet room full of free stories. Does that still exist?",
+                "Or did it disappear along the way?"
+            ],
+            choices: [
+                { label: "Yeah, still around", next: "stillAround" },
+                { label: "Fewer than before", next: "fewerThanUsedBooks" }
+            ]
+        },
+        stillAround: {
+            speaker: "future",
+            lines: [
+                "Good. That's one of the best things people ever built.",
+                "Glad it's holding on."
+            ],
+            next: "late"
+        },
+        fewerThanUsedBooks: {
+            speaker: "future",
+            lines: [
+                "Quiet places are the first to go, it seems.",
+                "Nobody notices until they're gone."
+            ],
+            next: "late"
+        },
+        late: {
+            speaker: "future",
+            lines: [
+                "Last thing. Is there a book you've read more than once?",
+                "One you keep going back to?"
+            ],
+            choices: [
+                { label: "Yeah, there is", next: "yesThereIs" },
+                { label: "Not really, honestly", next: "notReallyBooks" }
+            ]
+        },
+        yesThereIs: {
+            speaker: "future",
+            lines: [
+                "Good. Read it again soon.",
+                "Some books are worth wearing out."
+            ],
+            next: "urgency"
+        },
+        notReallyBooks: {
+            speaker: "future",
+            lines: [
+                "Find one, then. It's worth the search.",
+                "You'll know it when it happens."
+            ],
+            next: "urgency"
+        },
+        urgency: {
+            speaker: "future",
+            lines: [
+                "Signal's closing like a book, fittingly enough.",
+                "Go read something today, before I—"
+            ],
+            next: "ending"
+        },
+        ending: {
+            speaker: "future",
+            lines: [
+                "Keep the quiet rooms around. That's al—"
+            ],
+            end: true
+        }
+    }
+};
+
+const Conversation041 = {
+    id: "041",
+    title: "The Comedian Asking If We Still Laugh",
+    rarity: "common",
+    origin: "A Comedian",
     bridgeDuration: 67,
     start: "opening",
     nodes: {
         opening: {
             speaker: "future",
             lines: [
-                "You're not my brother.",
-                "I know his voice better than anyone's. You'll do.",
-                "Went to Station Nine. Stopped writing."
+                "One shot at this, so let's not waste it being serious the whole time.",
+                "I make people laugh for a living. That's all I'll say about me.",
+                "Do people still actually laugh? Not just online, out loud?"
             ],
             choices: [
-                { label: "What happened?", next: "askHappened" },
-                { label: "I'm sorry.", next: "saySorry" }
+                { label: "Yeah, still a lot", next: "yesStillLot" },
+                { label: "Less than they used to", next: "lessThanUsedLaugh" }
             ]
         },
-        askHappened: {
+        yesStillLot: {
             speaker: "future",
             lines: [
-                "Not forgot. Decided.",
-                "There's a difference, and it matters to me more than it should."
+                "Good. That's genuinely a relief to hear.",
+                "Do people still laugh at themselves, not just other things?"
             ],
             next: "middle"
         },
-        saySorry: {
+        lessThanUsedLaugh: {
             speaker: "future",
             lines: [
-                "Don't be. Not your doing.",
-                "I've had longer than you to sit with it."
+                "That's rough. Laughing's cheaper than most medicine.",
+                "Do people still laugh at themselves, not just other things?"
             ],
             next: "middle"
         },
         middle: {
             speaker: "future",
             lines: [
-                "I've rehearsed what I'll say when the bridge finally gets it right.",
-                "Practiced it so many times it barely feels true anymore."
+                "That's the hardest kind. Laughing at your own mess.",
+                "Does that still happen?"
             ],
             choices: [
-                { label: "What will you say?", next: "askSay" },
-                { label: "Why do you think he stopped?", next: "askWhy" }
+                { label: "Some can, most can't", next: "someCantMost" },
+                { label: "More than you'd guess", next: "moreThanGuess" }
             ]
         },
-        askSay: {
+        someCantMost: {
             speaker: "future",
             lines: [
-                "That I'm not angry anymore. Just tired of being angry.",
-                "Shorter speech than it used to be."
+                "Fair. It's the hardest joke to land, honestly.",
+                "Takes practice, that one."
             ],
             next: "late"
         },
-        askWhy: {
+        moreThanGuess: {
             speaker: "future",
             lines: [
-                "Blamed himself for something small.",
-                "Small things do that, to people who already blame themselves for everything."
+                "Good. That's the healthiest kind of funny there is.",
+                "Keep doing that."
             ],
             next: "late"
         },
         late: {
             speaker: "future",
             lines: [
-                "I'm not keeping score anymore. Haven't been for a while.",
-                "Wish he knew that without me having to say it."
+                "Last thing, and it's the real question.",
+                "When was the last time something made you actually laugh?"
             ],
             choices: [
-                { label: "I'll tell him if I can.", next: "sayTellHim" },
-                { label: "He probably knows.", next: "sayProbablyKnows" }
+                { label: "Pretty recently, actually", next: "prettyRecently" },
+                { label: "It's been a while", next: "beenAWhile" }
             ]
         },
-        sayTellHim: {
+        prettyRecently: {
             speaker: "future",
             lines: [
-                "Would mean more than you'd think.",
-                "Thank you."
+                "Good. Chase more of that.",
+                "It's doing more work than you think."
             ],
             next: "urgency"
         },
-        sayProbablyKnows: {
+        beenAWhile: {
             speaker: "future",
             lines: [
-                "Hope so.",
-                "People rarely know the things you assume they do."
+                "Go find something funny today. Doctor's orders.",
+                "Well, comedian's orders."
             ],
             next: "urgency"
         },
         urgency: {
             speaker: "future",
             lines: [
-                "Thinning. Of course, right when I get clo—",
-                "Don't—",
-                "...",
-                "trust—"
+                "Losing this. Terrible timing, as usual.",
+                "Go laugh at something today, before I—"
             ],
             next: "ending"
         },
         ending: {
             speaker: "future",
             lines: [
-                "If you reach him — tell him I'm not keeping sco—"
+                "Find something funny today. That's al—"
             ],
             end: true
         }
     }
 };
 
-const Conversation017 = {
-    id: "017",
-    title: "Letters No One Reads",
-    rarity: "common",
-    origin: "Arctic Archive",
-    bridgeDuration: 69,
+const Conversation042 = {
+    id: "042",
+    title: "The Elder Asking About Family",
+    rarity: "rare",
+    origin: "An Elder",
+    bridgeDuration: 72,
     start: "opening",
     nodes: {
         opening: {
             speaker: "future",
             lines: [
-                "Write a letter every week, which is a fairly ridiculous habit if you think about it, but here we are.",
-                "Nobody reads them. Far as I know."
+                "I don't know if I get another go at this, so I'll ask plainly.",
+                "I'm old. That's all I'll say about myself.",
+                "Do young people still visit the old ones in their family?"
             ],
             choices: [
-                { label: "Why keep writing them?", next: "askWhy" },
-                { label: "I'd read one.", next: "sayRead" }
+                { label: "Some do, not enough", next: "someDoNotEnough" },
+                { label: "Yeah, pretty regularly", next: "yesRegularly" }
             ]
         },
-        askWhy: {
+        someDoNotEnough: {
             speaker: "future",
             lines: [
-                "In case the archive outlives the reason for it.",
-                "Someone might want to know what an ordinary week looked like."
+                "Not enough. I understand that more than I'd like to.",
+                "Are the old ones lonely, where you are?"
             ],
             next: "middle"
         },
-        sayRead: {
+        yesRegularly: {
             speaker: "future",
             lines: [
-                "Would you. That's either very kind or very bored of you.",
-                "I'll take it either way."
+                "Good. That's worth more than people know.",
+                "Are the old ones lonely anyway, sometimes?"
             ],
             next: "middle"
         },
         middle: {
             speaker: "future",
             lines: [
-                "That's all most of them are, honestly. Embarrassingly ordinary.",
-                "Weather, meals, small complaints nobody will ever litigate."
+                "Even with visits. Even with calls.",
+                "Does loneliness still find them anyway?"
             ],
             choices: [
-                { label: "That sounds comforting.", next: "sayComforting" },
-                { label: "What's in this week's letter?", next: "askThisWeek" }
+                { label: "Yeah, it still does", next: "yesStillDoes" },
+                { label: "Less, if people try", next: "lessIfTry" }
             ]
         },
-        sayComforting: {
+        yesStillDoes: {
             speaker: "future",
             lines: [
-                "Didn't expect that word for it. I'll take it, though.",
-                "Comforting works."
+                "I was afraid of that answer.",
+                "It finds you no matter how many people love you, sometimes."
             ],
             next: "late"
         },
-        askThisWeek: {
+        lessIfTry: {
             speaker: "future",
             lines: [
-                "Hadn't started it yet. Now I know how.",
-                "'A stranger answered the bridge.' Good opening line, that."
+                "Good. Trying actually helps, then.",
+                "Tell people that. It's true."
             ],
             next: "late"
         },
         late: {
             speaker: "future",
             lines: [
-                "Should write tonight down properly. Most interesting week in a while, actually.",
-                "You've earned yourself a paragraph."
+                "Last question, and it's the one that brought me here.",
+                "Do you know your own grandparents' stories? Really know them?"
             ],
             choices: [
-                { label: "I'm honored.", next: "sayHonored" },
-                { label: "Make it a good one.", next: "sayGoodOne" }
+                { label: "Some of them, yeah", next: "someOfThemYeah" },
+                { label: "Honestly, not really", next: "honestlyNotReally" }
             ]
         },
-        sayHonored: {
+        someOfThemYeah: {
             speaker: "future",
             lines: [
-                "Don't get used to it. Standards are low most weeks."
+                "Good. Ask for more while you still can.",
+                "There's always more than you think."
             ],
             next: "urgency"
         },
-        sayGoodOne: {
+        honestlyNotReally: {
             speaker: "future",
             lines: [
-                "I'll do my best.",
-                "No promises on the ending, though."
+                "Ask them. Soon. While you still can.",
+                "You'll regret the ones you never asked."
             ],
             next: "urgency"
         },
         urgency: {
             speaker: "future",
             lines: [
-                "Should write tonight down too.",
-                "Most interesting week in a while, actuall—"
+                "It's fading, like most things do at my age.",
+                "Ask them their story, before I—"
             ],
             next: "ending"
         },
         ending: {
             speaker: "future",
             lines: [
-                "Dear whoever reads this — a stranger answered the bridge toda—"
+                "Go ask them while you still can. That's al—"
             ],
             end: true
         }
     }
 };
 
-const Conversation018 = {
-    id: "018",
-    title: "The Boy From Station Nine",
+const Conversation043 = {
+    id: "043",
+    title: "The Inventor Asking About Trust",
     rarity: "uncommon",
-    origin: "Station Nine",
-    bridgeDuration: 63,
+    origin: "An Inventor",
+    bridgeDuration: 70,
     start: "opening",
     nodes: {
         opening: {
             speaker: "future",
             lines: [
-                "Are you even allowed on this frequency, I'm not, technically,",
-                "don't tell my mum, she thinks I'm asleep, okay go quick—",
-                "There's a man everyone talks about like he's a ghost."
+                "I might not get another go, so let's use it right.",
+                "I build things. New things. That's all I'll say about myself.",
+                "Do people trust new inventions, or are they scared of them?"
             ],
             choices: [
-                { label: "Who is he?", next: "askWho" },
-                { label: "I won't tell.", next: "sayWontTell" }
+                { label: "Mostly scared, honestly", next: "mostlyScared" },
+                { label: "Some excited, some scared", next: "someExcitedScared" }
             ]
         },
-        askWho: {
+        mostlyScared: {
             speaker: "future",
             lines: [
-                "Elias. Not a ghost, just quiet.",
-                "Gave me his old radio, that's how I found this, isn't that—"
+                "Fair. New things break as much as they fix, sometimes.",
+                "Do people still believe things can get better?"
             ],
             next: "middle"
         },
-        sayWontTell: {
+        someExcitedScared: {
             speaker: "future",
             lines: [
-                "Good, good, thank you.",
-                "Okay so there's this man, Elias—"
+                "That split sounds about right, honestly.",
+                "Do people still believe things can get better?"
             ],
             next: "middle"
         },
         middle: {
             speaker: "future",
             lines: [
-                "He doesn't talk to anyone really, except sometimes to me.",
-                "Says I remind him of someone. Never says who."
+                "Not perfect. Just better than before.",
+                "Do people still believe that's possible?"
             ],
             choices: [
-                { label: "That's sweet, in a way.", next: "saySweet" },
-                { label: "Ask him who someday.", next: "askHimSomeday" }
+                { label: "Some do, some don't", next: "someDontBelieve" },
+                { label: "Yeah, mostly still do", next: "mostlyStillDo" }
             ]
         },
-        saySweet: {
+        someDontBelieve: {
             speaker: "future",
             lines: [
-                "I guess? He's weird about it, honestly.",
-                "But yeah, sweet, maybe."
+                "Fair split. Belief's hard to keep up, some years.",
+                "The ones who still believe carry the rest, usually."
             ],
             next: "late"
         },
-        askHimSomeday: {
+        mostlyStillDo: {
             speaker: "future",
             lines: [
-                "I've tried! He just goes quiet quieter, if that's a thing.",
-                "Adults are so strange sometimes."
+                "Good. That's the fuel for everything I do.",
+                "Keep that belief around, it's rarer than it should be."
             ],
             next: "late"
         },
         late: {
             speaker: "future",
             lines: [
-                "Anyway I should probably actually be asleep, this was—",
-                "wait,"
+                "Last question. If you could invent one thing, what would it fix?",
+                "Just the first thing that comes to mind."
             ],
             choices: [
-                { label: "Go, before you get caught.", next: "sayGo" },
-                { label: "It's okay, stay a second.", next: "sayStay" }
+                { label: "Fix loneliness", next: "loneliness" },
+                { label: "Fix the planet", next: "planet" }
             ]
         },
-        sayGo: {
+        loneliness: {
             speaker: "future",
             lines: [
-                "Yeah, yeah, okay—"
+                "That's the one nobody's solved yet.",
+                "Not with a machine, anyway."
             ],
             next: "urgency"
         },
-        sayStay: {
+        planet: {
             speaker: "future",
             lines: [
-                "Just one more second, then—"
+                "That one's already got people working on it.",
+                "Keep pushing them. It's not fast enough yet."
             ],
             next: "urgency"
         },
         urgency: {
             speaker: "future",
             lines: [
-                "Footsteps.",
-                "If that's her I have to—",
-                "It's her.",
-                "I—"
+                "Signal's failing, ironic given what I do for a living.",
+                "Keep believing things get better, before I—"
             ],
             next: "ending"
         },
         ending: {
             speaker: "future",
             lines: [
-                "If you meet Elias, tell him the radio still work—"
+                "Build something better. That's al—"
             ],
             end: true
         }
     }
 };
 
-const Conversation019 = {
-    id: "019",
-    title: "Mira Waits",
-    rarity: "rare",
-    origin: "The Garden",
-    bridgeDuration: 69,
+const Conversation044 = {
+    id: "044",
+    title: "The Dancer Asking About Movement",
+    rarity: "common",
+    origin: "A Dancer",
+    bridgeDuration: 65,
     start: "opening",
     nodes: {
         opening: {
             speaker: "future",
             lines: [
-                "Someone told me a stranger might ask for me eventually.",
-                "Didn't believe them. Still half don't.",
-                "Mira. If that means anything to you."
+                "I might not get this chance again, so let's not waste it.",
+                "I dance for a living. That's all I'll say about myself.",
+                "Do people still move their bodies just for joy?"
             ],
             choices: [
-                { label: "Someone planted a row for you.", next: "sayRow" },
-                { label: "Someone finally answered your last voicemail.", next: "sayVoicemail" }
+                { label: "Some do, at parties", next: "someAtParties" },
+                { label: "Too self-conscious", next: "tooSelfConscious" }
             ]
         },
-        sayRow: {
+        someAtParties: {
             speaker: "future",
             lines: [
-                "The fence garden. I know it.",
-                "Never asked who tends the row with my name on it."
+                "Good. Parties are honest, that way.",
+                "Do kids still dance without caring how they look?"
             ],
             next: "middle"
         },
-        sayVoicemail: {
+        tooSelfConscious: {
             speaker: "future",
             lines: [
-                "Three years. Sounds about right for him.",
-                "Stopped waiting on that a long time ago."
+                "That's a shame, honestly. Bodies want to move.",
+                "Do kids still dance without caring how they look?"
             ],
             next: "middle"
         },
         middle: {
             speaker: "future",
             lines: [
-                "Strange, being the name in someone else's story.",
-                "You spend so long being the one who waits."
+                "Before anyone teaches them to be embarrassed about it.",
+                "Do kids still have that?"
             ],
             choices: [
-                { label: "Were you waiting?", next: "askWaiting" },
-                { label: "You're not just a name to them.", next: "sayNotJustName" }
+                { label: "Yeah, kids still do", next: "kidsStillDo" },
+                { label: "They lose it pretty fast", next: "loseItFast" }
             ]
         },
-        askWaiting: {
+        kidsStillDo: {
             speaker: "future",
             lines: [
-                "Longer than I'd admit to most people.",
-                "Liked not knowing who was tending the row. Felt less lonely, somehow."
+                "Good. Hold onto that as long as you can.",
+                "It disappears faster than people realize."
             ],
             next: "late"
         },
-        sayNotJustName: {
+        loseItFast: {
             speaker: "future",
             lines: [
-                "No. Suppose I'm not.",
-                "Takes a stranger to say it plainly, apparently."
+                "Faster than it should, probably.",
+                "Somebody teaches them to stop too early."
             ],
             next: "late"
         },
         late: {
             speaker: "future",
             lines: [
-                "Glad I was wrong to stop waiting, if I'm honest.",
-                "Doesn't happen often, being glad to be wrong."
+                "Last thing. When did you last move just because it felt good?",
+                "Not exercise. Just moving."
             ],
             choices: [
-                { label: "I'm glad too.", next: "sayGladToo" },
-                { label: "What will you do now?", next: "askNow" }
+                { label: "Recently, actually", next: "recentlyActually" },
+                { label: "Honestly, can't remember", next: "cantRemember" }
             ]
         },
-        sayGladToo: {
+        recentlyActually: {
             speaker: "future",
             lines: [
-                "Thank you for that.",
-                "Means more than it should, coming from a stranger."
+                "Good. Keep doing that.",
+                "It's doing more for you than you know."
             ],
             next: "urgency"
         },
-        askNow: {
+        cantRemember: {
             speaker: "future",
             lines: [
-                "Stop leaving the light on for no reason, maybe.",
-                "Start leaving it on for a good one instead."
+                "Put on a song today and just move.",
+                "Nobody's watching. Promise."
             ],
             next: "urgency"
         },
         urgency: {
             speaker: "future",
             lines: [
-                "Going.",
-                "Always goes right after good news.",
-                "..."
+                "Losing rhythm on this signal, fitting enough.",
+                "Go move today, before I—"
             ],
             next: "ending"
         },
         ending: {
             speaker: "future",
             lines: [
-                "Tell them I finally stopped leaving the light on for no reas—"
+                "Move like nobody's watching. That's al—"
             ],
             end: true
         }
     }
 };
 
-const Conversation020 = {
-    id: "020",
-    title: "The Last Bridge",
-    rarity: "rare",
-    origin: "Ash Bridge",
-    bridgeDuration: 69,
+const Conversation045 = {
+    id: "045",
+    title: "The Translator Asking About Understanding",
+    rarity: "uncommon",
+    origin: "A Translator",
+    bridgeDuration: 72,
     start: "opening",
     nodes: {
         opening: {
             speaker: "future",
             lines: [
-                "Every frequency there is, looking for one voice.",
-                "Don't expect it to be yours.",
-                "Stopped expecting, mostly. A station, a garden, an archive, a choir underground."
+                "I don't know if I get another try, so let's make this count.",
+                "I translate between languages. That's all I'll say about myself.",
+                "Do people still try to understand people who are different from them?"
             ],
             choices: [
-                { label: "Who are you looking for?", next: "askWho" },
-                { label: "I'm sorry you haven't found them.", next: "saySorry" }
+                { label: "Some try, some don't", next: "someTrySomeDont" },
+                { label: "Less than they should", next: "lessThanShould" }
             ]
         },
-        askWho: {
+        someTrySomeDont: {
             speaker: "future",
             lines: [
-                "Doesn't matter who, not really, not to you.",
-                "Matters that I keep looking. That's the part I can control."
+                "Fair split. Understanding's harder work than people expect.",
+                "Do people still learn other languages, out of curiosity?"
             ],
             next: "middle"
         },
-        saySorry: {
+        lessThanShould: {
             speaker: "future",
             lines: [
-                "Don't be. The looking's become its own kind of company.",
-                "Strange thing to admit, but true."
+                "That's what worries me most in my work.",
+                "Do people still learn other languages, out of curiosity?"
             ],
             next: "middle"
         },
         middle: {
             speaker: "future",
             lines: [
-                "Spoken to all of them, chasing the same name through every one.",
-                "Someone out there's still counting days for me too. I hope."
+                "Not for a test. Not for a job. Just to talk to someone.",
+                "Does that still happen?"
             ],
             choices: [
-                { label: "What happens if you never find them?", next: "askNever" },
-                { label: "What happens if you do?", next: "askFind" }
+                { label: "Some do, out of love", next: "outOfLove" },
+                { label: "Rarely, honestly", next: "rarelyHonestly" }
             ]
         },
-        askNever: {
+        outOfLove: {
             speaker: "future",
             lines: [
-                "Keep planting rows. Writing letters no one reads.",
-                "Used to think that was nothing. It isn't."
+                "That's the best reason there is, honestly.",
+                "Love always was the best translator."
             ],
             next: "late"
         },
-        askFind: {
+        rarelyHonestly: {
             speaker: "future",
             lines: [
-                "I don't think I say anything at all.",
-                "Just want to hear them breathe a second."
+                "Rare's a shame. It changes how you see people.",
+                "Even a few words does something."
             ],
             next: "late"
         },
         late: {
             speaker: "future",
             lines: [
-                "Every bridge dies the same way, in the end.",
-                "Used to be afraid of that."
+                "Last question. Have you ever talked to a stranger who saw the world differently?",
+                "And actually listened, not just waited to reply?"
             ],
             choices: [
-                { label: "And now?", next: "askAndNow" },
-                { label: "I wish I had thirty more seconds with you.", next: "sayThirtyMore" }
+                { label: "Yeah, once or twice", next: "onceOrTwiceTrans" },
+                { label: "Honestly, not really", next: "notReallyTrans" }
             ]
         },
-        askAndNow: {
+        onceOrTwiceTrans: {
             speaker: "future",
             lines: [
-                "Not anymore.",
-                "Something always answers eventually. Even the wrong—"
+                "Good. That's rarer than it should be.",
+                "Do it again when you can."
             ],
             next: "urgency"
         },
-        sayThirtyMore: {
+        notReallyTrans: {
             speaker: "future",
             lines: [
-                "Me too.",
-                "Everyone always does, right at the end."
+                "Try it soon. It changes something in you.",
+                "Even just once."
             ],
             next: "urgency"
         },
         urgency: {
             speaker: "future",
             lines: [
-                "...",
-                "Even the wrong voice answering beats no voice at all."
+                "Losing the words for this, oddly enough.",
+                "Go listen to someone different, before I—"
             ],
             next: "ending"
         },
         ending: {
             speaker: "future",
             lines: [
-                "Whoever you're looking for — they're probably looking too—"
+                "Really listen to someone today. That's al—"
             ],
             end: true
         }
     }
 };
 
-window.CONTACT_CONVERSATIONS = [
-    Conversation001,
-    Conversation002,
-    Conversation003,
-    Conversation004,
-    Conversation005,
-    Conversation006,
-    Conversation007,
-    Conversation008,
-    Conversation009,
-    Conversation010,
-    Conversation011,
-    Conversation012,
-    Conversation013,
-    Conversation014,
-    Conversation015,
-    Conversation016,
-    Conversation017,
-    Conversation018,
-    Conversation019,
-    Conversation020
+window.CONTACT_INVESTIGATIVE_CONVERSATIONS = [
+    Conversation021,
+    Conversation022,
+    Conversation023,
+    Conversation024,
+    Conversation025,
+    Conversation026,
+    Conversation027,
+    Conversation028,
+    Conversation029,
+    Conversation030,
+    Conversation031,
+    Conversation032,
+    Conversation033,
+    Conversation034,
+    Conversation035,
+    Conversation036,
+    Conversation037,
+    Conversation038,
+    Conversation039,
+    Conversation040,
+    Conversation041,
+    Conversation042,
+    Conversation043,
+    Conversation044,
+    Conversation045
 ];
