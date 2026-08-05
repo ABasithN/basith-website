@@ -703,7 +703,7 @@ choicesEl.hidden = false;
   contactButtonEl.addEventListener('click', () => {
     if (StateMachine.current !== 'idle' || contactButtonEl.disabled) return;
 
-    const conversations = (window.CONTACT_CONVERSATIONS || []).filter(Boolean);
+    const conversations = (window.CONTACT__INVESTIGATIVE_CONVERSATIONS || []).filter(Boolean);
 
 function pickWeighted(list) {
 
