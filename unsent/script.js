@@ -117,6 +117,16 @@ function appendSentBubble(text) {
   threadEl.appendChild(div);
 }
 
+const continueHint = document.getElementById("continueHint");
+
+function showContinueHint() {
+    continueHint.classList.add("show");
+}
+
+function hideContinueHint() {
+    continueHint.classList.remove("show");
+}
+
 async function playStory(story, signal) {
   contactNameEl.textContent = story.contact || '';
   renderThread(story);
@@ -134,9 +144,11 @@ async function playStory(story, signal) {
     }
 
     if (story.sent) {
-      setComposeText('');
-      appendSentBubble(current);
-    }
+    setComposeText('');
+    appendSentBubble(current);
+
+    setTimeout(showContinueHint, 350);
+}
     // If not sent, the drafted text is simply left sitting in the box —
     // that's the point. We don't clean it up before moving on.
 
@@ -190,8 +202,10 @@ async function playStory(story, signal) {
     }
   }
 
-  function skipToNext() {
-    if (!controller) return;
+  function skipToNext(){
+    hideContinueHint();
+
+    if(!controller)return;
     controller.abort();
     const fresh = new AbortController();
     controller = fresh;
