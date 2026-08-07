@@ -147,7 +147,7 @@ async function playStory(story, signal) {
     setComposeText('');
     appendSentBubble(current);
 
-    setTimeout(showContinueHint, 1000); 
+    setTimeout(showContinueHint, 2000); 
 }
     // If not sent, the drafted text is simply left sitting in the box —
     // that's the point. We don't clean it up before moving on.
