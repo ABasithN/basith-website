@@ -4,62 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Poster Therapy — Vent. We'll make it beautiful.</title>
-<meta name="description" content="Type a thought. Get back a poster. A private confession turned into a cultural artifact.">
+<meta name="description" content="Type a thought. The website interprets it. You get back a designed poster.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- ============ LANDING VIEW ============ -->
-<main id="landing-view" class="view is-active" aria-label="Poster Therapy">
+<!-- ============ HOME VIEW ============ -->
+<main id="home-view" class="view is-active">
 
-  <div class="landing-grid">
+  <div class="layout">
 
-    <section class="landing-left">
-      <div class="landing-left-inner">
+    <section class="panel-left">
+      <div class="panel-left-inner">
 
-        <p class="brand-mark">Poster&nbsp;Therapy</p>
+        <p class="brand">Poster Therapy</p>
 
-        <h1 class="headline">Vent.</h1>
-        <p class="subheading">or just type your heart out</p>
-        <p class="supporting-line">We'll make it beautiful.</p>
+        <h1 class="hero-headline">Vent.</h1>
+        <p class="hero-sub">(or just type your heart out)</p>
+        <p class="hero-line">We'll make it beautiful.</p>
 
-        <form id="vent-form" class="vent-form" novalidate>
-          <label for="vent-input" class="sr-only">Type your thought</label>
+        <form id="vent-form" novalidate>
           <textarea
             id="vent-input"
-            name="vent"
-            maxlength="220"
+            maxlength="240"
             rows="5"
-            placeholder="Type it. All of it."
+            placeholder="What's bothering you?"
             autocomplete="off"
           ></textarea>
 
-          <div class="form-row">
-            <span class="char-count"><span id="char-count">0</span>/220</span>
-
-            <button type="button" id="attribution-toggle" class="attribution-toggle" aria-pressed="false">
-              Add my name
-            </button>
+          <div class="credit-row">
+            <button type="button" id="credit-toggle" aria-pressed="false">Add your name</button>
           </div>
 
-          <div id="name-field-wrap" class="name-field-wrap" hidden>
-            <input type="text" id="name-input" class="name-input" maxlength="40" placeholder="Your name" autocomplete="off">
+          <div id="credit-field-wrap" hidden>
+            <input type="text" id="credit-input" maxlength="30" placeholder="Your name" autocomplete="off">
           </div>
 
-          <button type="submit" id="create-btn" class="create-btn" disabled>
-            Create Poster
-          </button>
+          <button type="submit" id="make-btn" disabled>Make Poster</button>
         </form>
 
       </div>
     </section>
 
-    <aside class="landing-right" aria-hidden="true">
+    <aside class="panel-right" aria-hidden="true">
       <div class="showcase-viewport">
         <div class="showcase-track" id="showcase-track"></div>
       </div>
@@ -68,34 +60,26 @@
   </div>
 
   <div class="mobile-showcase" aria-hidden="true">
-    <div class="mobile-showcase-track" id="mobile-showcase-track"></div>
+    <div class="mobile-track" id="mobile-track"></div>
   </div>
 
 </main>
 
-<!-- ============ LOADING VIEW ============ -->
-<section id="loading-view" class="view" aria-live="polite" aria-label="Creating your poster">
-  <div class="loading-inner">
-    <div class="loading-mark">Poster&nbsp;Therapy</div>
-    <p class="loading-message" id="loading-message"></p>
-  </div>
-</section>
-
-<!-- ============ RESULT VIEW ============ -->
-<main id="result-view" class="view" aria-label="Your poster">
+<!-- ============ POSTER VIEW ============ -->
+<main id="poster-view" class="view" aria-label="Your poster">
   <div class="poster-stage">
     <div class="poster-viewport" id="poster-viewport">
       <div class="poster-wrapper" id="poster-wrapper"></div>
     </div>
   </div>
 
-  <div class="result-actions">
-    <button id="download-btn" class="action-btn action-btn--primary">Download Poster</button>
-    <button id="create-another-btn" class="action-btn action-btn--secondary">Create Another</button>
+  <div class="poster-actions">
+    <button id="download-btn" class="btn btn--primary">Download Poster</button>
+    <button id="again-btn" class="btn btn--secondary">Create Another</button>
   </div>
 </main>
 
-<!-- offscreen full-resolution export target, never visible -->
+<!-- offscreen true-resolution export target, never shown to the user -->
 <div id="export-root" aria-hidden="true"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>

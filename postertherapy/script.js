@@ -1,12 +1,17 @@
 /* ============================================================
-   POSTER THERAPY — script.js
-   Private thought → cultural artifact. Everything client-side.
+   POSTER THERAPY V2 — script.js
+   The website interprets what you wrote. It does not just
+   place your sentence on a poster — every template transforms
+   the input into a structured artifact. No AI, no API:
+   everything below is deterministic keyword + string logic.
    ============================================================ */
 
 (function () {
   "use strict";
 
-  /* ---------- small utilities ---------- */
+  /* ============================================================
+     STRING UTILITIES
+     ============================================================ */
 
   function esc(str) {
     return String(str)
@@ -16,403 +21,339 @@
       .replace(/"/g, "&quot;");
   }
 
-  function pick(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+  var STOPWORDS = new Set([
+    "a", "an", "the", "is", "am", "are", "was", "were", "i", "you", "he", "she",
+    "it", "we", "they", "my", "your", "his", "her", "its", "our", "their",
+    "this", "that", "these", "those", "to", "of", "in", "on", "at", "for",
+    "and", "but", "or", "so", "because", "just", "really", "very", "then",
+    "than", "be", "been", "being", "do", "does", "did", "have", "has", "had",
+    "not", "no", "all", "some", "me", "them", "us", "if", "with", "by", "as",
+    "can", "cant", "could", "couldnt", "would", "wouldnt", "will", "im", "ive",
+    "who", "what", "when", "where", "how",
+    "i'd", "i'll", "i'm", "don't", "didn't", "wasn't", "isn't", "doesn't",
+    "wouldn't", "couldn't", "can't", "it's", "that's", "there's", "who's", "what's",
+  ]);
+
+  // lowercase, strip punctuation (keep apostrophes), split into words
+  function cleanWords(text) {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9'\s]/g, "")
+      .split(/\s+/)
+      .filter(Boolean);
   }
 
-  function randomEdition() {
-    return String(Math.floor(10000 + Math.random() * 89999));
-  }
-
-  function currentYear() {
-    return String(new Date().getFullYear());
-  }
-
-  function todayLong() {
-    return new Date().toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
+  function significantWords(text) {
+    return cleanWords(text).filter(function (w) {
+      return w.length > 2 && !STOPWORDS.has(w);
     });
   }
 
-  /* ---------- emotion detection (lightweight keyword mapping, no AI) ---------- */
+  // unique significant words, longest (most "loaded") first
+  function topWords(text, n) {
+    var seen = {};
+    var uniq = [];
+    significantWords(text).forEach(function (w) {
+      if (!seen[w]) {
+        seen[w] = true;
+        uniq.push(w);
+      }
+    });
+    uniq.sort(function (a, b) { return b.length - a.length; });
+    return uniq.slice(0, n);
+  }
 
-  var EMOTION_KEYWORDS = {
-    anger: ["angry", "hate", "furious", "annoyed", "pissed"],
-    sadness: ["miss", "alone", "lost", "empty"],
-    regret: ["wish", "should", "could", "if only"],
-    burnout: ["tired", "exhausted", "drained", "burnout"],
+  function topWord(text) {
+    return topWords(text, 1)[0];
+  }
+
+  function firstClause(text) {
+    var parts = text.split(/[.!?]/);
+    return (parts[0] || text).trim();
+  }
+
+  // the first clause, stripped down to its significant words
+  function firstClauseCore(text) {
+    var words = significantWords(firstClause(text));
+    return words.join(" ");
+  }
+
+  function truncateWords(str, n) {
+    var words = String(str).split(/\s+/).filter(Boolean);
+    return words.slice(0, n).join(" ");
+  }
+
+  function titleCase(str) {
+    return String(str).replace(/\w\S*/g, function (t) {
+      return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase();
+    });
+  }
+
+  // deterministic string hash -> stable number in [min, max]
+  // (same input always produces the same interpretation)
+  function hashNum(str, min, max) {
+    var h = 0;
+    for (var i = 0; i < str.length; i++) {
+      h = (h * 31 + str.charCodeAt(i)) >>> 0;
+    }
+    var range = max - min + 1;
+    return min + (h % range);
+  }
+
+  function pickFrom(str, arr) {
+    return arr[hashNum(str, 0, arr.length - 1)];
+  }
+
+  /* ============================================================
+     INTERPRETATION ENGINE — routing
+     ============================================================ */
+
+  var CATEGORY_KEYWORDS = {
+    anger: ["fuck", "hate", "angry", "furious", "mad", "pissed", "rage"],
+    loss: ["miss", "gone", "lost", "left", "heartbreak", "goodbye", "breakup"],
+    work: [
+      "job", "boss", "office", "career", "promotion", "salary", "meeting",
+      "coworker", "manager", "deadline", "overtime", "tired", "exhausted",
+      "drained", "burnout", "burnt out", "silence",
+    ],
+    nostalgia: ["remember", "used to", "back then", "wish", "could have", "if only", "younger"],
+    identity: ["who am i", "confused", "identity", "worth", "enough", "doubt", "insecure", "imposter"],
+    reinvention: ["change", "new me", "reinvent", "growth", "evolve", "different person", "transform"],
+    universal: ["everyone", "nobody", "people", "always", "never", "life is", "no one"],
+    existential: ["wonder", "meaning", "universe", "existence", "why do", "purpose", "becoming", "exist"],
   };
 
-  var EMOTION_TEMPLATES = {
-    anger: ["protest", "public-notice", "tabloid"],
-    sadness: ["museum-placard", "poetry", "a24"],
-    regret: ["court-exhibit", "obituary", "dictionary"],
-    burnout: ["annual-report", "indie-film", "museum-wall"],
+  // order matters: first category matched wins
+  var PRIORITY = ["anger", "loss", "work", "nostalgia", "identity", "reinvention", "universal", "existential"];
+
+  var CATEGORY_TEMPLATE = {
+    anger: "protest",
+    work: "corporate",
+    identity: "dictionary",
+    existential: "museum",
+    loss: "obituary",
+    reinvention: "vogue",
+    universal: "notice",
+    nostalgia: "a24",
   };
 
-  function detectEmotions(text) {
+  function detectCategory(text) {
     var lower = " " + text.toLowerCase() + " ";
-    var matched = [];
-    Object.keys(EMOTION_KEYWORDS).forEach(function (emotion) {
-      var hit = EMOTION_KEYWORDS[emotion].some(function (kw) {
-        return lower.indexOf(kw) !== -1;
-      });
-      if (hit) matched.push(emotion);
-    });
-    return matched;
+    for (var i = 0; i < PRIORITY.length; i++) {
+      var cat = PRIORITY[i];
+      var keywords = CATEGORY_KEYWORDS[cat];
+      for (var j = 0; j < keywords.length; j++) {
+        if (lower.indexOf(keywords[j]) !== -1) return cat;
+      }
+    }
+    // nothing matched: default to the reflective, universally-fitting template
+    return "existential";
   }
 
   function chooseTemplateId(text) {
-    var matched = detectEmotions(text);
-    if (matched.length) {
-      var emotion = pick(matched);
-      return pick(EMOTION_TEMPLATES[emotion]);
-    }
-    return pick(TEMPLATES.map(function (t) { return t.id; }));
+    return CATEGORY_TEMPLATE[detectCategory(text)];
   }
 
-  /* ---------- template registry ----------
-     Each template returns the inner HTML for .poster-content.
-     data-fit-max / data-fit-min on the ".js-fit" element controls
-     the autofit range (px, at true 1080x1920 canvas size). */
+  /* ============================================================
+     8 POSTER SYSTEMS
+     Each build() function INTERPRETS the input — it never just
+     drops the raw sentence onto the canvas. It extracts words,
+     derives numbers, and reassembles them into a new structure.
+     ============================================================ */
 
-  var TEMPLATES = [
-    {
-      id: "a24",
-      name: "A24 Film Poster",
-      build: function (text) {
-        return (
-          '<p class="a24-eyebrow">A POSTER THERAPY FILM</p>' +
-          '<h2 class="a24-title js-fit" data-fit-max="118" data-fit-min="34">' + esc(text) + "</h2>" +
-          '<p class="a24-tagline">Not distributed by A24. Lived by you.</p>'
-        );
-      },
-    },
-    {
-      id: "museum-placard",
-      name: "Museum Placard",
-      build: function (text) {
-        return (
-          '<p class="placard-catalog">CATALOGUE NO. ' + randomEdition() + '</p>' +
-          '<h2 class="placard-title js-fit" data-fit-max="64" data-fit-min="24">' + esc(text) + "</h2>" +
-          '<p class="placard-medium">Mixed feeling on paper</p>' +
-          '<p class="placard-date">' + currentYear() + ", private collection</p>"
-        );
-      },
-    },
-    {
-      id: "vogue",
-      name: "Vogue Cover",
-      build: function (text) {
-        return (
-          '<p class="vogue-masthead">VENT</p>' +
-          '<p class="vogue-coverline-top">THE HONESTY ISSUE</p>' +
-          '<h2 class="vogue-headline js-fit" data-fit-max="76" data-fit-min="30">' + esc(text) + "</h2>" +
-          '<p class="vogue-coverline-bottom">+ how to survive knowing it</p>'
-        );
-      },
-    },
-    {
-      id: "indie-film",
-      name: "Indie Film",
-      build: function (text) {
-        return (
-          '<h2 class="indie-title js-fit" data-fit-max="92" data-fit-min="30">' + esc(text) + "</h2>" +
-          '<p class="indie-credit">A FILM ABOUT SOMEONE WHO KEPT GOING</p>'
-        );
-      },
-    },
-    {
-      id: "poetry",
-      name: "Poetry Collection",
-      build: function (text) {
-        return (
-          '<p class="poetry-numeral">XIV.</p>' +
-          '<p class="poetry-text js-fit" data-fit-max="58" data-fit-min="26">' + esc(text) + "</p>"
-        );
-      },
-    },
-    {
-      id: "protest",
+  var TEMPLATES = {
+
+    /* 1. PROTEST POSTER — anger, frustration, resentment */
+    protest: {
       name: "Protest Poster",
       build: function (text) {
-        return '<p class="protest-text js-fit" data-fit-max="128" data-fit-min="38">' + esc(text) + "</p>";
-      },
-    },
-    {
-      id: "newspaper",
-      name: "Newspaper Front Page",
-      build: function (text) {
+        var words = significantWords(text);
+        if (!words.length) words = cleanWords(text);
+        if (!words.length) words = ["enough"];
+        var chunkSize = words.length <= 3 ? 1 : 2;
+        var lines = [];
+        for (var i = 0; i < words.length && lines.length < 4; i += chunkSize) {
+          lines.push(words.slice(i, i + chunkSize).join(" ").toUpperCase());
+        }
         return (
-          '<p class="news-masthead">THE DAILY FEELING</p>' +
-          '<p class="news-dateline">' + todayLong() + " — LATE EDITION</p>" +
-          '<h2 class="news-headline js-fit" data-fit-max="86" data-fit-min="30">' + esc(text) + "</h2>" +
-          '<p class="news-byline">Reported anonymously, filed under personal</p>'
+          '<div class="protest-lines">' +
+          lines
+            .map(function (l) {
+              return '<p class="protest-line js-fit" data-fit-max="150" data-fit-min="42">' + esc(l) + "</p>";
+            })
+            .join("") +
+          "</div>"
         );
       },
     },
-    {
-      id: "luxury-fashion",
-      name: "Luxury Fashion Campaign",
+
+    /* 2. CORPORATE REPORT — burnout, work stress, office frustration */
+    corporate: {
+      name: "Corporate Report",
       build: function (text) {
+        var lower = text.toLowerCase();
+        var years = hashNum(text + "yr", 1, 15);
+        var overtime = hashNum(text + "ot", 20, 400);
+
+        var status;
+        if (/silen|ignor|no response/.test(lower)) status = "No Response Received";
+        else if (/fired|laid off|quit|resign/.test(lower)) status = "Terminated";
+        else if (/tired|exhaust|drain|burnout|burnt/.test(lower)) status = "Burnout Confirmed";
+        else status = pickFrom(text + "st", ["Pending Review", "Unresolved", "Denied", "Under Consideration"]);
+
+        var notes = titleCase(truncateWords(firstClauseCore(text) || "no comment provided", 6));
+
+        function row(label, value) {
+          return (
+            '<div class="corp-row"><span class="corp-label">' + esc(label) +
+            '</span><span class="corp-value">' + esc(value) + "</span></div>"
+          );
+        }
+
         return (
-          '<p class="fashion-season">FALL / WINTER — HONESTY</p>' +
-          '<h2 class="fashion-line js-fit" data-fit-max="70" data-fit-min="28">' + esc(text) + "</h2>" +
-          '<p class="fashion-house">MAISON DE VENT</p>'
+          '<p class="corp-title">EMPLOYEE RELATIONS REPORT</p>' +
+          '<div class="corp-rows">' +
+          row("Years Invested", years) +
+          row("Recognition Received", "0") +
+          row("Overtime Logged", overtime + " HRS") +
+          row("Status", status) +
+          "</div>" +
+          '<p class="corp-notes"><span class="corp-notes-label">Field Notes</span><span class="js-fit" data-fit-max="30" data-fit-min="18">' +
+          esc(notes) + "</span></p>"
         );
       },
     },
-    {
-      id: "obituary",
-      name: "Obituary",
-      build: function (text) {
-        return (
-          '<p class="obit-eyebrow">IN MEMORY OF WHAT I THOUGHT WOULD LAST</p>' +
-          '<p class="obit-text js-fit" data-fit-max="52" data-fit-min="24">' + esc(text) + "</p>" +
-          '<p class="obit-line">Survived by everyone who moved on anyway.</p>'
-        );
-      },
-    },
-    {
-      id: "receipt",
-      name: "Receipt",
-      build: function (text) {
-        return (
-          '<p class="receipt-store">POSTER THERAPY</p>' +
-          '<p class="receipt-sub">EMOTIONAL GOODS &amp; SERVICES</p>' +
-          '<div class="receipt-rule"></div>' +
-          '<p class="receipt-item">1 x THOUGHT&nbsp;&nbsp;&nbsp;&nbsp;NO REFUNDS</p>' +
-          '<p class="receipt-text js-fit" data-fit-max="34" data-fit-min="18">' + esc(text) + "</p>" +
-          '<div class="receipt-rule"></div>' +
-          '<p class="receipt-total">TOTAL: PRICELESS</p>' +
-          '<div class="receipt-barcode"></div>'
-        );
-      },
-    },
-    {
-      id: "court-exhibit",
-      name: "Court Exhibit",
-      build: function (text) {
-        return (
-          '<p class="court-exhibit-label">EXHIBIT A</p>' +
-          '<p class="court-case">IN THE MATTER OF MY OWN HEART</p>' +
-          '<p class="court-text js-fit" data-fit-max="46" data-fit-min="22">' + esc(text) + "</p>" +
-          '<p class="court-stamp">SUBMITTED AS EVIDENCE</p>'
-        );
-      },
-    },
-    {
-      id: "dictionary",
+
+    /* 3. DICTIONARY ENTRY — identity, self worth, confusion */
+    dictionary: {
       name: "Dictionary Entry",
       build: function (text) {
+        var head = topWord(text) || "unresolved";
+        var connector = pickFrom(text + "dc", [
+          "a feeling that", "the sense of", "what's left when",
+          "a place that", "a promise that", "the weight of",
+        ]);
+        var tail = truncateWords(firstClauseCore(text) || "keeps moving", 5).toLowerCase();
         return (
-          '<p class="dict-headword">con&middot;fes&middot;sion</p>' +
-          '<p class="dict-pos"><em>noun</em></p>' +
-          '<p class="dict-def js-fit" data-fit-max="44" data-fit-min="22"><span class="dict-num">1.</span> ' + esc(text) + "</p>"
+          '<p class="dict-word js-fit" data-fit-max="72" data-fit-min="34">' + esc(head) + "</p>" +
+          '<p class="dict-pos">(noun)</p>' +
+          '<p class="dict-def js-fit" data-fit-max="44" data-fit-min="22">' +
+          esc(connector) + "<br>" + esc(tail) + "</p>"
         );
       },
     },
-    {
-      id: "missing-person",
-      name: "Missing Person Poster",
+
+    /* 4. MUSEUM EXHIBIT — existential thoughts, reflection */
+    museum: {
+      name: "Museum Exhibit",
       build: function (text) {
+        var word = topWord(text) || "becoming";
+        var title = "ON " + word.toUpperCase();
+        var year = new Date().getFullYear();
+        var extras = topWords(text, 4).filter(function (w) { return w !== word; }).slice(0, 3);
+        if (!extras.length) extras = ["time"];
         return (
-          '<p class="missing-heading">MISSING</p>' +
-          '<div class="missing-frame"><span>NO PHOTO AVAILABLE</span></div>' +
-          '<p class="missing-label">LAST SEEN FEELING FINE</p>' +
-          '<p class="missing-text js-fit" data-fit-max="34" data-fit-min="18">' + esc(text) + "</p>" +
-          '<p class="missing-contact">IF FOUND, PLEASE BE GENTLE</p>'
+          '<p class="museum-title js-fit" data-fit-max="70" data-fit-min="32">' + esc(title) + "</p>" +
+          '<p class="museum-year">' + year + "</p>" +
+          '<p class="museum-medium">Mixed media:<br>' + extras.map(esc).join(",<br>") + ".</p>"
         );
       },
     },
-    {
-      id: "redacted",
-      name: "Redacted Document",
+
+    /* 5. OBITUARY — loss, heartbreak, endings */
+    obituary: {
+      name: "Obituary",
       build: function (text) {
+        var tail = truncateWords(firstClauseCore(text) || "this", 6).toLowerCase();
         return (
-          '<p class="redacted-stamp">CLASSIFIED</p>' +
-          '<p class="redacted-section">SECTION 4.2 — PERSONAL DISCLOSURE</p>' +
-          '<div class="redacted-bar redacted-bar--a"></div>' +
-          '<p class="redacted-text js-fit" data-fit-max="46" data-fit-min="22">' + esc(text) + "</p>" +
-          '<div class="redacted-bar redacted-bar--b"></div>'
+          '<p class="obit-heading">IN MEMORY OF</p>' +
+          '<p class="obit-body js-fit" data-fit-max="54" data-fit-min="26">the version of me<br>that ' +
+          esc(tail) + "</p>"
         );
       },
     },
-    {
-      id: "album-cover",
-      name: "Album Cover",
+
+    /* 6. VOGUE COVER — reinvention, transformation */
+    vogue: {
+      name: "Vogue Cover",
       build: function (text) {
+        var words = topWords(text, 2);
+        var main = words[0] || "change";
+        var second = words[1] || "letting go";
         return (
-          '<div class="album-art"><p class="album-text js-fit" data-fit-max="46" data-fit-min="20">' + esc(text) + "</p></div>" +
-          '<p class="album-artist">UNKNOWN ARTIST</p>' +
-          '<p class="album-title">SIDE A</p>'
+          '<p class="vogue-masthead">VENT</p>' +
+          '<p class="vogue-issue">THE REINVENTION ISSUE</p>' +
+          '<p class="vogue-cover js-fit" data-fit-max="72" data-fit-min="32">THE ART OF<br>' +
+          esc(main.toUpperCase()) + "</p>" +
+          '<p class="vogue-sub">+ letting go of ' + esc(second) + "</p>"
         );
       },
     },
-    {
-      id: "departure-board",
-      name: "Airport Departure Board",
-      build: function (text) {
-        var upper = text.toUpperCase();
-        var tiles = upper
-          .split("")
-          .map(function (ch) {
-            return '<span class="board-tile">' + (ch === " " ? "&nbsp;" : esc(ch)) + "</span>";
-          })
-          .join("");
-        return (
-          '<p class="board-heading">DEPARTURES</p>' +
-          '<div class="board-row">' + tiles + "</div>" +
-          '<p class="board-gate">GATE: WHEREVER YOU\u2019RE HEADED NEXT</p>'
-        );
-      },
-    },
-    {
-      id: "typewriter",
-      name: "Typewriter Page",
-      build: function (text) {
-        return (
-          '<p class="type-page-num">1.</p>' +
-          '<p class="type-text js-fit" data-fit-max="40" data-fit-min="20">' + esc(text) + "</p>"
-        );
-      },
-    },
-    {
-      id: "museum-wall",
-      name: "Museum Wall Text",
-      build: function (text) {
-        return (
-          '<p class="wall-eyebrow">ON VIEW</p>' +
-          '<p class="wall-text js-fit" data-fit-max="54" data-fit-min="24">' + esc(text) + "</p>"
-        );
-      },
-    },
-    {
-      id: "annual-report",
-      name: "Annual Report",
-      build: function (text) {
-        return (
-          '<p class="annual-eyebrow">ANNUAL REPORT</p>' +
-          '<p class="annual-year">' + currentYear() + "</p>" +
-          '<h2 class="annual-headline js-fit" data-fit-max="60" data-fit-min="26">' + esc(text) + "</h2>" +
-          '<p class="annual-footer-line">Prepared for the shareholders of self</p>'
-        );
-      },
-    },
-    {
-      id: "movie-credits",
-      name: "Movie Credits",
-      build: function (text) {
-        return (
-          '<p class="credits-role">WRITTEN, DIRECTED, AND LIVED BY YOU</p>' +
-          '<p class="credits-text js-fit" data-fit-max="48" data-fit-min="22">' + esc(text) + "</p>" +
-          '<p class="credits-role">A POSTER THERAPY PRODUCTION</p>'
-        );
-      },
-    },
-    {
-      id: "book-spine",
-      name: "Book Spine",
-      build: function (text) {
-        return (
-          '<div class="spine-band"><p class="spine-text js-fit" data-fit-max="52" data-fit-min="22">' + esc(text) + "</p></div>" +
-          '<p class="spine-imprint">POSTER THERAPY EDITIONS</p>'
-        );
-      },
-    },
-    {
-      id: "luxury-watch",
-      name: "Luxury Watch Advertisement",
-      build: function (text) {
-        return (
-          '<p class="watch-eyebrow">PRECISE, SINCE THE DAY IT BROKE</p>' +
-          '<h2 class="watch-headline js-fit" data-fit-max="64" data-fit-min="26">' + esc(text) + "</h2>" +
-          '<p class="watch-brand">VENT &amp; CO.</p>'
-        );
-      },
-    },
-    {
-      id: "tabloid",
-      name: "Tabloid",
-      build: function (text) {
-        return (
-          '<p class="tabloid-masthead">THE DAILY SHOCK</p>' +
-          '<h2 class="tabloid-headline js-fit" data-fit-max="100" data-fit-min="34">' + esc(text) + "</h2>" +
-          '<p class="tabloid-subhead">SOURCES CONFIRM: IT\u2019S TRUE</p>'
-        );
-      },
-    },
-    {
-      id: "public-notice",
+
+    /* 7. PUBLIC NOTICE — universal truths, observations */
+    notice: {
       name: "Public Notice",
       build: function (text) {
+        var prefix = pickFrom(text + "pn", [
+          "Nobody knows", "Everyone pretends", "No one talks about",
+          "Somebody always", "Most people forget",
+        ]);
+        var tail = truncateWords(firstClauseCore(text) || "what they are doing", 6).toLowerCase();
         return (
-          '<p class="notice-heading">PUBLIC NOTICE</p>' +
-          '<p class="notice-text js-fit" data-fit-max="46" data-fit-min="22">' + esc(text) + "</p>" +
-          '<p class="notice-ref">REF. NO. ' + randomEdition() + "</p>"
+          '<p class="notice-heading">NOTICE</p>' +
+          '<p class="notice-body js-fit" data-fit-max="52" data-fit-min="26">' +
+          esc(prefix) + "<br>" + esc(tail) + "</p>"
         );
       },
     },
-    {
-      id: "quiet",
-      name: "The Quiet One",
+
+    /* 8. A24 FILM POSTER — nostalgia, regret, longing */
+    a24: {
+      name: "A24 Film Poster",
       build: function (text) {
-        return '<p class="quiet-text js-fit" data-fit-max="46" data-fit-min="22">' + esc(text) + "</p>";
+        var words = topWords(text, 2);
+        var connector = pickFrom(text + "a24", ["OF", "AND", "WITHOUT", "BEFORE"]);
+        var title = words.length >= 2
+          ? words[0].toUpperCase() + " " + connector + " " + words[1].toUpperCase()
+          : (words[0] || "SOMEDAY").toUpperCase();
+        var credit = "A FILM ABOUT " + truncateWords(firstClauseCore(text) || "someone who remembers", 5).toUpperCase();
+        return (
+          '<p class="a24-title js-fit" data-fit-max="108" data-fit-min="36">' + esc(title) + "</p>" +
+          '<p class="a24-credit">' + esc(credit) + "</p>"
+        );
       },
     },
-  ];
 
-  var TEMPLATE_BY_ID = {};
-  TEMPLATES.forEach(function (t) { TEMPLATE_BY_ID[t.id] = t; });
+  };
 
-  /* ---------- poster shell + footer (shared by every template) ---------- */
+  /* ============================================================
+     POSTER SHELL — watermark + attribution, shared by all 8 systems
+     ============================================================ */
 
   function buildPosterHTML(templateId, text, name) {
-    var tpl = TEMPLATE_BY_ID[templateId];
-    var edition = randomEdition();
+    var tpl = TEMPLATES[templateId];
     var inner = tpl.build(text);
 
-    var footer =
-      '<div class="poster-footer">' +
-      '<p>POSTER THERAPY</p>' +
-      '<p>DIGITAL EDITION</p>' +
-      '<p>Edition #' + edition + "</p>" +
-      "<p>basith.xyz/postertherapy</p>" +
-      "</div>";
-
-    var attribution = name
-      ? '<p class="poster-attribution">\u2014 ' + esc(name) + "</p>"
-      : "";
+    var attribution = name ? '<p class="poster-attribution">\u2014 ' + esc(name) + "</p>" : "";
 
     return (
       '<div class="poster poster--' + templateId + '">' +
       '<div class="poster-content">' + inner + "</div>" +
-      footer +
+      '<p class="poster-watermark">postertherapy.basith.xyz</p>' +
       attribution +
       "</div>"
     );
   }
 
-  /* ---------- fixed typography: showcase cards never participate in font-fitting ----------
-     Showcase posters are rendered at true 1080x1920 and then scaled way down purely via
-     CSS transform for display. They just need their max size set once — never measured
-     or shrunk, since at showcase scale the fitting loop has nothing meaningful to compare
-     against and will walk font-size down toward data-fit-min for no reason. */
-
-  function applyFixedTypography(posterEl) {
-    var nodes = posterEl.querySelectorAll(".js-fit");
-    for (var i = 0; i < nodes.length; i++) {
-      var el = nodes[i];
-      var max = parseInt(el.getAttribute("data-fit-max"), 10) || 100;
-      el.style.fontSize = max + "px";
-    }
-  }
-
-  /* ---------- autofit: shrink text until it fits its box, no overflow ----------
-     Used ONLY for the full-size generated poster (result view) and the offscreen
-     export poster (download). Never applied to showcase cards. ---------- */
+  /* ============================================================
+     AUTOFIT — used ONLY for the generated poster and the export
+     poster. Showcase cards are rendered far below true size via
+     a CSS scale transform and must never run this: measuring a
+     1080x1920 box shrunk to ~200px on screen has nothing
+     meaningful to compare against and would walk every size down
+     toward its minimum for no reason. Showcase cards get fixed
+     typography instead — see applyFixedTypography().
+     ============================================================ */
 
   function autoFit(posterEl) {
     var nodes = posterEl.querySelectorAll(".js-fit");
@@ -427,8 +368,7 @@
       while (
         guard < 90 &&
         size > min &&
-        (el.scrollHeight > container.clientHeight + 1 ||
-          el.scrollWidth > container.clientWidth + 1)
+        (el.scrollHeight > container.clientHeight + 1 || el.scrollWidth > container.clientWidth + 1)
       ) {
         size -= 2;
         el.style.fontSize = size + "px";
@@ -437,39 +377,48 @@
     }
   }
 
-  /* ---------- landing view: char counter, attribution toggle, submit ---------- */
+  function applyFixedTypography(posterEl) {
+    var nodes = posterEl.querySelectorAll(".js-fit");
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      var max = parseInt(el.getAttribute("data-fit-max"), 10) || 100;
+      el.style.fontSize = max + "px";
+    }
+  }
+
+  /* ============================================================
+     HOME VIEW — input, char state, credit toggle
+     ============================================================ */
 
   var ventInput = document.getElementById("vent-input");
-  var charCount = document.getElementById("char-count");
-  var createBtn = document.getElementById("create-btn");
+  var makeBtn = document.getElementById("make-btn");
   var ventForm = document.getElementById("vent-form");
-  var attributionToggle = document.getElementById("attribution-toggle");
-  var nameFieldWrap = document.getElementById("name-field-wrap");
-  var nameInput = document.getElementById("name-input");
+  var creditToggle = document.getElementById("credit-toggle");
+  var creditFieldWrap = document.getElementById("credit-field-wrap");
+  var creditInput = document.getElementById("credit-input");
 
-  function updateCount() {
-    var len = ventInput.value.length;
-    charCount.textContent = String(len);
-    createBtn.disabled = ventInput.value.trim().length === 0;
+  function updateButtonState() {
+    makeBtn.disabled = ventInput.value.trim().length === 0;
   }
-  ventInput.addEventListener("input", updateCount);
-  updateCount();
+  ventInput.addEventListener("input", updateButtonState);
+  updateButtonState();
 
-  var attributionOn = false;
-  attributionToggle.addEventListener("click", function () {
-    attributionOn = !attributionOn;
-    attributionToggle.setAttribute("aria-pressed", String(attributionOn));
-    attributionToggle.classList.toggle("is-active", attributionOn);
-    nameFieldWrap.hidden = !attributionOn;
-    if (attributionOn) nameInput.focus();
+  var creditOn = false;
+  creditToggle.addEventListener("click", function () {
+    creditOn = !creditOn;
+    creditToggle.setAttribute("aria-pressed", String(creditOn));
+    creditToggle.classList.toggle("is-active", creditOn);
+    creditFieldWrap.hidden = !creditOn;
+    if (creditOn) creditInput.focus();
   });
 
-  /* ---------- view switching ---------- */
+  /* ============================================================
+     VIEW SWITCHING
+     ============================================================ */
 
   var views = {
-    landing: document.getElementById("landing-view"),
-    loading: document.getElementById("loading-view"),
-    result: document.getElementById("result-view"),
+    home: document.getElementById("home-view"),
+    poster: document.getElementById("poster-view"),
   };
 
   function showView(name) {
@@ -478,43 +427,15 @@
     });
   }
 
-  /* ---------- loading messages ---------- */
-
-  var LOADING_MESSAGES = [
-    "Giving your frustration better typography.",
-    "Looking for the right frame.",
-    "Making it gallery worthy.",
-    "Treating your thoughts like art.",
-    "Turning a thought into an artifact.",
-  ];
-
-  var loadingMessageEl = document.getElementById("loading-message");
-  var loadingTimer = null;
-
-  function runLoading(callback) {
-    var order = LOADING_MESSAGES.slice().sort(function () { return Math.random() - 0.5; });
-    var i = 0;
-    loadingMessageEl.textContent = order[0];
-    i = 1;
-    loadingTimer = setInterval(function () {
-      loadingMessageEl.textContent = order[i % order.length];
-      i++;
-    }, 650);
-
-    var totalTime = 1900 + Math.floor(Math.random() * 500);
-    setTimeout(function () {
-      clearInterval(loadingTimer);
-      callback();
-    }, totalTime);
-  }
-
-  /* ---------- result view: render, scale to fit, download ---------- */
+  /* ============================================================
+     GENERATE + DISPLAY
+     ============================================================ */
 
   var posterWrapper = document.getElementById("poster-wrapper");
   var posterViewport = document.getElementById("poster-viewport");
   var exportRoot = document.getElementById("export-root");
   var downloadBtn = document.getElementById("download-btn");
-  var createAnotherBtn = document.getElementById("create-another-btn");
+  var againBtn = document.getElementById("again-btn");
 
   var currentTemplateId = null;
   var currentText = "";
@@ -529,14 +450,13 @@
     posterWrapper.style.transform = "scale(" + scale + ")";
   }
 
-  function renderResult() {
+  function renderPoster() {
     posterWrapper.innerHTML = buildPosterHTML(currentTemplateId, currentText, currentName);
     var poster = posterWrapper.querySelector(".poster");
     autoFit(poster);
     scalePosterToFit();
 
-    showView("result");
-    // fade the artwork in like something being unveiled, not a dashboard update
+    showView("poster");
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         poster.classList.add("is-revealed");
@@ -550,25 +470,24 @@
     if (!text) return;
 
     currentText = text;
-    currentName = attributionOn ? nameInput.value.trim() : "";
+    currentName = creditOn ? creditInput.value.trim() : "";
     currentTemplateId = chooseTemplateId(text);
 
-    showView("loading");
-    runLoading(renderResult);
+    renderPoster();
   });
 
   window.addEventListener("resize", scalePosterToFit);
 
-  createAnotherBtn.addEventListener("click", function () {
+  againBtn.addEventListener("click", function () {
     ventInput.value = "";
-    nameInput.value = "";
-    attributionOn = false;
-    attributionToggle.setAttribute("aria-pressed", "false");
-    attributionToggle.classList.remove("is-active");
-    nameFieldWrap.hidden = true;
-    updateCount();
+    creditInput.value = "";
+    creditOn = false;
+    creditToggle.setAttribute("aria-pressed", "false");
+    creditToggle.classList.remove("is-active");
+    creditFieldWrap.hidden = true;
+    updateButtonState();
     posterWrapper.innerHTML = "";
-    showView("landing");
+    showView("home");
     ventInput.focus();
   });
 
@@ -577,14 +496,11 @@
     downloadBtn.disabled = true;
     downloadBtn.textContent = "Preparing download...";
 
-    // Build a true-resolution, untransformed copy off-screen for export,
-    // so the exported PNG is exactly 1080x1920 with no UI in it.
     exportRoot.innerHTML = buildPosterHTML(currentTemplateId, currentText, currentName);
     var exportPoster = exportRoot.firstElementChild;
     exportPoster.classList.add("is-revealed");
     autoFit(exportPoster);
 
-    // give layout a tick to settle before capture
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         html2canvas(exportPoster, {
@@ -612,39 +528,45 @@
     });
   });
 
-  /* ---------- homepage showcase: 10 curated, seeded examples ---------- */
+  /* ============================================================
+     SHOWCASE — 8 seeded examples, run through the SAME
+     interpretation engine real submissions use (no hardcoded
+     template assignment).
+     ============================================================ */
 
-  var SHOWCASE = [
-    { text: "I thought I'd be further along by now.", id: "museum-placard" },
-    { text: "Some people only miss you when you're leaving.", id: "a24" },
-    { text: "I'm tired of being easy to lose.", id: "poetry" },
-    { text: "I keep waiting for a version of me that doesn't exist.", id: "dictionary" },
-    { text: "Nobody prepares you for becoming the adult you needed.", id: "obituary" },
-    { text: "I miss places more than people.", id: "quiet" },
-    { text: "The worst goodbyes are the quiet ones.", id: "museum-wall" },
-    { text: "I outgrew things I once prayed for.", id: "book-spine" },
-    { text: "I wish I worried less and lived more.", id: "court-exhibit" },
-    { text: "Not every ending deserves closure.", id: "typewriter" },
+  var SHOWCASE_SEEDS = [
+    "I am tired in ways sleep can't fix.",
+    "Nobody talks about how lonely ambition is.",
+    "I gave them years. They gave me silence.",
+    "I thought I'd be further along by now.",
+    "Some people leave twice.",
+    "Fuck this job.",
+    "I miss who I was before all this.",
+    "The version of me they loved no longer exists.",
   ];
 
-  function buildShowcaseCard(item) {
+  function buildShowcaseCard(seedText) {
+    var templateId = chooseTemplateId(seedText);
     var card = document.createElement("div");
     card.className = "showcase-card";
-    card.innerHTML = buildPosterHTML(item.id, item.text, "");
+    card.innerHTML = buildPosterHTML(templateId, seedText, "");
     var poster = card.querySelector(".poster");
     poster.classList.add("is-revealed");
     applyFixedTypography(poster);
     return card;
   }
 
-  function populateShowcase(container, loop) {
-    var list = loop ? SHOWCASE.concat(SHOWCASE) : SHOWCASE;
-    list.forEach(function (item) {
-      container.appendChild(buildShowcaseCard(item));
+  function populateShowcase(container) {
+    SHOWCASE_SEEDS.forEach(function (seed) {
+      container.appendChild(buildShowcaseCard(seed));
     });
   }
 
-  populateShowcase(document.getElementById("showcase-track"), true);
-  populateShowcase(document.getElementById("mobile-showcase-track"), false);
+  // desktop track gets a duplicated set for a seamless continuous scroll
+  var desktopTrack = document.getElementById("showcase-track");
+  populateShowcase(desktopTrack);
+  populateShowcase(desktopTrack);
+
+  populateShowcase(document.getElementById("mobile-track"));
 
 })();

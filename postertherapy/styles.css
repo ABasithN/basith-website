@@ -1,27 +1,21 @@
 /* ============================================================
-   POSTER THERAPY — styles.css
-   Typography is the hero. Whitespace is a design element.
+   POSTER THERAPY V2 — styles.css
+   Palette: #F5F2EA #111111 #D72638 #16324F #FFD54F #DDE7F2 #FFFFFF
+   Typography: Cormorant Garamond (headlines) + Inter (utility)
+   No gradients. No neon. No glassmorphism. No SaaS look.
    ============================================================ */
 
 :root {
-  --ink: #111111;
   --paper: #F5F2EA;
+  --ink: #111111;
+  --red: #D72638;
+  --navy: #16324F;
+  --yellow: #FFD54F;
+  --sky: #DDE7F2;
   --white: #FFFFFF;
-  --sand: #D8D0C2;
-  --charcoal: #2B2B2B;
-  --cream-dark: #D9CFC1;
-  --black: #0D0D0D;
-  --stone: #CFC8BB;
 
-  --serif: "Cormorant Garamond", Georgia, serif;
-  --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  --mono: "IBM Plex Mono", "Courier New", monospace;
-}
-
-body {
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(0,0,0,.025) 0%, transparent 40%),
-      radial-gradient(circle at 80% 70%, rgba(0,0,0,.02) 0%, transparent 35%);
+  --headline: "Cormorant Garamond", Georgia, serif;
+  --utility: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -31,186 +25,155 @@ html, body {
   padding: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--sans);
+  font-family: var(--utility);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 button, input, textarea { font-family: inherit; }
 
-.sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
-}
-
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
 
-/* ---------- view switching ---------- */
-
-.view {
-  display: none;
-  min-height: 100vh;
-}
+.view { display: none; min-height: 100vh; }
 .view.is-active { display: block; }
 
 /* ============================================================
-   LANDING VIEW
+   HOME VIEW
    ============================================================ */
 
-#landing-view.is-active { display: flex; flex-direction: column; }
+#home-view.is-active { display: flex; flex-direction: column; }
 
-.landing-grid {
+.layout {
   display: grid;
-  grid-template-columns: minmax(0, 620px) 1fr;
+  grid-template-columns: minmax(0, 600px) 1fr;
   min-height: 100vh;
 }
 
-.landing-left {
+.panel-left {
   display: flex;
   align-items: center;
   padding: 6vw 5vw;
-  border-right: 1px solid var(--sand);
+  border-right: 1px solid var(--sky);
 }
 
-.landing-left-inner { max-width: 460px; width: 100%; }
+.panel-left-inner { max-width: 440px; width: 100%; }
 
-.brand-mark {
-  font-family: var(--mono);
+.brand {
+  font-family: var(--utility);
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--charcoal);
-  opacity: 0.6;
+  color: var(--ink);
+  opacity: 0.55;
   margin: 0 0 3.5rem;
 }
 
-.headline {
-  font-family: var(--serif);
+.hero-headline {
+  font-family: var(--headline);
   font-weight: 500;
-  font-size: clamp(90px, 11vw, 160px);
+  font-size: clamp(64px, 9vw, 106px);
   line-height: 0.95;
-  margin: 0 0 0.6rem;
-  color: var(--ink);
+  margin: 0 0 0.5rem;
 }
 
-.subheading {
-  font-family: var(--serif);
+.hero-sub {
+  font-family: var(--headline);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(20px, 2vw, 26px);
-  color: var(--charcoal);
-  margin: 0 0 1.1rem;
+  font-size: clamp(19px, 2vw, 24px);
+  color: var(--ink);
+  opacity: 0.75;
+  margin: 0 0 1rem;
 }
 
-.supporting-line {
-  font-family: var(--sans);
+.hero-line {
+  font-family: var(--utility);
   font-size: 14px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--charcoal);
-  opacity: 0.55;
+  opacity: 0.5;
   margin: 0 0 3rem;
 }
 
-.vent-form { display: flex; flex-direction: column; gap: 0; }
+#vent-form { display: flex; flex-direction: column; }
 
 #vent-input {
   width: 100%;
   resize: none;
   border: none;
-  border-bottom: 1px solid var(--charcoal);
+  border-bottom: 1px solid var(--ink);
   background: transparent;
   padding: 0 0 1rem;
-  font-family: var(--serif);
+  font-family: var(--headline);
   font-size: 22px;
   line-height: 1.45;
   color: var(--ink);
   outline: none;
 }
-#vent-input::placeholder { color: var(--charcoal); opacity: 0.35; }
-#vent-input:focus { border-bottom-color: var(--ink); }
+#vent-input::placeholder { color: var(--ink); opacity: 0.32; }
+#vent-input:focus { border-bottom-width: 2px; }
 
-.form-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 0.7rem;
-}
+.credit-row { margin-top: 0.8rem; }
 
-.char-count {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--charcoal);
-  opacity: 0.5;
-}
-
-.attribution-toggle {
+#credit-toggle {
   border: none;
   background: none;
   cursor: pointer;
-  font-family: var(--mono);
+  font-family: var(--utility);
   font-size: 11px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--charcoal);
-  opacity: 0.55;
+  color: var(--ink);
+  opacity: 0.5;
   padding: 0.3rem 0;
   border-bottom: 1px solid transparent;
   transition: opacity 0.2s ease, border-color 0.2s ease;
 }
-.attribution-toggle:hover { opacity: 0.85; }
-.attribution-toggle.is-active {
-  opacity: 1;
-  border-bottom-color: var(--charcoal);
-}
+#credit-toggle:hover { opacity: 0.8; }
+#credit-toggle.is-active { opacity: 1; border-bottom-color: var(--ink); }
 
-.name-field-wrap { margin-top: 1rem; }
+#credit-field-wrap { margin-top: 0.9rem; }
 
-.name-input {
+#credit-input {
   width: 100%;
   border: none;
-  border-bottom: 1px solid var(--stone);
+  border-bottom: 1px solid var(--sky);
   background: transparent;
   padding: 0 0 0.6rem;
-  font-family: var(--sans);
+  font-family: var(--utility);
   font-size: 15px;
   color: var(--ink);
   outline: none;
 }
-.name-input:focus { border-bottom-color: var(--ink); }
+#credit-input:focus { border-bottom-color: var(--ink); }
 
-.create-btn {
+#make-btn {
   margin-top: 2.4rem;
   align-self: flex-start;
   background: var(--ink);
   color: var(--paper);
   border: none;
   padding: 0.95rem 2.2rem;
-  font-family: var(--sans);
+  font-family: var(--utility);
   font-size: 13px;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   cursor: pointer;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
-.create-btn:hover:not(:disabled) { opacity: 0.85; }
-.create-btn:active:not(:disabled) { transform: scale(0.98); }
-.create-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+#make-btn:hover:not(:disabled) { opacity: 0.85; }
+#make-btn:active:not(:disabled) { transform: scale(0.98); }
+#make-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-/* ---------- right side: continuous showcase ---------- */
+/* ---------- showcase, right column ---------- */
 
-.landing-right {
+.panel-right {
   position: relative;
   overflow: hidden;
-  background: var(--cream-dark);
+  background: var(--sky);
 }
 
 .showcase-viewport {
@@ -225,10 +188,10 @@ button, input, textarea { font-family: inherit; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5rem;
-  padding: 2.5rem 0;
+  gap: 2.4rem;
+  padding: 2.4rem 0;
   width: 100%;
-  animation: scroll-up 70s linear infinite;
+  animation: scroll-up 64s linear infinite;
 }
 
 @keyframes scroll-up {
@@ -238,76 +201,27 @@ button, input, textarea { font-family: inherit; }
 
 .showcase-card {
   flex: 0 0 auto;
-  width: 420px;
+  width: 210px;
   aspect-ratio: 1080 / 1920;
-  border-radius: 2px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.16);
   pointer-events: none;
-}
-
-.showcase-card {
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow:
-      0 20px 60px rgba(0,0,0,.08),
-      0 4px 12px rgba(0,0,0,.05);
 }
 
 .showcase-card .poster {
   width: 1080px;
   height: 1920px;
-  transform: scale(calc(420 / 1080));
+  transform: scale(calc(210 / 1080));
   transform-origin: top left;
-}
-
-.showcase-card .poster,
-.mobile-showcase .poster {
-  opacity: 1 !important;
 }
 
 .mobile-showcase { display: none; }
 
 /* ============================================================
-   LOADING VIEW
+   POSTER VIEW
    ============================================================ */
 
-#loading-view {
-  align-items: center;
-  justify-content: center;
-  background: var(--ink);
-  color: var(--paper);
-}
-#loading-view.is-active {
-  display: flex;
-}
-
-.loading-inner { text-align: center; }
-
-.loading-mark {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.45;
-  margin-bottom: 1.4rem;
-}
-
-.loading-message {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(22px, 3vw, 32px);
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  min-height: 1.6em;
-}
-
-/* ============================================================
-   RESULT VIEW
-   ============================================================ */
-
-#result-view.is-active {
+#poster-view.is-active {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -320,46 +234,38 @@ button, input, textarea { font-family: inherit; }
 .poster-stage { display: flex; align-items: center; justify-content: center; }
 
 .poster-viewport {
-  width: min(38vh, 92vw, 430px);
-  height: min(67.5vh, 163vw, 764px);
+  width: min(38vh, 92vw, 420px);
+  height: min(67.5vh, 163vw, 746px);
   aspect-ratio: 1080 / 1920;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.22);
+  box-shadow: 0 28px 64px rgba(0,0,0,0.22);
 }
 
-.poster-wrapper {
-  width: 1080px;
-  height: 1920px;
-  transform-origin: top left;
-}
+.poster-wrapper { width: 1080px; height: 1920px; transform-origin: top left; }
 
-.result-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+.poster-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
-.action-btn {
+.btn {
   border: 1px solid var(--ink);
   background: transparent;
   color: var(--ink);
   padding: 0.85rem 1.9rem;
-  font-family: var(--sans);
+  font-family: var(--utility);
   font-size: 13px;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
 }
-.action-btn--primary { background: var(--ink); color: var(--paper); }
-.action-btn--primary:hover { opacity: 0.85; }
-.action-btn--secondary:hover { background: var(--ink); color: var(--paper); }
-.action-btn:disabled { opacity: 0.5; cursor: wait; }
+.btn--primary { background: var(--ink); color: var(--paper); }
+.btn--primary:hover { opacity: 0.85; }
+.btn--secondary:hover { background: var(--ink); color: var(--paper); }
+.btn:disabled { opacity: 0.5; cursor: wait; }
 
 /* ============================================================
-   POSTER — shared shell (1080x1920 fixed canvas)
+   POSTER SHELL — 1080x1920 fixed canvas
    ============================================================ */
 
 .poster {
@@ -371,7 +277,7 @@ button, input, textarea { font-family: inherit; }
   color: var(--ink);
   opacity: 0;
   transform: scale(0.985);
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .poster.is-revealed { opacity: 1; transform: scale(1); }
 
@@ -380,7 +286,7 @@ button, input, textarea { font-family: inherit; }
   top: 130px;
   left: 90px;
   right: 90px;
-  bottom: 230px;
+  bottom: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -388,354 +294,132 @@ button, input, textarea { font-family: inherit; }
   text-align: center;
 }
 
-.poster-footer {
+.poster-watermark {
   position: absolute;
   left: 90px;
-  bottom: 96px;
-  font-family: var(--mono);
-  font-size: 15px;
-  line-height: 1.55;
-  letter-spacing: 0.04em;
-  opacity: 0.42;
+  bottom: 70px;
+  margin: 0;
+  font-family: var(--utility);
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  opacity: 0.4;
 }
-.poster-footer p { margin: 0; }
 
 .poster-attribution {
   position: absolute;
   right: 90px;
-  bottom: 96px;
-  font-family: var(--serif);
+  bottom: 68px;
+  margin: 0;
+  font-family: var(--headline);
   font-style: italic;
   font-size: 24px;
   opacity: 0.85;
-  margin: 0;
 }
 
-.poster [class$="-text"],
-.poster [class$="-title"],
-.poster [class$="-headline"],
-.poster [class$="-def"],
-.poster [class$="-line"] {
-  margin: 0;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
+.poster p { margin: 0; word-wrap: break-word; overflow-wrap: break-word; }
 
 /* ============================================================
-   25 POSTER SYSTEMS
+   8 POSTER SYSTEMS
    ============================================================ */
 
-/* ---- 1. A24 Film Poster ---- */
-.poster--a24 { background: var(--black); color: var(--paper); }
-.poster--a24 .poster-content { justify-content: space-between; padding: 40px 0; }
-.a24-eyebrow {
-  font-family: var(--mono); font-size: 16px; letter-spacing: 0.28em;
-  opacity: 0.6; margin-bottom: 40px;
-}
-.a24-title {
-  font-family: var(--serif); font-weight: 500; font-style: italic;
-  line-height: 1.05; max-height: 900px; overflow: hidden;
-  display: flex; align-items: center;
-}
-.a24-tagline {
-  font-family: var(--sans); font-size: 15px; opacity: 0.55; margin-top: 40px;
+/* ---- 1. Protest Poster (anger) ---- */
+.poster--protest { background: var(--red); color: var(--white); }
+.protest-lines { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.protest-line {
+  font-family: var(--utility); font-weight: 800; text-transform: uppercase;
+  line-height: 0.95; letter-spacing: -0.01em; max-height: 420px; overflow: hidden;
 }
 
-/* ---- 2. Museum Placard ---- */
-.poster--museum-placard { background: var(--white); color: var(--ink); }
-.poster--museum-placard .poster-content { text-align: left; align-items: flex-start; }
-.placard-catalog {
-  font-family: var(--mono); font-size: 14px; letter-spacing: 0.1em;
-  opacity: 0.5; margin-bottom: 56px;
+/* ---- 2. Corporate Report (burnout / work) ---- */
+.poster--corporate { background: var(--navy); color: var(--white); }
+.poster--corporate .poster-content { align-items: stretch; text-align: left; justify-content: flex-start; padding-top: 10px; }
+.corp-title {
+  font-family: var(--utility); font-weight: 700; font-size: 26px; letter-spacing: 0.06em;
+  border-bottom: 2px solid rgba(255,255,255,0.35); padding-bottom: 28px; margin-bottom: 44px;
 }
-.placard-title {
-  font-family: var(--serif); font-weight: 500; line-height: 1.15;
-  max-height: 780px; overflow: hidden; border-left: 3px solid var(--ink);
-  padding-left: 36px;
-}
-.placard-medium { font-family: var(--serif); font-style: italic; font-size: 22px; margin-top: 48px; padding-left: 39px; }
-.placard-date { font-family: var(--sans); font-size: 14px; opacity: 0.5; margin-top: 8px; padding-left: 39px; }
+.corp-rows { display: flex; flex-direction: column; gap: 26px; margin-bottom: 56px; }
+.corp-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,0.18); padding-bottom: 14px; }
+.corp-label { font-family: var(--utility); font-size: 16px; opacity: 0.65; letter-spacing: 0.02em; }
+.corp-value { font-family: var(--headline); font-size: 34px; font-weight: 500; }
+.corp-notes { font-family: var(--utility); font-size: 15px; opacity: 0.6; line-height: 1.5; }
+.corp-notes-label { display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; margin-bottom: 10px; }
 
-/* ---- 3. Vogue Cover ---- */
+/* ---- 3. Dictionary Entry (identity) ---- */
+.poster--dictionary { background: var(--sky); color: var(--ink); }
+.poster--dictionary .poster-content { text-align: left; align-items: flex-start; }
+.dict-word { font-family: var(--headline); font-weight: 500; font-style: italic; margin-bottom: 10px; }
+.dict-pos { font-family: var(--headline); font-style: italic; font-size: 22px; opacity: 0.55; margin-bottom: 48px; }
+.dict-def { font-family: var(--headline); font-weight: 400; line-height: 1.4; max-height: 900px; overflow: hidden; }
+
+/* ---- 4. Museum Exhibit (existential) ---- */
+.poster--museum { background: var(--white); color: var(--ink); }
+.museum-title { font-family: var(--headline); font-weight: 500; letter-spacing: 0.01em; margin-bottom: 24px; max-height: 500px; overflow: hidden; }
+.museum-year { font-family: var(--utility); font-size: 16px; opacity: 0.5; margin-bottom: 56px; }
+.museum-medium { font-family: var(--headline); font-style: italic; font-size: 26px; line-height: 1.5; opacity: 0.85; }
+
+/* ---- 5. Obituary (loss) ---- */
+.poster--obituary { background: var(--ink); color: var(--paper); }
+.obit-heading {
+  font-family: var(--utility); letter-spacing: 0.18em; font-size: 16px; opacity: 0.6;
+  margin-bottom: 52px; border-top: 1px solid rgba(245,242,234,0.35); border-bottom: 1px solid rgba(245,242,234,0.35);
+  padding: 20px 0; width: 100%;
+}
+.obit-body { font-family: var(--headline); font-weight: 400; line-height: 1.35; max-height: 900px; overflow: hidden; }
+
+/* ---- 6. Vogue Cover (reinvention) ---- */
 .poster--vogue { background: var(--paper); color: var(--ink); }
 .poster--vogue .poster-content { justify-content: space-between; padding: 20px 0 60px; }
-.vogue-masthead {
-  font-family: var(--serif); font-weight: 600; font-size: 130px; letter-spacing: 0.02em;
-  line-height: 1; margin-bottom: 0;
-}
-.vogue-coverline-top {
-  font-family: var(--sans); font-size: 16px; letter-spacing: 0.22em; opacity: 0.6; margin-top: 12px;
-}
-.vogue-headline {
-  font-family: var(--serif); font-style: italic; font-weight: 500; line-height: 1.1;
-  max-height: 620px; overflow: hidden;
-}
-.vogue-coverline-bottom { font-family: var(--sans); font-size: 15px; opacity: 0.55; }
+.vogue-masthead { font-family: var(--headline); font-weight: 600; font-size: 128px; line-height: 1; }
+.vogue-issue { font-family: var(--utility); font-size: 15px; letter-spacing: 0.2em; opacity: 0.55; margin-top: 10px; }
+.vogue-cover { font-family: var(--headline); font-style: italic; font-weight: 500; line-height: 1.1; max-height: 620px; overflow: hidden; }
+.vogue-sub { font-family: var(--utility); font-size: 15px; opacity: 0.55; }
 
-/* ---- 4. Indie Film ---- */
-.poster--indie-film { background: var(--cream-dark); color: var(--ink); }
-.poster--indie-film .poster-content { justify-content: flex-end; padding-bottom: 40px; }
-.indie-title {
-  font-family: var(--serif); font-weight: 500; line-height: 1.08;
-  max-height: 1200px; overflow: hidden;
-}
-.indie-credit {
-  font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; opacity: 0.55;
-  margin-top: 48px; border-top: 1px solid var(--charcoal); padding-top: 24px; width: 100%;
-}
+/* ---- 7. Public Notice (universal) ---- */
+.poster--notice { background: var(--yellow); color: var(--ink); }
+.notice-heading { font-family: var(--utility); font-weight: 700; font-size: 26px; letter-spacing: 0.14em; margin-bottom: 52px; }
+.notice-body { font-family: var(--headline); font-weight: 500; line-height: 1.35; max-height: 900px; overflow: hidden; }
 
-/* ---- 5. Poetry Collection ---- */
-.poster--poetry { background: var(--paper); color: var(--ink); }
-.poetry-numeral { font-family: var(--serif); font-style: italic; font-size: 26px; opacity: 0.5; margin-bottom: 44px; }
-.poetry-text { font-family: var(--serif); font-weight: 400; font-style: italic; line-height: 1.5; max-height: 1100px; overflow: hidden; }
-
-/* ---- 6. Protest Poster ---- */
-.poster--protest {
-  background: #C62828;
-  color: white;
-}
-.protest-text {
-  font-family: var(--sans); font-weight: 800; text-transform: uppercase;
-  line-height: 0.98; letter-spacing: -0.01em; max-height: 1500px; overflow: hidden;
-}
-
-/* ---- 7. Newspaper Front Page ---- */
-.poster--newspaper { background: var(--paper); color: var(--ink); }
-.poster--newspaper .poster-content { text-align: center; }
-.news-masthead {
-  font-family: var(--serif); font-weight: 600; font-size: 74px; letter-spacing: 0.01em;
-  border-bottom: 4px solid var(--ink); padding-bottom: 20px; margin-bottom: 14px; width: 100%;
-}
-.news-dateline { font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; opacity: 0.55; margin-bottom: 52px; }
-.news-headline { font-family: var(--serif); font-weight: 600; line-height: 1.08; max-height: 900px; overflow: hidden; }
-.news-byline { font-family: var(--serif); font-style: italic; font-size: 18px; opacity: 0.55; margin-top: 44px; }
-
-/* ---- 8. Luxury Fashion Campaign ---- */
-.poster--luxury-fashion { background: var(--stone); color: var(--ink); }
-.poster--luxury-fashion .poster-content { justify-content: space-between; padding: 60px 0; }
-.fashion-season { font-family: var(--mono); font-size: 13px; letter-spacing: 0.24em; opacity: 0.6; }
-.fashion-line {
-  font-family: var(--serif); font-weight: 400; font-style: italic; line-height: 1.12;
-  max-height: 900px; overflow: hidden;
-}
-.fashion-house { font-family: var(--sans); font-size: 16px; letter-spacing: 0.32em; }
-
-/* ---- 9. Obituary ---- */
-.poster--obituary { background: var(--white); color: var(--ink); }
-.obit-eyebrow {
-  font-family: var(--serif); font-style: italic; font-size: 20px; opacity: 0.65; margin-bottom: 48px;
-  border-top: 1px solid var(--charcoal); border-bottom: 1px solid var(--charcoal); padding: 18px 0;
-}
-.obit-text { font-family: var(--serif); font-weight: 400; line-height: 1.4; max-height: 1000px; overflow: hidden; }
-.obit-line { font-family: var(--sans); font-size: 15px; opacity: 0.5; margin-top: 48px; }
-
-/* ---- 10. Receipt ---- */
-.poster--receipt { background: var(--white); color: var(--ink); }
-.poster--receipt .poster-content { align-items: stretch; text-align: left; }
-.receipt-store { font-family: var(--mono); font-weight: 600; font-size: 26px; text-align: center; letter-spacing: 0.08em; }
-.receipt-sub { font-family: var(--mono); font-size: 13px; text-align: center; opacity: 0.55; margin-top: 6px; margin-bottom: 28px; }
-.receipt-rule { border-top: 2px dashed var(--charcoal); opacity: 0.5; margin: 20px 0; }
-.receipt-item { font-family: var(--mono); font-size: 15px; opacity: 0.7; }
-.receipt-text { font-family: var(--mono); line-height: 1.6; margin: 24px 0; max-height: 700px; overflow: hidden; }
-.receipt-total { font-family: var(--mono); font-weight: 600; font-size: 18px; text-align: center; }
-.receipt-barcode {
-  height: 60px; margin-top: 36px;
-  background: repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 7px, var(--ink) 7px 9px, transparent 9px 15px);
-  opacity: 0.85;
-}
-
-/* ---- 11. Court Exhibit ---- */
-.poster--court-exhibit { background: var(--paper); color: var(--ink); }
-.court-exhibit-label {
-  font-family: var(--mono); font-size: 18px; letter-spacing: 0.15em; border: 2px solid var(--ink);
-  padding: 10px 26px; margin-bottom: 40px;
-}
-.court-case { font-family: var(--sans); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.6; margin-bottom: 40px; }
-.court-text { font-family: var(--mono); line-height: 1.55; max-height: 850px; overflow: hidden; }
-.court-stamp {
-  font-family: var(--mono); font-size: 15px; letter-spacing: 0.12em; opacity: 0.55;
-  margin-top: 48px; border: 1px solid var(--charcoal); padding: 10px 20px; transform: rotate(-4deg);
-}
-
-/* ---- 12. Dictionary Entry ---- */
-.poster--dictionary {
-  background: #DDE7F2;
-  color: #111111;
-}
-.poster--dictionary .poster-content { text-align: left; align-items: flex-start; }
-.dict-headword { font-family: var(--serif); font-weight: 500; font-size: 68px; margin-bottom: 6px; }
-.dict-pos { font-family: var(--serif); font-size: 22px; opacity: 0.55; margin-bottom: 44px; }
-.dict-def { font-family: var(--sans); line-height: 1.5; max-height: 950px; overflow: hidden; }
-.dict-num { font-family: var(--mono); opacity: 0.55; margin-right: 8px; }
-
-/* ---- 13. Missing Person Poster ---- */
-.poster--missing-person { background: var(--white); color: var(--ink); }
-.missing-heading { font-family: var(--sans); font-weight: 800; font-size: 96px; letter-spacing: 0.02em; margin-bottom: 32px; }
-.missing-frame {
-  width: 360px; height: 360px; border: 3px dashed var(--charcoal);
-  display: flex; align-items: center; justify-content: center; margin-bottom: 32px;
-}
-.missing-frame span { font-family: var(--mono); font-size: 13px; opacity: 0.4; letter-spacing: 0.05em; }
-.missing-label { font-family: var(--mono); font-size: 15px; letter-spacing: 0.06em; opacity: 0.6; margin-bottom: 20px; }
-.missing-text { font-family: var(--sans); font-weight: 500; line-height: 1.4; max-height: 500px; overflow: hidden; }
-.missing-contact { font-family: var(--mono); font-size: 13px; opacity: 0.5; margin-top: 32px; }
-
-/* ---- 14. Redacted Document ---- */
-.poster--redacted { background: var(--cream-dark); color: var(--ink); }
-.poster--redacted .poster-content { align-items: stretch; text-align: left; }
-.redacted-stamp {
-  font-family: var(--sans); font-weight: 800; font-size: 40px; letter-spacing: 0.1em;
-  color: var(--black); border: 4px solid var(--black); align-self: center;
-  padding: 6px 24px; transform: rotate(-6deg); margin-bottom: 44px;
-}
-.redacted-section { font-family: var(--mono); font-size: 13px; opacity: 0.55; margin-bottom: 24px; }
-.redacted-bar { height: 26px; background: var(--black); width: 70%; margin: 18px 0; }
-.redacted-bar--a { width: 40%; }
-.redacted-bar--b { width: 58%; }
-.redacted-text { font-family: var(--mono); line-height: 1.55; max-height: 650px; overflow: hidden; text-align: center; }
-
-/* ---- 15. Album Cover ---- */
-.poster--album-cover { background: var(--black); color: var(--paper); }
-.album-art {
-  width: 780px; height: 780px; background: var(--charcoal);
-  display: flex; align-items: center; justify-content: center; padding: 60px; margin-bottom: 48px;
-}
-.album-text { font-family: var(--serif); font-style: italic; line-height: 1.25; max-height: 660px; overflow: hidden; }
-.album-artist { font-family: var(--sans); font-weight: 700; font-size: 22px; letter-spacing: 0.04em; }
-.album-title { font-family: var(--mono); font-size: 14px; opacity: 0.55; margin-top: 8px; }
-
-/* ---- 16. Airport Departure Board ---- */
-.poster--departure-board { background: var(--black); color: var(--paper); }
-.board-heading { font-family: var(--mono); font-size: 20px; letter-spacing: 0.24em; opacity: 0.6; margin-bottom: 60px; }
-.board-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-height: 1200px; overflow: hidden; }
-.board-tile {
-  font-family: var(--mono); font-weight: 500; font-size: 34px;
-  background: var(--charcoal); padding: 8px 4px; width: 46px; text-align: center;
-}
-.board-gate { font-family: var(--mono); font-size: 14px; opacity: 0.5; margin-top: 56px; letter-spacing: 0.05em; }
-
-/* ---- 17. Typewriter Page ---- */
-.poster--typewriter { background: var(--white); color: var(--ink); }
-.poster--typewriter .poster-content { align-items: flex-start; text-align: left; }
-.type-page-num { font-family: var(--mono); font-size: 16px; opacity: 0.5; margin-bottom: 40px; align-self: center; }
-.type-text { font-family: var(--mono); line-height: 1.7; max-height: 1200px; overflow: hidden; }
-
-/* ---- 18. Museum Wall Text ---- */
-.poster--museum-wall { background: var(--paper); color: var(--ink); }
-.wall-eyebrow { font-family: var(--mono); font-size: 15px; letter-spacing: 0.24em; opacity: 0.55; margin-bottom: 56px; }
-.wall-text { font-family: var(--serif); font-weight: 400; line-height: 1.35; max-height: 1100px; overflow: hidden; }
-
-/* ---- 19. Annual Report ---- */
-.poster--annual-report {
-  background: #16324F;
-  color: white;
-}
-
-
-.poster--annual-report .poster-content { justify-content: space-between; padding: 40px 0; text-align: left; align-items: flex-start; }
-.annual-eyebrow { font-family: var(--mono); font-size: 14px; letter-spacing: 0.16em; opacity: 0.6; }
-.annual-year { font-family: var(--serif); font-weight: 600; font-size: 140px; line-height: 1; margin-top: 10px; }
-.annual-headline { font-family: var(--sans); font-weight: 600; line-height: 1.2; max-height: 700px; overflow: hidden; }
-.annual-footer-line { font-family: var(--sans); font-size: 14px; opacity: 0.5; border-top: 1px solid var(--charcoal); padding-top: 18px; width: 100%; }
-
-/* ---- 20. Movie Credits ---- */
-.poster--movie-credits { background: var(--black); color: var(--paper); }
-.poster--movie-credits .poster-content { justify-content: space-between; padding: 80px 0; }
-.credits-role { font-family: var(--mono); font-size: 15px; letter-spacing: 0.18em; opacity: 0.55; }
-.credits-text { font-family: var(--serif); font-style: italic; font-weight: 400; line-height: 1.3; max-height: 900px; overflow: hidden; }
-
-/* ---- 21. Book Spine ---- */
-.poster--book-spine { background: var(--charcoal); color: var(--paper); }
-.poster--book-spine .poster-content { flex-direction: row; }
-.spine-band {
-  writing-mode: vertical-rl; transform: rotate(180deg);
-  height: 100%; display: flex; align-items: center; justify-content: center;
-  border-left: 2px solid var(--stone); border-right: 2px solid var(--stone); padding: 0 40px;
-}
-.spine-text { font-family: var(--serif); font-weight: 500; letter-spacing: 0.02em; max-width: 1400px; overflow: hidden; }
-.spine-imprint {
-  writing-mode: vertical-rl;
-  font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; opacity: 0.5;
-  position: absolute; right: 40px; bottom: 40px;
-}
-
-/* ---- 22. Luxury Watch Advertisement ---- */
-.poster--luxury-watch { background: var(--black); color: var(--paper); }
-.poster--luxury-watch .poster-content { justify-content: space-between; padding: 60px 0; }
-.watch-eyebrow { font-family: var(--sans); font-size: 13px; letter-spacing: 0.2em; opacity: 0.55; }
-.watch-headline { font-family: var(--serif); font-weight: 500; line-height: 1.15; max-height: 900px; overflow: hidden; }
-.watch-brand { font-family: var(--sans); font-size: 20px; letter-spacing: 0.28em; }
-
-/* ---- 23. Tabloid ---- */
-.poster--tabloid {
-  background: #FF5A3C;
-  color: white;
-}
-.tabloid-masthead {
-  font-family: var(--sans); font-weight: 800; font-size: 60px; letter-spacing: -0.01em;
-  border-bottom: 8px solid var(--black); padding-bottom: 16px; margin-bottom: 40px; width: 100%;
-}
-.tabloid-headline {
-  font-family: var(--sans); font-weight: 800; text-transform: uppercase; line-height: 0.96;
-  max-height: 1000px; overflow: hidden;
-}
-.tabloid-subhead { font-family: var(--mono); font-size: 16px; margin-top: 40px; letter-spacing: 0.04em; }
-
-/* ---- 24. Public Notice ---- */
-.poster--public-notice {
-  background: #FFD54F;
-  color: #111111;
-}
-.poster--public-notice .poster-content { border: 2px solid var(--ink); padding: 60px 50px; }
-.notice-heading { font-family: var(--sans); font-weight: 700; font-size: 26px; letter-spacing: 0.14em; margin-bottom: 48px; }
-.notice-text { font-family: var(--sans); font-weight: 400; line-height: 1.5; max-height: 850px; overflow: hidden; }
-.notice-ref { font-family: var(--mono); font-size: 13px; opacity: 0.5; margin-top: 44px; }
-
-/* ---- 25. The Quiet One ---- */
-.poster--quiet { background: var(--paper); color: var(--ink); }
-.quiet-text {
-  font-family: var(--serif); font-weight: 300; font-style: italic; line-height: 1.5;
-  max-height: 700px; overflow: hidden; opacity: 0.92;
-}
+/* ---- 8. A24 Film Poster (nostalgia) ---- */
+.poster--a24 { background: var(--paper); color: var(--ink); }
+.poster--a24 .poster-content { justify-content: space-between; padding: 60px 0; }
+.a24-title { font-family: var(--headline); font-weight: 500; font-style: italic; line-height: 1.05; max-height: 900px; overflow: hidden; }
+.a24-credit { font-family: var(--utility); font-size: 13px; letter-spacing: 0.1em; opacity: 0.55; }
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
 
 @media (max-width: 980px) {
-  .landing-grid { grid-template-columns: 1fr; }
-  .landing-left { border-right: none; padding: 10vw 6vw 4vw; }
-  .landing-right { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  .panel-left { border-right: none; padding: 10vw 6vw 4vw; }
+  .panel-right { display: none; }
 
-  .mobile-showcase {
-    display: block;
-    padding: 0 6vw 6vw;
-  }
-  .mobile-showcase-track {
+  .mobile-showcase { display: block; padding: 0 6vw 6vw; }
+  .mobile-track {
     display: flex;
-    gap: 1.1rem;
+    gap: 1rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding-bottom: 0.5rem;
     -webkit-overflow-scrolling: touch;
   }
-  .mobile-showcase-track::-webkit-scrollbar { display: none; }
-  .mobile-showcase .showcase-card {
-    width: 148px;
+  .mobile-track::-webkit-scrollbar { display: none; }
+  .mobile-track .showcase-card {
+    width: 142px;
     scroll-snap-align: start;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.14);
   }
-  .mobile-showcase .poster { transform: scale(calc(148 / 1080)); }
+  .mobile-track .poster { transform: scale(calc(142 / 1080)); }
 
-  .headline { font-size: 72px; }
-  .create-btn { align-self: stretch; text-align: center; }
+  .hero-headline { font-size: 70px; }
+  #make-btn { align-self: stretch; text-align: center; }
 }
 
 @media (max-width: 560px) {
-  .landing-left { padding: 12vw 6vw 5vw; }
-  .brand-mark { margin-bottom: 2.4rem; }
-  .headline { font-size: 58px; }
+  .panel-left { padding: 12vw 6vw 5vw; }
+  .brand { margin-bottom: 2.2rem; }
+  .hero-headline { font-size: 56px; }
   #vent-input { font-size: 19px; }
-  .result-actions { flex-direction: column; width: 100%; max-width: 320px; }
-  .action-btn { width: 100%; }
+  .poster-actions { flex-direction: column; width: 100%; max-width: 320px; }
+  .btn { width: 100%; }
 }
