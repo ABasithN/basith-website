@@ -395,7 +395,24 @@
     );
   }
 
-  /* ---------- autofit: shrink text until it fits its box, no overflow ---------- */
+  /* ---------- fixed typography: showcase cards never participate in font-fitting ----------
+     Showcase posters are rendered at true 1080x1920 and then scaled way down purely via
+     CSS transform for display. They just need their max size set once — never measured
+     or shrunk, since at showcase scale the fitting loop has nothing meaningful to compare
+     against and will walk font-size down toward data-fit-min for no reason. */
+
+  function applyFixedTypography(posterEl) {
+    var nodes = posterEl.querySelectorAll(".js-fit");
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      var max = parseInt(el.getAttribute("data-fit-max"), 10) || 100;
+      el.style.fontSize = max + "px";
+    }
+  }
+
+  /* ---------- autofit: shrink text until it fits its box, no overflow ----------
+     Used ONLY for the full-size generated poster (result view) and the offscreen
+     export poster (download). Never applied to showcase cards. ---------- */
 
   function autoFit(posterEl) {
     var nodes = posterEl.querySelectorAll(".js-fit");
@@ -616,6 +633,7 @@
     card.innerHTML = buildPosterHTML(item.id, item.text, "");
     var poster = card.querySelector(".poster");
     poster.classList.add("is-revealed");
+    applyFixedTypography(poster);
     return card;
   }
 
@@ -628,12 +646,5 @@
 
   populateShowcase(document.getElementById("showcase-track"), true);
   populateShowcase(document.getElementById("mobile-showcase-track"), false);
-
-  // autofit runs after cards are laid out in the DOM
-  requestAnimationFrame(function () {
-    document.querySelectorAll(".showcase-card .poster, .mobile-showcase .poster").forEach(function (p) {
-      autoFit(p);
-    });
-  });
 
 })();
