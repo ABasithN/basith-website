@@ -238,7 +238,7 @@ button, input, textarea { font-family: inherit; }
 
 .showcase-card {
   flex: 0 0 auto;
-  width: 260px;
+  width: 420px;
   aspect-ratio: 1080 / 1920;
   border-radius: 2px;
   overflow: hidden;
@@ -257,7 +257,7 @@ button, input, textarea { font-family: inherit; }
 .showcase-card .poster {
   width: 1080px;
   height: 1920px;
-  transform: scale(calc(260 / 1080));
+  transform: scale(calc(420 / 1080));
   transform-origin: top left;
 }
 
