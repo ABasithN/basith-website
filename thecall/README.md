@@ -1,15 +1,23 @@
-# The Call — Step 2
+# The Call — V4
 
-Clean wall background + 3D-looking CSS telephone.
+This version makes the phone a real HTML/CSS object while using the cinematic wall scene as the environment.
 
-The telephone is HTML/CSS, not an image, so every control can change state.
+The phone includes:
+- Handset form
+- LCD with INCOMING CALL / blinking ANSWER
+- Speaker grille
+- CALL indicator / green status light
+- SPEAKER button
+- 3x4 numeric keypad
+- HOLD -> RESUME
+- END CALL
+- Physical-style bevels, shadows and plastic depth
+- Responsive desktop/mobile scaling
 
-Controls:
-- SPEAKER: answers the call
-- HOLD: pauses the voice message
-- RESUME: appears on the same button after HOLD
-- END CALL: ends the call
-- Number keys are decorative physical keypad buttons
+The background is an environmental photograph. The phone is not an image, so its controls and LCD can change dynamically.
 
-LCD states:
-INCOMING CALL -> CALL IN PROGRESS -> CALL ON HOLD -> CALL IN PROGRESS -> CALL ENDED
+Audio:
+- audio/message-01.mp3 is the current prototype message.
+
+Browser note:
+Audible autoplay on page load can be blocked by Safari/Chrome. The call UI can be shown immediately; the message itself is started by the SPEAKER user gesture.

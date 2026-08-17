@@ -1,12 +1,11 @@
 const lcd = document.getElementById("lcd");
+const answerPrompt = document.getElementById("answerPrompt");
 const callLight = document.getElementById("callLight");
 const speakerButton = document.getElementById("speakerButton");
 const holdButton = document.getElementById("holdButton");
 const endButton = document.getElementById("endButton");
 const messageAudio = document.getElementById("messageAudio");
 const afterCall = document.getElementById("afterCall");
-const leaveButton = document.getElementById("leaveButton");
-const hangButton = document.getElementById("hangButton");
 
 let answered = false;
 let ended = false;
@@ -34,18 +33,19 @@ function answerCall() {
   clickSound();
 
   lcd.textContent = "CALL IN PROGRESS";
+  answerPrompt.classList.add("off");
   callLight.classList.add("on");
   speakerButton.disabled = true;
 
   messageAudio.currentTime = 0;
-  messageAudio.play();
+  messageAudio.play().catch(() => {});
 }
 
 function toggleHold() {
   if (!answered || ended) return;
 
   if (messageAudio.paused) {
-    messageAudio.play();
+    messageAudio.play().catch(() => {});
     holdButton.textContent = "HOLD";
     callLight.classList.remove("hold");
     lcd.textContent = "CALL IN PROGRESS";
@@ -62,8 +62,9 @@ function endCall() {
 
   ended = true;
   messageAudio.pause();
-  callLight.classList.remove("on", "hold");
+
   lcd.textContent = "CALL ENDED";
+  callLight.classList.remove("on", "hold");
   speakerButton.disabled = true;
   holdButton.disabled = true;
   endButton.disabled = true;
@@ -80,11 +81,3 @@ speakerButton.addEventListener("click", answerCall);
 holdButton.addEventListener("click", toggleHold);
 endButton.addEventListener("click", endCall);
 messageAudio.addEventListener("ended", endCall);
-
-leaveButton.addEventListener("click", () => {
-  alert("Recording comes next.");
-});
-
-hangButton.addEventListener("click", () => {
-  afterCall.hidden = true;
-});
