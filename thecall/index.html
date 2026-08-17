@@ -3,42 +3,68 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#171714">
+  <meta name="theme-color" content="#302b23">
   <title>The Call</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="stage">
-    <section class="scene" aria-label="The Call">
-      <div class="scene-image">
-        <img src="the-call.jpg" alt="A telephone waiting for a call">
+  <main class="room">
+    <div class="phone-stage">
 
-        <!-- Invisible interaction area over the real SPEAKER button -->
-        <button id="speakerButton" class="speaker-hotspot"
-          aria-label="Answer call on speakerphone"></button>
+      <section class="phone" id="phone" aria-label="The Call telephone">
+        <div class="phone-shadow"></div>
 
-        <!-- Real green status light layered over the photographed CALL light -->
-        <span id="led" class="led-overlay" aria-hidden="true"></span>
-      </div>
+        <div class="phone-face">
+          <div class="phone-top">
+            <div class="lcd" id="lcd">INCOMING CALL</div>
 
-      <div class="call-controls" id="callControls" hidden>
-        <button id="pauseButton">PAUSE</button>
-        <button id="endButton" class="end">END CALL</button>
-      </div>
-    </section>
+            <div class="speaker-grille" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <div class="phone-middle">
+            <div class="call-light-panel">
+              <span class="small-label">CALL</span>
+              <span class="call-light" id="callLight"></span>
+            </div>
+
+            <button class="speaker-button" id="speakerButton">
+              <span class="speaker-symbol">◖))</span>
+              <span>SPEAKER</span>
+            </button>
+
+            <div class="keypad" aria-label="Telephone keypad">
+              <button>1</button><button>2</button><button>3</button>
+              <button>4</button><button>5</button><button>6</button>
+              <button>7</button><button>8</button><button>9</button>
+              <button>*</button><button>0</button><button>#</button>
+            </div>
+          </div>
+
+          <div class="phone-bottom">
+            <button class="control-button" id="holdButton">HOLD</button>
+            <button class="control-button end-button" id="endButton">END CALL</button>
+          </div>
+
+          <div class="phone-brand">homeline</div>
+        </div>
+      </section>
+
+    </div>
 
     <section class="after-call" id="afterCall" hidden>
-      <p class="after-kicker">THE LINE IS QUIET</p>
+      <p>THE LINE IS QUIET</p>
       <h1>Would you like to leave something for the next person?</h1>
-      <div class="after-actions">
+      <div>
         <button id="leaveButton">LEAVE A MESSAGE</button>
-        <button id="hangButton" class="secondary">HANG UP</button>
+        <button id="hangButton">HANG UP</button>
       </div>
-      <p class="placeholder" id="placeholder" hidden>Message recording comes next.</p>
     </section>
   </main>
 
-  <audio id="ringAudio" preload="auto" src="audio/ring.mp3"></audio>
   <audio id="messageAudio" preload="auto" src="audio/message-01.mp3"></audio>
   <script src="script.js"></script>
 </body>

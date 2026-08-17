@@ -1,15 +1,15 @@
-# The Call — V3
+# The Call — Step 2
 
-This version uses the photographic telephone as the only phone on the page.
+Clean wall background + 3D-looking CSS telephone.
 
-Fixes:
-- Removes the duplicate HTML/CSS telephone.
-- Removes the duplicate "Someone is calling." text below the image.
-- Adds a transparent clickable hotspot over the photographed SPEAKER button.
-- Adds a real green LED overlay over the photographed CALL light.
-- Fixes the JavaScript so it no longer tries to access the removed CSS phone elements.
-- Includes a ring sound and the working message audio.
-- Keeps PAUSE / RESUME and END CALL.
+The telephone is HTML/CSS, not an image, so every control can change state.
 
-Important browser limitation:
-Browsers can block audible autoplay on first page load. The visual phone is therefore immediately in the incoming-call state, but the audible ring may not begin until the visitor has interacted with the page. The message itself is triggered by the SPEAKER click, so it can play after that user gesture.
+Controls:
+- SPEAKER: answers the call
+- HOLD: pauses the voice message
+- RESUME: appears on the same button after HOLD
+- END CALL: ends the call
+- Number keys are decorative physical keypad buttons
+
+LCD states:
+INCOMING CALL -> CALL IN PROGRESS -> CALL ON HOLD -> CALL IN PROGRESS -> CALL ENDED
