@@ -142,3 +142,43 @@ body { min-height: 100svh; overflow-x: hidden; }
   .speaker-grille { gap: 5px; padding: 15px 10px; }
   .phone-base { align-items: flex-start; flex-direction: column; gap: 6px; }
 }
+
+.scene {
+  width: min(100%, 1536px);
+  text-align: center;
+}
+
+.scene-image {
+  position: relative;
+  width: 100%;
+}
+
+.scene-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.speaker-hotspot {
+  position: absolute;
+
+  /* Position of the SPEAKER button in the image */
+  left: 42%;
+  top: 44%;
+
+  width: 18%;
+  height: 11%;
+
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  /* Remove this once we're happy with the positioning */
+  outline: none;
+}
+
+.speaker-hotspot:focus-visible {
+  outline: 2px solid rgba(255,255,255,.6);
+  border-radius: 10px;
+}
+

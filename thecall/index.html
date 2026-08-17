@@ -9,15 +9,24 @@
 </head>
 <body>
   <main class="stage">
-    <section class="phone-wrap" aria-label="The Call telephone">
-      <div class="phone" id="phone">
-        <div class="phone-top">
-          <div class="display" id="display" aria-live="polite">INCOMING CALL</div>
-          <div class="speaker-grille" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i>
-            <i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-        </div>
+    <section class="scene">
+  <div class="scene-image">
+    <img src="the-call.jpg" alt="A telephone waiting for a call">
+
+    <button
+      id="speakerButton"
+      class="speaker-hotspot"
+      aria-label="Answer call on speakerphone">
+    </button>
+  </div>
+
+  <p class="instruction" id="instruction">Someone is calling.</p>
+
+  <div class="call-controls" id="callControls" hidden>
+    <button id="pauseButton">PAUSE</button>
+    <button id="endButton" class="end">END CALL</button>
+  </div>
+</section>
 
         <div class="phone-body">
           <div class="module">
