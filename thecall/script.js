@@ -5,6 +5,9 @@ const statusLine = document.getElementById("statusLine");
 const instruction = document.getElementById("instruction");
 const speakerButton = document.getElementById("speakerButton");
 const messageAudio = document.getElementById("messageAudio");
+const callControls = document.getElementById("callControls");
+const pauseButton = document.getElementById("pauseButton");
+const endButton = document.getElementById("endButton");
 const afterCall = document.getElementById("afterCall");
 const leaveButton = document.getElementById("leaveButton");
 const hangButton = document.getElementById("hangButton");
@@ -12,25 +15,22 @@ const placeholder = document.getElementById("placeholder");
 
 let audioCtx;
 let ringTimer = null;
-let ringOsc = null;
-let ringGain = null;
 let answered = false;
+let ended = false;
 
 function initAudioContext() {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   if (audioCtx.state === "suspended") audioCtx.resume();
 }
 
-function makeClick(duration = 0.045, frequency = 180) {
+function tone(frequency, duration, volume = 0.12, type = "square") {
   initAudioContext();
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
-  osc.type = "square";
+  osc.type = type;
   osc.frequency.value = frequency;
   gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.11, audioCtx.currentTime + 0.005);
+  gain.gain.exponentialRampToValueAtTime(volume, audioCtx.currentTime + 0.005);
   gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
   osc.connect(gain).connect(audioCtx.destination);
   osc.start();
@@ -38,25 +38,16 @@ function makeClick(duration = 0.045, frequency = 180) {
 }
 
 function ringBurst() {
-  initAudioContext();
-
-  ringOsc = audioCtx.createOscillator();
-  ringGain = audioCtx.createGain();
-  ringOsc.type = "sine";
-  ringOsc.frequency.value = 440;
-  ringGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-  ringGain.gain.exponentialRampToValueAtTime(0.16, audioCtx.currentTime + 0.02);
-  ringGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.28);
-  ringOsc.connect(ringGain).connect(audioCtx.destination);
-  ringOsc.start();
-  ringOsc.stop(audioCtx.currentTime + 0.3);
+  tone(440, 0.28, 0.16, "sine");
 }
 
 function startRinging() {
   phone.classList.add("ringing");
+  // The visual ringing state starts immediately on page load.
+  // Browsers may block audible autoplay until the first user gesture.
   ringBurst();
   ringTimer = setInterval(() => {
-    if (!answered) ringBurst();
+    if (!answered && !ended) ringBurst();
   }, 1100);
 }
 
@@ -67,35 +58,68 @@ function stopRinging() {
 }
 
 function hangupSound() {
-  // Short synthetic handset-disconnect click, so no extra sound file is required.
-  makeClick(0.055, 145);
-  setTimeout(() => makeClick(0.025, 92), 35);
+  tone(145, 0.055, 0.11, "square");
+  setTimeout(() => tone(92, 0.025, 0.08, "square"), 35);
+}
+
+function showControls() {
+  callControls.hidden = false;
 }
 
 function answerCall() {
-  if (answered) return;
-  answered = true;
+  if (answered || ended) return;
 
+  answered = true;
   initAudioContext();
   stopRinging();
-  makeClick();
+  tone(180, 0.045, 0.10, "square");
 
   led.classList.add("on");
   display.textContent = "LINE OPEN";
   statusLine.textContent = "SPEAKERPHONE ON";
   instruction.textContent = "Someone is listening.";
+  speakerButton.disabled = true;
+  showControls();
 
   messageAudio.currentTime = 0;
   messageAudio.play().catch(() => {
-    instruction.textContent = "Press SPEAKER to hear the message.";
+    instruction.textContent = "Press SPEAKER again to hear the message.";
+    speakerButton.disabled = false;
   });
 }
 
-function endCall() {
+function togglePause() {
+  if (!answered || ended) return;
+
+  if (messageAudio.paused) {
+    messageAudio.play();
+    pauseButton.textContent = "PAUSE";
+    pauseButton.classList.remove("paused");
+    statusLine.textContent = "SPEAKERPHONE ON";
+    instruction.textContent = "Someone is listening.";
+  } else {
+    messageAudio.pause();
+    pauseButton.textContent = "RESUME";
+    pauseButton.classList.add("paused");
+    statusLine.textContent = "CALL PAUSED";
+    instruction.textContent = "The call is paused.";
+  }
+}
+
+function endCall(reason = "ended") {
+  if (ended) return;
+  ended = true;
+
+  messageAudio.pause();
+  stopRinging();
+
   led.classList.remove("on");
   display.textContent = "CALL ENDED";
   statusLine.textContent = "LINE QUIET";
-  instruction.textContent = "The call has ended.";
+  instruction.textContent = reason === "finished" ? "The call has ended." : "You ended the call.";
+  callControls.hidden = true;
+  speakerButton.disabled = true;
+
   hangupSound();
 
   setTimeout(() => {
@@ -105,8 +129,10 @@ function endCall() {
 }
 
 speakerButton.addEventListener("click", answerCall);
+pauseButton.addEventListener("click", togglePause);
+endButton.addEventListener("click", () => endCall("manual"));
 
-messageAudio.addEventListener("ended", endCall);
+messageAudio.addEventListener("ended", () => endCall("finished"));
 
 leaveButton.addEventListener("click", () => {
   placeholder.hidden = false;
@@ -120,4 +146,5 @@ hangButton.addEventListener("click", () => {
   statusLine.textContent = "NO ACTIVE CALL";
 });
 
+// Start the ringing state immediately when the page loads.
 startRinging();

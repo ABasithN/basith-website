@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#171714">
-  <title>The Phone</title>
+  <title>The Call</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="stage">
-    <section class="phone-wrap" aria-label="Telephone">
+    <section class="phone-wrap" aria-label="The Call telephone">
       <div class="phone" id="phone">
         <div class="phone-top">
           <div class="display" id="display" aria-live="polite">INCOMING CALL</div>
@@ -22,7 +22,7 @@
         <div class="phone-body">
           <div class="module">
             <div class="module-label">CALL</div>
-            <div class="led" id="led" aria-label="Speakerphone status"></div>
+            <div class="led" id="led"></div>
           </div>
 
           <button class="speaker-button" id="speakerButton" aria-label="Answer call on speakerphone">
@@ -39,11 +39,16 @@
 
         <div class="phone-base">
           <div class="brand">home<span>line</span></div>
-          <div class="status-line" id="statusLine">LISTENING FOR A CALL</div>
+          <div class="status-line" id="statusLine">INCOMING CALL</div>
         </div>
       </div>
 
-      <p class="instruction" id="instruction">The phone is ringing.</p>
+      <p class="instruction" id="instruction">Someone is calling.</p>
+
+      <div class="call-controls" id="callControls" hidden>
+        <button id="pauseButton">PAUSE</button>
+        <button id="endButton" class="end">END CALL</button>
+      </div>
     </section>
 
     <section class="after-call" id="afterCall" hidden>
@@ -57,7 +62,7 @@
     </section>
   </main>
 
-  <audio id="messageAudio" preload="auto" src="audio/message-01.wav"></audio>
+  <audio id="messageAudio" preload="auto" src="audio/message-01.mp3"></audio>
   <script src="script.js"></script>
 </body>
 </html>

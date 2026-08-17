@@ -1,41 +1,26 @@
-# The Phone — V1
+# The Call — V2
 
-A tiny one-call prototype.
+This version adds visitor control during the call.
 
-## Current flow
+## Flow
 
-1. Phone rings automatically.
+1. The phone enters its ringing state immediately on page load.
 2. Visitor presses SPEAKER.
 3. Green LED turns on.
-4. `audio/message-01.wav` plays.
-5. When audio ends, a telephone-style disconnect click plays.
-6. Green LED turns off.
-7. After a short silence, the leave-a-message prompt appears.
+4. Message plays.
+5. Visitor can PAUSE / RESUME at any time.
+6. Visitor can END CALL at any time.
+7. If the message finishes naturally, a short hang-up click plays.
+8. Green LED turns off.
+9. After a short silence, the leave-a-message prompt appears.
+
+## Browser autoplay note
+
+A browser may block audible ringing until the first user interaction. The phone's visual ringing state starts immediately. Once the visitor interacts with the page, the browser can play the generated ringing tone normally.
 
 ## Files
 
-- `index.html`
-- `style.css`
-- `script.js`
-- `audio/message-01.wav`
-
-## Run locally
-
-Because browsers can restrict audio behavior when opening files directly, the easiest local test is VS Code + Live Server, or any simple local web server.
-
-For example, from this folder:
-
-`python3 -m http.server 8000`
-
-Then open:
-
-`http://localhost:8000`
-
-## Next build stages
-
-- Replace the CSS phone with the final designed phone object.
-- Add the real speakerphone/ringing sound assets if desired.
-- Add five-message daily pool.
-- Add visitor message recording.
-- Add moderation/storage.
-- Add five-minute return logic.
+- index.html
+- style.css
+- script.js
+- audio/message-01.mp3
