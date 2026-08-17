@@ -1,26 +1,15 @@
-# The Call — V2
+# The Call — V3
 
-This version adds visitor control during the call.
+This version uses the photographic telephone as the only phone on the page.
 
-## Flow
+Fixes:
+- Removes the duplicate HTML/CSS telephone.
+- Removes the duplicate "Someone is calling." text below the image.
+- Adds a transparent clickable hotspot over the photographed SPEAKER button.
+- Adds a real green LED overlay over the photographed CALL light.
+- Fixes the JavaScript so it no longer tries to access the removed CSS phone elements.
+- Includes a ring sound and the working message audio.
+- Keeps PAUSE / RESUME and END CALL.
 
-1. The phone enters its ringing state immediately on page load.
-2. Visitor presses SPEAKER.
-3. Green LED turns on.
-4. Message plays.
-5. Visitor can PAUSE / RESUME at any time.
-6. Visitor can END CALL at any time.
-7. If the message finishes naturally, a short hang-up click plays.
-8. Green LED turns off.
-9. After a short silence, the leave-a-message prompt appears.
-
-## Browser autoplay note
-
-A browser may block audible ringing until the first user interaction. The phone's visual ringing state starts immediately. Once the visitor interacts with the page, the browser can play the generated ringing tone normally.
-
-## Files
-
-- index.html
-- style.css
-- script.js
-- audio/message-01.mp3
+Important browser limitation:
+Browsers can block audible autoplay on first page load. The visual phone is therefore immediately in the incoming-call state, but the audible ring may not begin until the visitor has interacted with the page. The message itself is triggered by the SPEAKER click, so it can play after that user gesture.

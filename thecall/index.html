@@ -8,19 +8,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="stage">
-    <section class="scene">
+  <main class="stage">
+    <section class="scene" aria-label="The Call">
       <div class="scene-image">
         <img src="the-call.jpg" alt="A telephone waiting for a call">
 
-        <button
-          id="speakerButton"
-          class="speaker-hotspot"
-          aria-label="Answer call on speakerphone">
-        </button>
-      </div>
+        <!-- Invisible interaction area over the real SPEAKER button -->
+        <button id="speakerButton" class="speaker-hotspot"
+          aria-label="Answer call on speakerphone"></button>
 
-      <p class="instruction" id="instruction">Someone is calling.</p>
+        <!-- Real green status light layered over the photographed CALL light -->
+        <span id="led" class="led-overlay" aria-hidden="true"></span>
+      </div>
 
       <div class="call-controls" id="callControls" hidden>
         <button id="pauseButton">PAUSE</button>
@@ -39,6 +38,7 @@
     </section>
   </main>
 
+  <audio id="ringAudio" preload="auto" src="audio/ring.mp3"></audio>
   <audio id="messageAudio" preload="auto" src="audio/message-01.mp3"></audio>
   <script src="script.js"></script>
 </body>
