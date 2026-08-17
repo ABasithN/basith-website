@@ -1,23 +1,22 @@
-# The Call — V4
+# The Call — V5
 
-This version makes the phone a real HTML/CSS object while using the cinematic wall scene as the environment.
+This is the first proper integrated build.
 
-The phone includes:
-- Handset form
-- LCD with INCOMING CALL / blinking ANSWER
-- Speaker grille
-- CALL indicator / green status light
-- SPEAKER button
-- 3x4 numeric keypad
-- HOLD -> RESUME
-- END CALL
-- Physical-style bevels, shadows and plastic depth
-- Responsive desktop/mobile scaling
+Architecture:
+- `background.png` is only the environment.
+- The phone, handset, LCD, keypad, controls, green LED and coiled cord are HTML/CSS/SVG.
+- The phone is positioned responsively over the wall.
+- `audio/ring.mp3` is the telephone ring.
+- `audio/message-01.mp3` is the current voice message.
 
-The background is an environmental photograph. The phone is not an image, so its controls and LCD can change dynamically.
-
-Audio:
-- audio/message-01.mp3 is the current prototype message.
+Interaction:
+INCOMING CALL + blinking ANSWER
+→ SPEAKER
+→ CALL IN PROGRESS + green LED + voice
+→ HOLD / RESUME
+→ END CALL
+→ CALL ENDED + click
+→ quiet follow-up
 
 Browser note:
-Audible autoplay on page load can be blocked by Safari/Chrome. The call UI can be shown immediately; the message itself is started by the SPEAKER user gesture.
+Some browsers prevent audible autoplay on page load. The ring is triggered on load, but the browser may suppress it until the first user gesture. The voice message is always initiated by the SPEAKER click.
