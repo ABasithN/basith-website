@@ -1,0 +1,518 @@
+{
+  "client": [
+    {
+      "id": "brief",
+      "title": "Creative Brief",
+      "desc": "You need an agency to crack a campaign. Now you have to brief one.",
+      "subject": "Campaign brief | Need a thinking partner",
+      "steps": [
+        [
+          "mail",
+          "Hi team,\n\nWe want something fresh, culturally relevant and talked about. Audience is broadly 25–40. The exact objective is still being shaped internally.\n\nWould love to see where you take it.",
+          "The agency has read your brief. They want the business problem.",
+          [
+            "Awareness is the main thing. We need people talking.",
+            "Honestly, we're still aligning internally.",
+            "We need something big. The business will know it when they see it."
+          ]
+        ],
+        [
+          "teams",
+          "The agency has asked for a clearer objective.",
+          [
+            [
+              "Rhea",
+              "Anyone know if this is awareness or consideration?"
+            ],
+            [
+              "Sameer",
+              "I thought sales wanted conversion."
+            ],
+            [
+              "You",
+              "I need an answer before I go back to the agency."
+            ],
+            [
+              "Rhea",
+              "Can we just say all three?"
+            ]
+          ],
+          "Your own team is no more certain than you are.",
+          [
+            "Let's call it awareness for now.",
+            "I'll go back and say we're still aligning.",
+            "Let's not over-index on the objective. The idea matters more."
+          ]
+        ],
+        [
+          "wa",
+          "Quick one. When you say 'something people will talk about'... what does good look like internally?",
+          "The agency wants you to make a vague ambition useful.",
+          [
+            "We want it to feel disruptive.",
+            "We want something culturally relevant.",
+            "Honestly, I don't know. That's why we hired you."
+          ]
+        ],
+        [
+          "mail",
+          "We've developed three early territories. Route 2 feels closest to the problem, but we've kept the routes deliberately different.",
+          "You've seen the routes. Give the feedback you normally hear yourself.",
+          [
+            "I like Route 2, but can we make it more emotional?",
+            "Can we make all three feel bigger?",
+            "None of these feel quite there yet."
+          ]
+        ],
+        [
+          "wa",
+          "Happy to take another pass. Just checking, is the emotional direction replacing the original brief or adding to it?",
+          "The agency has noticed the brief is moving.",
+          [
+            "It's still the same brief. We're sharpening it.",
+            "The brief has evolved as we've seen the work.",
+            "Keep the original brief in mind but push further."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "retainer",
+      "title": "Retainer Conversation",
+      "desc": "Your agency says the scope has grown. You say the budget hasn't.",
+      "subject": "A quick conversation about scope",
+      "steps": [
+        [
+          "mail",
+          "Over the last few months, the scope has expanded beyond the original retainer. We'd like to talk about the additional work and team requirements.",
+          "The agency wants more money. How do you respond?",
+          [
+            "Isn't this already covered?",
+            "Show me exactly where the extra scope is.",
+            "Let's look at what we can remove first."
+          ]
+        ],
+        [
+          "wa",
+          "Just wanted to follow up. We don't want this to become a conversation about charging for every little thing.",
+          "The agency is trying to make this about scope, not money.",
+          [
+            "Budgets are tight. I need to understand the value.",
+            "Let's look at the actual workload.",
+            "Send me a revised proposal."
+          ]
+        ],
+        [
+          "mail",
+          "We've mapped the additional work across strategy, creative, production and always-on social. We can either reduce scope or revise the retainer.",
+          "Now you have to choose what matters more.",
+          [
+            "Protect the budget.",
+            "Protect the work.",
+            "Split the difference and see what happens."
+          ]
+        ],
+        [
+          "wa",
+          "Honestly, we'd rather keep doing the work properly than pretend the scope hasn't changed.",
+          "Last move. How do you close?",
+          [
+            "Let's revise the retainer.",
+            "Let's reduce deliverables.",
+            "Let's take this offline and work it out."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "review",
+      "title": "The Agency Review",
+      "desc": "You're reviewing agencies. Unfortunately, your current agency is one of them.",
+      "subject": "Agency Review | Invitation to participate",
+      "steps": [
+        [
+          "mail",
+          "We're reviewing our agency roster for the upcoming year and would like your team to participate in the process. Please confirm.",
+          "You are inviting your current agency to pitch for their own account.",
+          [
+            "Send it exactly as written.",
+            "Add a note acknowledging the existing relationship.",
+            "Ask procurement to send it instead."
+          ]
+        ],
+        [
+          "teams",
+          "The agency has confirmed participation.",
+          [
+            [
+              "Rhea",
+              "We're inviting our current agency to pitch."
+            ],
+            [
+              "Sameer",
+              "Yep."
+            ],
+            [
+              "You",
+              "I know how that sounds."
+            ],
+            [
+              "Rhea",
+              "Do we actually know what we're unhappy with?"
+            ]
+          ],
+          "Your own team is questioning why you're doing this.",
+          [
+            "We need a fresh perspective.",
+            "Let's define what we're actually trying to change.",
+            "Maybe we should speak to the agency first."
+          ]
+        ],
+        [
+          "wa",
+          "Don't read too much into the review btw.",
+          "The agency is trying to stay calm. What do you tell them?",
+          [
+            "It's not about performance. We want to benchmark.",
+            "We want to challenge the current thinking.",
+            "There are things we want done differently."
+          ]
+        ],
+        [
+          "mail",
+          "We understand the process. We'd also like to understand what you feel is missing from the current relationship so we can respond meaningfully.",
+          "The agency is asking you to tell them what is wrong.",
+          [
+            "Be specific about the gaps.",
+            "Keep it broad and let them surprise us.",
+            "Say honestly that we're not sure yet."
+          ]
+        ],
+        [
+          "wa",
+          "So... are we pitching against other agencies or pitching against ourselves?",
+          "You now have to answer the question nobody wants to answer.",
+          [
+            "Both, I suppose.",
+            "Everyone is being evaluated on the same criteria.",
+            "The relationship matters too."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "warroom",
+      "title": "Campaign War Room",
+      "desc": "The campaign is live. The comments are not going according to plan.",
+      "subject": "URGENT | Campaign response",
+      "steps": [
+        [
+          "teams",
+          "Something has started moving in the comments.",
+          [
+            [
+              "Rhea",
+              "Anyone seeing this?"
+            ],
+            [
+              "Sameer",
+              "Yes."
+            ],
+            [
+              "You",
+              "What happened?"
+            ],
+            [
+              "Rhea",
+              "People are interpreting the campaign very differently."
+            ]
+          ],
+          "The campaign is live and the room is tense.",
+          [
+            "Let's pause the campaign.",
+            "Let's understand what's happening first.",
+            "Get the agency on a call now."
+          ]
+        ],
+        [
+          "wa",
+          "Hey, we're seeing the same reaction. We can get the team together quickly.",
+          "The agency wants to act. What do you tell them?",
+          [
+            "Pause everything until we understand it.",
+            "Keep it live and monitor.",
+            "I need a response recommendation in 20 minutes."
+          ]
+        ],
+        [
+          "mail",
+          "We've mapped the reaction, likely trigger and three possible response routes. Our recommendation is to stay live while we clarify the issue.",
+          "You now have a recommendation.",
+          [
+            "Go with the recommendation.",
+            "I want the safest option.",
+            "Escalate internally before we act."
+          ]
+        ]
+      ]
+    }
+  ],
+  "agency": [
+    {
+      "id": "decode",
+      "title": "Decode the Brief",
+      "desc": "The brief says 'make it big'. Your job is to work out what that means.",
+      "subject": "Brief | New campaign opportunity",
+      "steps": [
+        [
+          "mail",
+          "We need a big campaign. Fresh, premium, emotional and culturally relevant. Timeline is three weeks. Deliverables will follow.",
+          "The brief is vague. What do you ask first?",
+          [
+            "What is the primary business problem?",
+            "Who exactly are we trying to move?",
+            "What does 'big' mean to the client?"
+          ]
+        ],
+        [
+          "teams",
+          "Client hasn't clarified the objective.",
+          [
+            [
+              "Creative",
+              "What are we actually solving?"
+            ],
+            [
+              "Account",
+              "They said awareness."
+            ],
+            [
+              "Strategy",
+              "Sales thinks it's conversion."
+            ],
+            [
+              "Creative",
+              "Cool. Very clear."
+            ]
+          ],
+          "Your own team is already confused.",
+          [
+            "Push the client for clarity.",
+            "Start exploring despite the ambiguity.",
+            "Ask strategy to frame the problem internally."
+          ]
+        ],
+        [
+          "wa",
+          "Hey, quick one. Don't overthink the brief. Leadership just wants something exciting.",
+          "The client has given you even less clarity.",
+          [
+            "Ask what leadership means by exciting.",
+            "Acknowledge and push ahead.",
+            "Tell them we need a clearer problem."
+          ]
+        ],
+        [
+          "mail",
+          "We've got three territories. The client replies: 'Can we make this more premium?'",
+          "The feedback is vague again.",
+          [
+            "Ask what feels not premium enough.",
+            "Interpret premium and take a pass.",
+            "Push back because the idea already feels right."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "retainer",
+      "title": "Retainer Upgrade",
+      "desc": "The work has grown. Now you have to ask the client to pay for it.",
+      "subject": "Scope | Next steps",
+      "steps": [
+        [
+          "mail",
+          "We've noticed the scope has evolved significantly. We'd like to discuss the team and production requirements needed to sustain it.",
+          "How do you open the money conversation?",
+          [
+            "Frame the scope change clearly.",
+            "Lead with the workload.",
+            "Show the value before mentioning cost."
+          ]
+        ],
+        [
+          "wa",
+          "Just being transparent, we're stretched. We don't want the team burning out because we're pretending the scope hasn't changed.",
+          "The client says: 'Can't you absorb some of this?'",
+          [
+            "Explain what would have to come out.",
+            "Offer a revised retainer.",
+            "Ask what they want to prioritise."
+          ]
+        ],
+        [
+          "mail",
+          "If we keep the current output level, we'd recommend revising the retainer. Otherwise we can reduce deliverables and protect the core work.",
+          "The client wants the old budget and new scope.",
+          [
+            "Hold the line on scope.",
+            "Offer a phased approach.",
+            "Give them one last compromise."
+          ]
+        ],
+        [
+          "wa",
+          "Okay. Send me the revised proposal. I'll take it internally.",
+          "You've got the opening. How do you close?",
+          [
+            "Send it and document the scope.",
+            "Set up a call first.",
+            "Send two options and let them choose."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "review",
+      "title": "The Agency Review",
+      "desc": "Your current client has invited you to pitch for the account you already have.",
+      "subject": "Agency Review | Invitation to participate",
+      "steps": [
+        [
+          "mail",
+          "We're reviewing our agency roster for the upcoming year and would like your agency to participate. Please confirm.",
+          "Your current client just invited you to pitch for your own account.",
+          [
+            "Absolutely. We'd love to participate.",
+            "Ask what prompted the review.",
+            "Ask whether this is a full competitive pitch."
+          ]
+        ],
+        [
+          "teams",
+          "The client has confirmed there are other agencies involved.",
+          [
+            [
+              "Account",
+              "We're pitching for our own account."
+            ],
+            [
+              "Creative",
+              "Against who?"
+            ],
+            [
+              "Strategy",
+              "Don't ask."
+            ],
+            [
+              "Account",
+              "We need to decide whether we defend the relationship or reinvent it."
+            ]
+          ],
+          "Your team is staring at the problem.",
+          [
+            "Defend the relationship.",
+            "Lead with new thinking.",
+            "Ask the client what they feel is missing."
+          ]
+        ],
+        [
+          "wa",
+          "Don't take the review personally. We're just looking at what's out there.",
+          "You have history together. How do you respond?",
+          [
+            "We've been there for the brand. We'd like that to count.",
+            "We'll let the work speak.",
+            "Can we have an honest conversation about what changed?"
+          ]
+        ],
+        [
+          "mail",
+          "We've put together a response that combines what we've learned about the brand with directions we haven't explored together.",
+          "Your pitch is ready. What do you lead with?",
+          [
+            "The relationship and the work we've built.",
+            "A completely new point of view.",
+            "The client's reason for reviewing the agency."
+          ]
+        ],
+        [
+          "wa",
+          "This is strong. But the question we're going to get is: why should we stay with you?",
+          "There it is. The actual question.",
+          [
+            "Because we know the brand better than anyone.",
+            "Because we can still surprise you.",
+            "Because we've earned the right to keep building it with you."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "influencer",
+      "title": "Influencer Association",
+      "desc": "The client wants creators. You need to find the mythical person with everything.",
+      "subject": "Creator recommendations | Campaign",
+      "steps": [
+        [
+          "mail",
+          "Can you share influencer recommendations? Looking for credibility, reach and strong engagement.",
+          "How do you respond?",
+          [
+            "Send a focused shortlist.",
+            "Ask what role creators need to play.",
+            "Challenge the criteria before recommending anyone."
+          ]
+        ],
+        [
+          "teams",
+          "Client has rejected the first list.",
+          [
+            [
+              "Account",
+              "They want more mainstream."
+            ],
+            [
+              "Creative",
+              "But not too mainstream."
+            ],
+            [
+              "Strategy",
+              "And credible."
+            ],
+            [
+              "Creative",
+              "And affordable, presumably."
+            ]
+          ],
+          "Your internal team is solving an impossible brief.",
+          [
+            "Reframe the criteria.",
+            "Find a compromise list.",
+            "Go back to the client for priorities."
+          ]
+        ],
+        [
+          "wa",
+          "Can you give me a few more options? Maybe someone with a little more mass appeal.",
+          "You can feel the brief getting longer.",
+          [
+            "Ask what they mean by mass appeal.",
+            "Send another list.",
+            "Tell them the trade-offs clearly."
+          ]
+        ],
+        [
+          "mail",
+          "The client likes one creator but wants someone more credible, same reach, less expensive.",
+          "What do you say?",
+          [
+            "Explain the trade-off honestly.",
+            "Offer a different creator archetype.",
+            "Recommend staying with the original choice."
+          ]
+        ]
+      ]
+    }
+  ]
+}
