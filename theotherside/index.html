@@ -5,94 +5,95 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>The Other Side</title>
 <meta name="description" content="Advertising is easier when you're not the one doing it.">
-<link rel="stylesheet" href="styles.css?v=0.8">
+<link rel="stylesheet" href="styles.css?v=0.9">
 </head>
 <body>
 <div class="ambient"><span></span><span></span><span></span></div>
-
 <main id="app">
-  <section id="landing" class="landing">
-    <div class="landing-copy">
-      <div class="eyebrow">THE OTHER SIDE</div>
-      <h1>Advertising is easier<br>when you're not the one doing it.</h1>
-      <p>Pick the side you know. We'll put you on the other.</p>
-      <div class="side-buttons">
-        <button data-side="agency">I'm from the agency</button>
-        <button data-side="client">I'm from the client side</button>
-      </div>
-    </div>
-    <div class="desk-preview">
-      <div class="preview-laptop">
-        <div class="preview-screen">
-          <div class="preview-top"><span>●</span><span>●</span><span>●</span><b>WORKSPACE</b></div>
-          <div class="preview-windows">
-            <div class="preview-window mail"><strong>Mail</strong><span>Re: Campaign Routes</span></div>
-            <div class="preview-window wa"><strong>WhatsApp</strong><span>Hey, quick one...</span></div>
-            <div class="preview-window slack"><strong>Slack</strong><span>#brand-x-agency</span></div>
-          </div>
-        </div>
-        <div class="preview-base"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="reveal" class="reveal hidden">
-    <div class="reveal-mark">THE OTHER SIDE</div>
-    <h2 id="role-title"></h2>
-    <p id="role-sub"></p>
-    <button id="startBtn" class="primary">Let's go</button>
-  </section>
-
-  <section id="experience" class="experience hidden">
-    <header class="exp-header">
-      <div><span class="brand">THE OTHER SIDE</span><span id="exp-name"></span></div>
-      <div class="time" id="clock">10:04 AM</div>
-    </header>
-
-    <div class="workspace">
-      <div class="device">
-        <div class="screen">
-          <aside class="rail">
-            <button class="rail-btn" data-channel="email"><span>✉</span><small>Mail</small><i></i></button>
-            <button class="rail-btn" data-channel="whatsapp"><span>◔</span><small>WhatsApp</small><i></i></button>
-            <button class="rail-btn" data-channel="slack"><span>#</span><small>Slack</small><i></i></button>
-          </aside>
-          <section class="channels">
-            <div class="channel" id="email"></div>
-            <div class="channel" id="whatsapp"></div>
-            <div class="channel" id="slack"></div>
-          </section>
-        </div>
-        <div class="device-base"><div></div></div>
-      </div>
-    </div>
-
-    <div class="task-card hidden" id="taskCard">
-      <div class="task-label">YOUR MOVE</div>
-      <div id="taskText"></div>
-      <div id="choices"></div>
-    </div>
-
-    <div class="center-notice hidden" id="notice">
-      <div class="notice-app" id="noticeApp">MAIL</div>
-      <div class="notice-title" id="noticeTitle"></div>
-      <div class="notice-body" id="noticeBody"></div>
-      <button id="noticeOpen">OPEN</button>
-    </div>
-  </section>
-
-  <section id="ending" class="ending hidden">
+<section id="landing" class="landing">
+  <div class="landing-copy">
     <div class="eyebrow">THE OTHER SIDE</div>
-    <h2 id="endTitle"></h2>
-    <p id="endCopy"></p>
-    <div class="score" id="score"></div>
-    <div class="end-actions">
-      <button id="againBtn" class="primary">Try another experience</button>
-      <button id="switchBtn" class="secondary">Try the other side</button>
+    <h1>Advertising is easier<br>when you're not the one doing it.</h1>
+    <p>Pick the side you know. We'll put you on the other.</p>
+    <div class="side-buttons">
+      <button data-side="agency">I'm from the agency</button>
+      <button data-side="client">I am the client</button>
     </div>
-  </section>
-</main>
+  </div>
+  <div class="desk-preview">
+    <div class="preview-laptop">
+      <div class="preview-screen">
+        <div class="preview-top"><span>●</span><span>●</span><span>●</span><b>WORKSPACE</b></div>
+        <div class="preview-windows">
+          <div class="preview-window mail"><strong>Mail</strong><span>Re: Campaign Routes</span><em>New reply waiting</em></div>
+          <div class="preview-window wa"><strong>WhatisUp</strong><span>Hey, quick one...</span></div>
+          <div class="preview-window slack"><strong>Mycoresoft Teams</strong><span>#brand-x-agency</span></div>
+        </div>
+      </div>
+      <div class="preview-base"></div>
+    </div>
+  </div>
+</section>
 
-<script src="script.js?v=0.8"></script>
+<section id="reveal" class="reveal hidden">
+  <div class="reveal-mark">THE OTHER SIDE</div>
+  <h2 id="role-title"></h2>
+  <button id="startBtn" class="primary">Let's go</button>
+</section>
+
+<section id="experience" class="experience hidden">
+  <header class="exp-header">
+    <button id="escapeBtn" class="escape">← ESCAPE BACK</button>
+    <div><span class="brand">THE OTHER SIDE</span><span id="exp-name"></span></div>
+    <div class="time" id="clock">10:04 AM</div>
+  </header>
+  <div class="workspace">
+    <div class="device">
+      <div class="screen">
+        <aside class="rail">
+          <button class="rail-btn" data-channel="email"><span>✉</span><small>Mail</small><i></i></button>
+          <button class="rail-btn" data-channel="whatsapp"><span>◔</span><small>WhatisUp</small><i></i></button>
+          <button class="rail-btn" data-channel="slack"><span>▦</span><small>Teams</small><i></i></button>
+        </aside>
+        <section class="channels">
+          <div class="channel" id="email"></div>
+          <div class="channel" id="whatsapp"></div>
+          <div class="channel" id="slack"></div>
+        </section>
+      </div>
+      <div class="device-base"><div></div></div>
+    </div>
+  </div>
+  <div class="task-card hidden" id="taskCard">
+    <div class="task-label">YOUR MOVE</div>
+    <div id="taskText"></div>
+    <div id="choices"></div>
+  </div>
+  <div class="center-notice hidden" id="notice">
+    <div class="notice-app" id="noticeApp">MAIL</div>
+    <div class="notice-title" id="noticeTitle"></div>
+    <div class="notice-body" id="noticeBody"></div>
+    <button id="noticeOpen" type="button">OPEN <span>→</span></button>
+  </div>
+  <div class="confirm hidden" id="escapeConfirm">
+    <strong>Escape already?</strong>
+    <p>Your workday will end here.</p>
+    <div><button id="confirmEscape" class="primary">ESCAPE BACK</button><button id="stayBtn" class="secondary">STAY</button></div>
+  </div>
+</section>
+
+<section id="ending" class="ending hidden">
+  <div class="eyebrow">THE OTHER SIDE</div>
+  <h2 id="endTitle"></h2>
+  <p id="endCopy"></p>
+  <div class="score" id="score"></div>
+  <div class="end-actions">
+    <button id="againBtn" class="primary">Try another experience</button>
+    <button id="switchBtn" class="secondary">Try the other side</button>
+    <button id="homeBtn" class="secondary">Escape back</button>
+  </div>
+</section>
+</main>
+<script src="script.js?v=0.9"></script>
 </body>
 </html>
