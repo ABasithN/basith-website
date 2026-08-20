@@ -22,11 +22,30 @@ async function choose(i){let s=scenario.steps[step];$('#decision').classList.add
 function finish(i){$('#endTitle').textContent=scenario.end||'You made it through.';$('#endCopy').textContent='The workday ends here. Your choices mattered. The next experience does not have to.';show('end');setTimeout(()=>{show('journeys');renderJourneys()},2200)}
 function renderJourneys(){$('#roleLabel').textContent=side==='client'?'CLIENT':'AGENCY';$('#journeyCards').innerHTML=scenarios[side].map((s,i)=>`<button class="card" data-id="${s.id}"><span class="eyebrow">0${i+1}</span><h3>${s.title}</h3><p>${s.desc}</p></button>`).join('')}
 function start(sc){reset();scenario=sc;$('#persistentRole').textContent=side==='client'?'CLIENT':'AGENCY';$('#scenarioLabel').textContent=sc.title.toUpperCase();$('#mailSubject').textContent=sc.subject;$('#waTitle').textContent='Current agency';$('#teamOrg').textContent=side==='client'?'YOUR WORKPLACE':'YOUR AGENCY';$('#teamRooms').innerHTML=(side==='client'?['#marketing','#brand','#leadership','#creative','#random']:['#account','#creative','#strategy','#production','#leadership','#random']).map(x=>`<div>${x}</div>`).join('');channel('mail');show('work');setTimeout(()=>notify(sc.steps[0],()=>decide(sc.steps[0])),500)}
-$$('[data-role]').forEach(b=>b.onclick=()=>{side=b.dataset.role;$('#roleTitle').textContent=side==='agency'?"Well, you're the client now.":"Well, you're the agency now.";$('#roleCopy').textContent=side==='agency'?'Try not to make it personal.':'Good luck with the brief.';show('reveal')});
+document.addEventListener('click',e=>{
+  const roleBtn=e.target.closest('[data-role]');
+  if(roleBtn){
+    side=roleBtn.dataset.role;
+    $('#roleTitle').textContent=side==='agency'?"Well, you're the client now.":"Well, you're the agency now.";
+    $('#roleCopy').textContent=side==='agency'?'Try not to make it personal.':'Good luck with the brief.';
+    resetRun();
+    show('reveal');
+    return;
+  }
+  const journeyBtn=e.target.closest('#journeyCards [data-id]');
+  if(journeyBtn && data && data[side]){
+    startJourney(data[side].find(sc=>sc.id===journeyBtn.dataset.id));
+    return;
+  }
+  const choice=e.target.closest('.choice');
+  if(choice){ choose(+choice.dataset.i); return; }
+  const channel=e.target.closest('[data-channel]');
+  if(channel){ openChannel(channel.dataset.channel); return; }
+});
 $('#startJourneys').onclick=()=>{renderJourneys();show('journeys')};
 $('#journeyCards').onclick=e=>{let b=e.target.closest('[data-id]');if(b)start(scenarios[side].find(s=>s.id===b.dataset.id))};
 $('#openAttention').onclick=()=>{let f=pending;pending=null;$('#attention').classList.add('hidden');if(f)f()};
-$('#choiceButtons').onclick=e=>{let b=e.target.closest('.choice');if(b)choose(+b.dataset.i)};
+
 $$('[data-channel]').forEach(b=>b.onclick=()=>channel(b.dataset.channel));
 $('#another').onclick=()=>{renderJourneys();show('journeys')};
 $('#workEscape').onclick=()=>{reset();show('landing')};
