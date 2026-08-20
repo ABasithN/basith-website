@@ -75,7 +75,7 @@ const experiences=[
    ["Actually, I've had another thought.","Actually, I've had another thought.","thought"],
    ["Can we see the latest casting options again?","Can we see the latest casting options again?","casting"]]},
   {ch:"slack",inbound:{from:"Vikram • Account",body:"Client has had another thought. Production is locked."},task:"You can now see the internal reaction.",choices:[
-   ["Say: 'It's genuinely a small thing.'","It's genuinely a small thing.","small"},
+   ["Say: 'It's genuinely a small thing.'","It's genuinely a small thing.","small"],
    ["Say nothing.","","silent"],
    ["Ask if the change is still possible.","Is the change still possible?","possible"]]},
   {ch:"email",inbound:{from:"Agency Production",subject:"Re: Production: Route 01",body:"Hi,\n\nWe can accommodate the change, but it will require a talent and location adjustment.\n\nThis will add cost and may affect the Thursday schedule.\n\nPlease confirm how you'd like to proceed.\n\nBest,\nMaya"},task:"A small change has become a production problem. What do you send?",choices:[
@@ -136,8 +136,43 @@ function renderHistory(){
  ["email","whatsapp","slack"].forEach(ch=>{$("#"+ch).classList.toggle("active",state.channel===ch);$("#"+ch).classList.toggle("attention",state.channel===ch);});
  document.querySelectorAll(".rail-btn").forEach(b=>b.classList.toggle("active",b.dataset.channel===state.channel));
 }
+function agencyView(scene,idx){
+ const ch=scene.ch;
+ const sets={
+  email:[
+   {from:"Brand Marketing Team",subject:"Brief: Q4 Launch",body:"Hi team,\n\nSharing the Q4 launch brief. We need a strong social-first idea with broad appeal.\n\nWould love to see first routes tomorrow EOD.\n\nThanks,\nMeera"},
+   {from:"Brand Marketing Team",subject:"Re: Campaign Routes",body:"Hi team,\n\nWe've reviewed the routes. Route 02 is closest, but we're not fully there yet.\n\nCan you push the thinking further without making it too niche?\n\nThanks,\nMeera"},
+   {from:"Brand Marketing Team",subject:"Re: Campaign Routes",body:"Hi,\n\nThe latest route is looking good. Before we lock production, we'd like to revisit one element.\n\nPlease see the note below.\n\nThanks,\nMeera"}
+  ],
+  whatsapp:[
+   {from:"Meera • Brand",body:"Quick one. When you say this is the strongest route, what makes it different from what everyone else is doing?"},
+   {from:"Meera • Brand",body:"Can we make the headline a little bigger? It needs to land faster on mobile."},
+   {from:"Meera • Brand",body:"Actually, one tiny thought before we lock this. Can we make it feel more premium?"}
+  ],
+  slack:[
+   {from:"Account • Agency",body:"Client feedback: they want it more disruptive, but still broad and easy to understand."},
+   {from:"Creative Director • Agency",body:"Client has asked for another route. Production timing stays the same."},
+   {from:"Account • Agency",body:"Client wants one final change before approval. Production is already being scheduled."}
+  ]
+ };
+ const msg=sets[ch][Math.min(idx,sets[ch].length-1)];
+ const taskByChannel={
+  email:["The client has sent a brief. What do you send back?","The client likes the direction but wants more. How do you respond?","You're nearly at approval. What do you send?"],
+  whatsapp:["The client is challenging the thinking. Your move.","The client has a small visual request. How do you respond?","The client has one more thought. What do you do?"],
+  slack:["The feedback is vague but urgent. What do you tell the team?","The deadline hasn't moved. How do you handle it internally?","The team is under pressure. What do you do next?"]
+ };
+ const choicesByChannel={
+  email:[[["We'll explore a stronger route and come back with options.","We'll explore a stronger route and come back with options.","professional"],["Can you clarify what 'more disruptive' means?","Can you clarify what 'more disruptive' means?","clarify"],["Let's get on a call so we can align quickly.","Let's get on a call so we can align quickly.","call"]],[["We'll push the thinking while keeping the idea broad.","We'll push the thinking while keeping the idea broad.","push"],["Can you share a couple of references for what you mean?","Can you share a couple of references for what you mean?","reference"],["We'll show you two alternate routes.","We'll show you two alternate routes.","more"]],[["Absolutely. We'll make the final change and keep production moving.","Absolutely. We'll make the final change and keep production moving.","yes"],["Can we jump on a quick call before we lock it?","Can we jump on a quick call before we lock it?","call"],["We'll send a final recommendation with the rationale.","We'll send a final recommendation with the rationale.","rationale"]]],
+  whatsapp:[[["The idea is designed to interrupt the category. That's the role of the creative.","The idea is designed to interrupt the category. That's the role of the creative.","defend"],["Fair point. We'll sharpen the distinction.","Fair point. We'll sharpen the distinction.","sharpen"],["We'll show you what changes when we push it further.","We'll show you what changes when we push it further.","show"]],[["Sure. We'll make the mobile hierarchy clearer.","Sure. We'll make the mobile hierarchy clearer.","mobile"],["We'll keep the current size if the composition starts feeling cramped.","We'll keep the current size if the composition starts feeling cramped.","design"],["We'll send two versions so you can compare.","We'll send two versions so you can compare.","compare"]],[["We'll leave it as is and move to approval.","We'll leave it as is and move to approval.","close"],["Let's make the premium cues more obvious without overdoing it.","Let's make the premium cues more obvious without overdoing it.","premium"],["We'll take another look and tell you honestly if it improves the work.","We'll take another look and tell you honestly if it improves the work.","honest"]]],
+  slack:[[["Let's translate the feedback into a sharper creative problem for the team.","Let's translate the feedback into a sharper creative problem for the team.","brief"],["Ask the client for a clearer definition before changing the work.","Ask the client for a clearer definition before changing the work.","clarify"],["Tell the team to push it and trust the instinct.","Tell the team to push it and trust the instinct.","trust"]],[["Let's protect the core idea and simplify the execution.","Let's protect the core idea and simplify the execution.","protect"],["We'll need to flag the timing risk to account.","We'll need to flag the timing risk to account.","risk"],["Let's make the strongest version we can by the deadline.","Let's make the strongest version we can by the deadline.","best"]],[["I'll manage the client expectation. You focus on the work.","I'll manage the client expectation. You focus on the work.","manage"],["Let's show the team exactly what needs changing.","Let's show the team exactly what needs changing.","specific"],["Let's push back on the change if it weakens the idea.","Let's push back on the change if it weakens the idea.","pushback"]]]
+ };
+ const mapIndex=ch==="email"? (idx===0?0:idx<5?1:2) : ch==="whatsapp"?(idx===1?0:idx===4?1:2):(idx===2?0:idx===5?1:2);
+ return {ch,inbound:msg,task:taskByChannel[ch][mapIndex],choices:choicesByChannel[ch][mapIndex]};
+}
+
 function showScene(){
- const scene=experiences[state.expIndex].scenes[state.step];
+ let scene=experiences[state.expIndex].scenes[state.step];
+ if(state.role==="agency") scene=agencyView(scene,state.step);
  state.channel=scene.ch;
  addInbound(scene.ch,scene.inbound);
  renderHistory(); updateClock();
@@ -150,9 +185,12 @@ function task(text,choices){
 }
 function choose(label,send,effect){
  $("#taskCard").classList.add("hidden");
- addOutbound(state.channel,send);
- renderHistory();
- typeSend(state.channel,send,()=>{state.scores+=effect==="silent"?0:1; nextAfterChoice(effect)});
+ typeSend(state.channel,send,()=>{
+   addOutbound(state.channel,send);
+   renderHistory();
+   state.scores+=effect==="silent"?0:1;
+   nextAfterChoice(effect);
+ });
 }
 function typeSend(ch,text,done){
  const target=ch==="email"?$("#mailThread"):ch==="whatsapp"?$("#waBody"):$("#slackChat");

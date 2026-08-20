@@ -1,4 +1,4 @@
-# THE OTHER SIDE v0.7
+# THE OTHER SIDE v0.8
 
 A standalone HTML/CSS/JS interactive prototype.
 
