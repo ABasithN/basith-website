@@ -1,24 +1,16 @@
-# The Other Side v1
-Narrative rebuild with eight core situations.
+# THE OTHER SIDE v2
 
-Client side:
-- Creative Brief
-- Retainer Conversation
-- The Agency Review
-- Campaign War Room
+Narrative-first build.
 
-Agency side:
-- Decode the Brief
-- Retainer Upgrade
-- The Agency Review
-- Influencer Association
-
-Rules:
-- Teams is always the player's own workplace.
-- The other side only appears in a Teams room when explicitly part of that conversation.
-- Visitor choices are typed/sent into the same communication surface.
-- Email responses remain in one thread.
-- Notifications pull the visitor into the next channel.
-- No forced use of every channel in every story.
-
-Replace index.html, styles.css, script.js and add scenarios.json.
+- Visitor chooses their real side, then becomes the other side.
+- Persistent CLIENT / AGENCY marker stays visible during the journey.
+- Choices are prompts, not the final dialogue.
+- The selected direction generates a detailed response, types it, and sends it into the same Email / WhatisUp / Teams thread.
+- Email remains one continuous thread.
+- WhatisUp remains one continuous chat.
+- Teams is the player's own workplace, with the other side only appearing when explicitly relevant to the scenario.
+- Different choices change the response and the next reaction.
+- The journey pauses between incoming communications so the visitor can read and act.
+- A scenario ends on a narrative note, then transitions back to the journey menu.
+- Escape Back completely wipes the run, including mailbox and chat history.
+- Switching roles always starts clean.
