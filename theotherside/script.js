@@ -134,19 +134,39 @@ function branchReply(info,index){
   ][index] || `Let's take that direction. ${choice}`;
 }
 
-function showNotification(stepData,after){
+function showNotification(stepData, after){
   const info = stepInfo(stepData);
   switchApp(info.app);
+  const attention = $("#attention");
+  const open = $("#openAttention");
   $("#attentionApp").textContent = names[info.app];
   $("#attentionText").textContent =
     info.app === "mail" ? "A new email just arrived."
     : info.app === "wa" ? "New message on WhatisUp."
     : "Someone posted in Teams.";
-  $("#attention").classList.remove("hidden");
-  pending = () => {
-    addIncoming(stepData);
-    after();
-  };
+
+  // Store the complete action as state. Do not depend on a transient closure
+  // being recreated by a channel switch or later render.
+  pending = { stepData, after, opened:false };
+  attention.classList.remove("hidden");
+  attention.classList.add("flash");
+  setTimeout(() => attention.classList.remove("flash"), 2500);
+  open.disabled = false;
+  open.textContent = "OPEN";
+  open.focus({preventScroll:true});
+}
+
+function openPendingNotification(){
+  if(!pending || pending.opened) return false;
+  const action = pending;
+  pending.opened = true;
+  const button = $("#openAttention");
+  if(button) button.disabled = true;
+  $("#attention").classList.add("hidden");
+  addIncoming(action.stepData);
+  action.after();
+  pending = null;
+  return true;
 }
 
 function showDecision(stepData){
@@ -218,6 +238,13 @@ function startScenario(sc){
 }
 
 /* Event delegation keeps the UI resilient and prevents duplicate handlers. */
+$("#openAttention")?.addEventListener("keydown", e => {
+  if((e.key === "Enter" || e.key === " ") && !e.defaultPrevented){
+    e.preventDefault();
+    openPendingNotification();
+  }
+});
+
 document.addEventListener("click", e => {
   const role = e.target.closest("[data-side]");
   if(role){
@@ -260,10 +287,13 @@ document.addEventListener("click", e => {
 
   const open = e.target.closest("#openAttention");
   if(open){
-    const fn = pending;
-    pending = null;
-    $("#attention").classList.add("hidden");
-    if(fn) fn();
+    openPendingNotification();
+    return;
+  }
+
+  const attention = e.target.closest("#attention");
+  if(attention){
+    openPendingNotification();
     return;
   }
 
