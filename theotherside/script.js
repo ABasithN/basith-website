@@ -139,34 +139,37 @@ function showNotification(stepData, after){
   switchApp(info.app);
   const attention = $("#attention");
   const open = $("#openAttention");
+
   $("#attentionApp").textContent = names[info.app];
   $("#attentionText").textContent =
     info.app === "mail" ? "A new email just arrived."
     : info.app === "wa" ? "New message on WhatisUp."
     : "Someone posted in Teams.";
 
-  // Store the complete action as state. Do not depend on a transient closure
-  // being recreated by a channel switch or later render.
   pending = { stepData, after, opened:false };
   attention.classList.remove("hidden");
   attention.classList.add("flash");
   setTimeout(() => attention.classList.remove("flash"), 2500);
   open.disabled = false;
   open.textContent = "OPEN";
-  open.focus({preventScroll:true});
 }
 
 function openPendingNotification(){
-  if(!pending || pending.opened) return false;
   const action = pending;
-  pending.opened = true;
-  const button = $("#openAttention");
-  if(button) button.disabled = true;
-  $("#attention").classList.add("hidden");
-  addIncoming(action.stepData);
-  action.after();
+  if(!action || action.opened) return;
+
+  action.opened = true;
   pending = null;
-  return true;
+  const attention = $("#attention");
+  const button = $("#openAttention");
+  attention.classList.add("hidden");
+  button.disabled = true;
+
+  // Render the incoming communication first. Only after it is visible
+  // do we reveal the decision. This prevents a notification from feeling
+  // like it is merely covering the conversation underneath.
+  addIncoming(action.stepData);
+  requestAnimationFrame(() => action.after());
 }
 
 function showDecision(stepData){
@@ -220,7 +223,7 @@ function startScenario(sc){
   scenario = sc;
 
   $("#scenarioName").textContent =
-    `${side === "client" ? "CLIENT" : "AGENCY"} · ${sc.title.toUpperCase()}`;
+    `${side === "agency" ? "CLIENT" : "AGENCY"} · ${sc.title.toUpperCase()}`;
   $("#mailSubject").textContent = sc.subject || "";
   $("#waTitle").textContent = "Current agency";
   $("#org").textContent = side === "client" ? "YOUR WORKPLACE" : "YOUR AGENCY";
@@ -243,6 +246,12 @@ $("#openAttention")?.addEventListener("keydown", e => {
     e.preventDefault();
     openPendingNotification();
   }
+});
+
+$("#openAttention")?.addEventListener("click", e => {
+  e.preventDefault();
+  e.stopPropagation();
+  openPendingNotification();
 });
 
 document.addEventListener("click", e => {
@@ -285,14 +294,8 @@ document.addEventListener("click", e => {
     return;
   }
 
-  const open = e.target.closest("#openAttention");
-  if(open){
-    openPendingNotification();
-    return;
-  }
-
   const attention = e.target.closest("#attention");
-  if(attention){
+  if(attention && !e.target.closest("#openAttention")){
     openPendingNotification();
     return;
   }
